@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | CorpSight Advisors LLP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #B8962E; --gold-light: #D4AF5A; --gold-pale: #F0E6C8;
+    --dark: #1A1A1A; --dark-mid: #2C2C2C; --dark-soft: #3E3E3E;
+    --grey: #6B6B6B; --grey-light: #9A9A9A;
+    --off-white: #F8F6F1; --white: #FFFFFF;
+    --border: rgba(184,150,46,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Jost',sans-serif; color:var(--dark); background:var(--white); overflow-x:hidden; }
+  h1,h2,h3,h4 { font-family:'Cormorant Garamond',serif; }
+
+  /* ══ LOADER ══ */
+  #loader {
+    position:fixed; inset:0; z-index:99999; background:var(--dark);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:32px;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #loader.loaded { opacity:0; visibility:hidden; }
+  .loader-logo { display:flex; flex-direction:column; align-items:center; gap:16px; animation:loaderLogoIn 0.8s ease forwards; }
+  @keyframes loaderLogoIn { from{opacity:0;transform:translateY(20px) scale(0.9)} to{opacity:1;transform:none} }
+  .loader-logo-mark {
+    width:72px; height:72px; border:2px solid rgba(184,150,46,0.3);
+    display:flex; align-items:center; justify-content:center; position:relative;
+    animation:loaderMarkSpin 0.6s 0.4s ease forwards; opacity:0;
+  }
+  @keyframes loaderMarkSpin { from{opacity:0;transform:rotate(-15deg) scale(0.8)} to{opacity:1;transform:none} }
+  .loader-logo-mark::before {
+    content:''; position:absolute; inset:-8px;
+    border:1px solid rgba(184,150,46,0.15);
+    animation:loaderRingPulse 2s ease-in-out infinite;
+  }
+  @keyframes loaderRingPulse { 0%,100%{transform:scale(1);opacity:0.5} 50%{transform:scale(1.08);opacity:1} }
+  .loader-logo-mark::after { content:'CS'; font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:var(--gold); letter-spacing:2px; }
+  .loader-name { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--white); letter-spacing:4px; text-transform:uppercase; animation:loaderNameIn 0.6s 0.6s ease forwards; opacity:0; }
+  @keyframes loaderNameIn { from{opacity:0;letter-spacing:8px} to{opacity:1;letter-spacing:4px} }
+  .loader-sub { font-size:9px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; animation:loaderSubIn 0.6s 0.9s ease forwards; opacity:0; }
+  @keyframes loaderSubIn { from{opacity:0} to{opacity:1} }
+  .loader-progress-row { display:flex; align-items:center; gap:14px; animation:loaderSubIn 0.4s 1.1s ease forwards; opacity:0; }
+  .loader-progress-wrap { width:220px; height:1px; background:rgba(255,255,255,0.08); position:relative; overflow:hidden; }
+  .loader-progress-fill {
+    position:absolute; left:0; top:0; height:100%;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+    background-size:200% 100%;
+    animation:loaderFill 1.8s 1.1s cubic-bezier(0.4,0,0.2,1) forwards, loaderShimmer 1s 1.1s linear infinite;
+    width:0%;
+  }
+  @keyframes loaderFill { 0%{width:0%} 60%{width:85%} 100%{width:100%} }
+  @keyframes loaderShimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+  .loader-pct { font-size:10px; letter-spacing:2px; color:rgba(255,255,255,0.35); font-weight:300; min-width:40px; text-align:center; }
+  .loader-particle { position:absolute; width:2px; height:2px; border-radius:50%; background:var(--gold); opacity:0; animation:loaderParticleFloat var(--dur) var(--delay) linear infinite; }
+  @keyframes loaderParticleFloat { 0%{opacity:0;transform:translateY(0) translateX(0)} 10%{opacity:0.6} 90%{opacity:0.3} 100%{opacity:0;transform:translateY(-120px) translateX(var(--dx))} }
+
+  /* ══ SCROLL UI ══ */
+  #scroll-progress {
+    position:fixed; top:0; left:0; height:2px; width:0%; z-index:9999;
+    background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold)); background-size:200% 100%;
+    box-shadow:0 0 12px rgba(184,150,46,0.8);
+    animation:progressShimmer 2s linear infinite; transition:width 0.1s linear;
+  }
+  @keyframes progressShimmer { 0%{background-position:200% center} 100%{background-position:-200% center} }
+  #side-progress { position:fixed; left:0; top:0; bottom:0; width:2px; background:rgba(184,150,46,0.06); z-index:500; pointer-events:none; }
+  #side-progress-fill { position:absolute; top:0; left:0; width:100%; height:0%; background:linear-gradient(to bottom,transparent,var(--gold) 30%,var(--gold)); transition:height 0.12s ease; }
+
+  /* Section dots */
+  #section-dots { position:fixed; right:20px; top:50%; transform:translateY(-50%); z-index:900; display:flex; flex-direction:column; gap:10px; opacity:0; transition:opacity 0.5s; }
+  .s-dot { width:6px; height:6px; border-radius:50%; background:rgba(184,150,46,0.25); cursor:pointer; transition:all 0.3s; border:1px solid transparent; position:relative; }
+  .s-dot::before { content:attr(data-label); position:absolute; right:16px; top:50%; transform:translateY(-50%); font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); white-space:nowrap; opacity:0; transition:opacity 0.2s; pointer-events:none; font-family:'Jost',sans-serif; }
+  .s-dot:hover::before { opacity:1; }
+  .s-dot.active { background:var(--gold); transform:scale(1.5); }
+  .s-dot:hover { background:var(--gold); }
+
+  /* Cursor */
+  #cursor-glow { position:fixed; width:350px; height:350px; border-radius:50%; background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%); pointer-events:none; transform:translate(-50%,-50%); z-index:0; display:none; }
+  body:hover #cursor-glow { display:block; }
+  #custom-cursor { width:12px; height:12px; border:1.5px solid rgba(184,150,46,0.6); border-radius:50%; position:fixed; z-index:99998; pointer-events:none; transform:translate(-50%,-50%); transition:width 0.3s, height 0.3s, border-color 0.3s, background 0.3s; }
+  #custom-cursor.hovering { width:36px; height:36px; background:rgba(184,150,46,0.1); border-color:var(--gold); }
+
+  /* Particles */
+  #particle-canvas { position:fixed; inset:0; pointer-events:none; z-index:1; opacity:0.7; }
+
+  /* ══ NAVBAR ══ */
+  nav {
+    position:fixed; top:0; left:0; right:0; z-index:1000; padding:0 5%;
+    display:flex; align-items:center; justify-content:space-between; height:72px;
+    background:rgba(255,255,255,0.96); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border); transition:all 0.3s ease;
+    transform:translateY(-100%);
+    animation:navSlideDown 0.6s 2.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  @keyframes navSlideDown { from{transform:translateY(-100%)} to{transform:translateY(0)} }
+  nav.scrolled { height:60px; box-shadow:0 2px 24px rgba(0,0,0,0.08); }
+  .nav-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+  .nav-links { display:flex; align-items:center; gap:28px; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:var(--dark-soft); position:relative; transition:color 0.3s; }
+  .nav-links > li > a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s ease; }
+  .nav-links a:hover { color:var(--dark); }
+  .nav-links > li > a:hover::after { width:100%; }
+  .nav-links > li.nav-dropdown > a::after { display:none; }
+  .nav-cta { background:var(--dark) !important; color:var(--white) !important; padding:10px 20px; letter-spacing:1.5px !important; border:1px solid var(--dark); transition:background 0.3s !important; }
+  .nav-cta::after { display:none !important; }
+  .nav-cta:hover { background:var(--gold) !important; border-color:var(--gold) !important; }
+  .nav-active { color:var(--gold) !important; }
+  .nav-active::after { width:100% !important; }
+  .nav-dropdown { position:relative; }
+  .nav-dropdown > a { display:flex !important; align-items:center; gap:6px; }
+  .nav-dropdown > a::after { content:'' !important; display:inline-block !important; width:0 !important; height:0 !important; border-left:4px solid transparent !important; border-right:4px solid transparent !important; border-top:4px solid currentColor !important; border-bottom:none !important; background:none !important; position:static !important; flex-shrink:0; transition:transform 0.25s ease !important; margin-top:1px; }
+  .nav-dropdown:hover > a::after { transform:rotate(180deg) !important; }
+  .nav-dropdown-menu { position:absolute; top:calc(100% + 18px); left:50%; transform:translateX(-50%) translateY(-8px); background:var(--white); min-width:265px; border:1px solid rgba(0,0,0,0.07); box-shadow:0 20px 60px rgba(0,0,0,0.13); opacity:0; visibility:hidden; pointer-events:none; transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s; z-index:2000; }
+  .nav-dropdown:hover .nav-dropdown-menu { opacity:1; visibility:visible; pointer-events:auto; transform:translateX(-50%) translateY(0); }
+  .nav-dropdown-menu::before { content:''; position:absolute; top:-7px; left:50%; width:13px; height:13px; background:var(--white); border-left:1px solid rgba(0,0,0,0.07); border-top:1px solid rgba(0,0,0,0.07); transform:translateX(-50%) rotate(45deg); }
+  .nav-dropdown-item { display:block; padding:13px 24px; font-family:'Jost',sans-serif; font-size:12.5px; font-weight:400; color:#444; text-decoration:none; letter-spacing:0.3px; transition:background 0.18s,color 0.18s,padding-left 0.18s; border-bottom:1px solid rgba(0,0,0,0.045); white-space:nowrap; text-transform:none; }
+  .nav-dropdown-item:last-child { border-bottom:none; }
+  .nav-dropdown-item:first-child { border-top:3px solid var(--gold); }
+  .nav-dropdown-item:hover { background:var(--off-white); color:var(--gold); padding-left:30px; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .hamburger span { display:block; width:24px; height:1.5px; background:var(--dark); transition:all 0.3s; }
+  .mobile-nav { display:none; position:fixed; inset:0; z-index:999; background:var(--dark); flex-direction:column; align-items:center; justify-content:center; gap:32px; }
+  .mobile-nav.open { display:flex; }
+  .mobile-nav a { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; color:var(--white); text-decoration:none; letter-spacing:1px; transition:color 0.3s; }
+  .mobile-nav a:hover { color:var(--gold); }
+  .mobile-nav-close { position:absolute; top:24px; right:5%; background:none; border:none; font-size:24px; color:rgba(255,255,255,0.5); cursor:pointer; padding:8px; }
+
+  /* ══ REVEALS ══ */
+  .reveal { opacity:0; transform:translateY(36px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal.visible { opacity:1; transform:none; }
+  .reveal-left { opacity:0; transform:translateX(-48px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal-left.visible { opacity:1; transform:none; }
+  .reveal-right { opacity:0; transform:translateX(48px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal-right.visible { opacity:1; transform:none; }
+  .reveal-scale { opacity:0; transform:scale(0.88); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+  .reveal-scale.visible { opacity:1; transform:none; }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+  .reveal-delay-3 { transition-delay:0.3s; }
+  .reveal-delay-4 { transition-delay:0.4s; }
+
+  /* Section wipe */
+  .section-wipe { position:relative; }
+  .section-wipe::before { content:''; position:absolute; top:-2px; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold),transparent); opacity:0; transform:scaleX(0); transition:transform 1s ease,opacity 0.5s; }
+  .section-wipe.visible::before { opacity:1; transform:scaleX(1); }
+
+  /* ══ SECTION BASE ══ */
+  section { padding:100px 5%; }
+  .section-inner { max-width:1200px; margin:0 auto; }
+  .section-label { display:inline-flex; align-items:center; gap:12px; margin-bottom:20px; }
+  .section-label span { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); font-weight:500; }
+  .section-label-line { width:30px; height:1px; background:var(--gold); }
+  .section-title { font-size:clamp(32px,4vw,52px); font-weight:400; line-height:1.1; color:var(--dark); letter-spacing:-0.5px; }
+  .section-title em { font-style:italic; color:var(--gold); }
+  .gold-rule { width:60px; height:2px; background:linear-gradient(90deg,var(--gold),transparent); margin:20px 0; }
+
+  /* ══ HERO BANNER ══ */
+  #about-hero { min-height:56vh; padding-top:72px; display:flex; align-items:center; position:relative; background:var(--dark); overflow:hidden; }
+
+  .about-hero-grid {
+    position:absolute; inset:0;
+    background-image:linear-gradient(rgba(184,150,46,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.06) 1px,transparent 1px);
+    background-size:80px 80px;
+    animation:gridDrift 20s linear infinite;
+  }
+  @keyframes gridDrift { 0%{background-position:0 0} 100%{background-position:80px 80px} }
+
+  .about-hero-glow { position:absolute; top:-20%; right:-10%; width:600px; height:600px; background:radial-gradient(circle,rgba(184,150,46,0.12) 0%,transparent 70%); animation:glowPulse 6s ease-in-out infinite; }
+  .about-hero-glow2 { position:absolute; bottom:-20%; left:-5%; width:400px; height:400px; background:radial-gradient(circle,rgba(184,150,46,0.07) 0%,transparent 70%); animation:glowPulse2 8s ease-in-out infinite; }
+  @keyframes glowPulse { 0%,100%{transform:scale(1) translateY(0);opacity:0.8} 50%{transform:scale(1.1) translateY(-20px);opacity:1} }
+  @keyframes glowPulse2 { 0%,100%{transform:scale(1);opacity:0.5} 50%{transform:scale(1.15);opacity:0.8} }
+
+  .about-hero-line { position:absolute; left:5%; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.3) 30%,rgba(184,150,46,0.3) 70%,transparent); }
+  .about-hero-scan { position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(184,150,46,0.15),transparent); animation:heroScan 5s ease-in-out infinite; }
+  @keyframes heroScan { 0%{top:15%;opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{top:85%;opacity:0} }
+
+  .about-hero-inner { position:relative; z-index:2; padding:60px 5% 80px; max-width:1200px; margin:0 auto; width:100%; }
+
+  .about-hero-eyebrow { display:inline-flex; align-items:center; gap:12px; margin-bottom:28px; opacity:0; animation:fadeUp 0.9s 3.0s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .about-hero-eyebrow span { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); font-weight:500; }
+  .about-hero-eyebrow-line { width:0; height:1px; background:var(--gold); animation:lineExpand 0.8s 3.3s ease forwards; }
+  @keyframes lineExpand { to{width:40px} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+  .about-hero-title { font-size:clamp(48px,6.5vw,92px); font-weight:300; color:var(--white); line-height:1.05; letter-spacing:-1.5px; margin-bottom:28px; opacity:0; animation:fadeUp 0.9s 3.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .about-hero-title em { font-style:italic; color:var(--gold-light); }
+  .about-hero-desc { max-width:520px; font-size:15px; color:rgba(255,255,255,0.5); font-weight:300; line-height:1.8; opacity:0; animation:fadeUp 0.9s 3.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+  .about-hero-breadcrumb { position:absolute; bottom:32px; left:5%; display:flex; align-items:center; gap:10px; opacity:0; animation:fadeUp 0.9s 3.6s cubic-bezier(0.22,1,0.36,1) forwards; }
+  .about-hero-breadcrumb a { font-size:11px; color:rgba(255,255,255,0.35); text-decoration:none; letter-spacing:1px; text-transform:uppercase; transition:color 0.3s; }
+  .about-hero-breadcrumb a:hover { color:var(--gold); }
+  .about-hero-breadcrumb span { font-size:11px; color:rgba(255,255,255,0.2); }
+  .about-hero-breadcrumb .current { font-size:11px; color:var(--gold); letter-spacing:1px; text-transform:uppercase; }
+
+  /* ══ STAT STRIP ══ */
+  .about-stat-strip { background:var(--gold); position:relative; overflow:hidden; }
+  .about-stat-strip::before { content:''; position:absolute; inset:0; background:linear-gradient(45deg,rgba(255,255,255,0.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,0.05) 75%); background-size:40px 40px; }
+  .about-stat-strip-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); position:relative; z-index:1; }
+  .about-stat-item { padding:36px 0; display:flex; flex-direction:column; align-items:center; text-align:center; border-right:1px solid rgba(255,255,255,0.2); opacity:0; transform:translateY(20px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .about-stat-item:last-child { border-right:none; }
+  .about-stat-item.visible { opacity:1; transform:none; }
+  .about-stat-num { font-family:'Cormorant Garamond',serif; font-size:46px; font-weight:300; color:var(--white); line-height:1; }
+  .about-stat-num sup { font-size:22px; vertical-align:super; }
+  .about-stat-label { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.75); margin-top:6px; font-weight:500; }
+
+  /* ══ WHO WE ARE ══ */
+  #who { background:var(--white); }
+  .who-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+  .who-body { font-size:15px; line-height:1.9; color:var(--grey); font-weight:300; margin-bottom:20px; }
+  .who-signature { display:flex; align-items:center; gap:20px; margin-top:36px; padding-top:32px; border-top:1px solid var(--border); }
+  .who-sig-name { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; color:var(--dark); font-style:italic; }
+  .who-sig-title { font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-top:4px; }
+  .who-right { position:relative; }
+  .who-image-box { position:relative; }
+  .who-image-main { background:var(--off-white); height:440px; position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; transition:transform 0.3s ease; }
+  .who-image-main:hover { transform:scale(1.01); }
+  .who-image-main::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:linear-gradient(to bottom,var(--gold),transparent); }
+  .who-image-main::after { content:''; position:absolute; top:0; right:0; width:1px; height:100%; background:linear-gradient(to bottom,transparent,var(--border),transparent); }
+  .who-image-deco { position:absolute; bottom:-24px; right:-24px; width:160px; height:160px; background:var(--dark); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:6px; z-index:2; transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .who-image-box:hover .who-image-deco { transform:scale(1.05); }
+  .who-image-deco-num { font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:300; color:var(--gold); line-height:1; }
+  .who-image-deco-label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.5); text-align:center; line-height:1.4; }
+  .who-inner-svg { width:80%; opacity:0.12; }
+
+  /* ══ PHILOSOPHY ══ */
+  #philosophy { background:var(--dark); position:relative; overflow:hidden; }
+  .philosophy-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(184,150,46,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.05) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; animation:gridDrift 25s linear infinite; }
+  .philosophy-glow { position:absolute; top:-10%; left:50%; transform:translateX(-50%); width:800px; height:400px; background:radial-gradient(ellipse,rgba(184,150,46,0.08) 0%,transparent 70%); pointer-events:none; animation:glowPulse 8s ease-in-out infinite; }
+  .philosophy-inner { position:relative; z-index:2; }
+  .philosophy-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-top:56px; }
+  .philosophy-card { padding:48px 36px; border:1px solid rgba(184,150,46,0.12); position:relative; overflow:hidden; transition:background 0.35s,border-color 0.35s,transform 0.35s; opacity:0; transform:translateY(30px); }
+  .philosophy-card.visible { opacity:1; transform:none; }
+  .philosophy-card::before { content:''; position:absolute; bottom:0; left:0; width:0; height:3px; background:var(--gold); transition:width 0.4s ease; }
+  .philosophy-card:hover { background:rgba(184,150,46,0.04); border-color:rgba(184,150,46,0.25); transform:translateY(-4px); }
+  .philosophy-card:hover::before { width:100%; }
+  .philosophy-card-num { font-family:'Cormorant Garamond',serif; font-size:64px; font-weight:300; color:rgba(184,150,46,0.12); line-height:1; margin-bottom:20px; }
+  .philosophy-card h3 { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:400; color:var(--white); margin-bottom:16px; line-height:1.2; }
+  .philosophy-card p { font-size:14px; color:rgba(255,255,255,0.45); line-height:1.85; font-weight:300; }
+
+  /* ══ JOURNEY ══ */
+  #journey { background:var(--off-white); }
+  .journey-layout { display:grid; grid-template-columns:380px 1fr; gap:80px; align-items:start; }
+  .journey-desc { font-size:15px; color:var(--grey); line-height:1.8; font-weight:300; margin-top:20px; }
+  .timeline { position:relative; padding-left:32px; }
+  .timeline::before { content:''; position:absolute; left:0; top:12px; bottom:12px; width:1px; background:linear-gradient(to bottom,var(--gold),rgba(184,150,46,0.1)); animation:timelineGrow 1.5s ease forwards; transform-origin:top; }
+  @keyframes timelineGrow { from{transform:scaleY(0)} to{transform:scaleY(1)} }
+  .timeline-item { position:relative; padding:0 0 40px 36px; opacity:0; transform:translateX(20px); transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1); }
+  .timeline-item:last-child { padding-bottom:0; }
+  .timeline-item.visible { opacity:1; transform:none; }
+  .timeline-dot { position:absolute; left:-7px; top:6px; width:14px; height:14px; background:var(--off-white); border:2px solid var(--gold); border-radius:50%; transition:background 0.3s,transform 0.3s; }
+  .timeline-item:hover .timeline-dot { background:var(--gold); transform:scale(1.3); }
+  .timeline-year { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:8px; }
+  .timeline-item h4 { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:500; color:var(--dark); margin-bottom:8px; line-height:1.2; }
+  .timeline-item p { font-size:13.5px; color:var(--grey); line-height:1.75; font-weight:300; }
+  /* Connector line animation per item */
+  .timeline-item::before { content:''; position:absolute; left:-1px; top:14px; width:1px; height:0; background:rgba(184,150,46,0.3); transition:height 0.6s ease; }
+  .timeline-item.visible::before { height:calc(100% - 14px); }
+  .timeline-item:last-child::before { display:none; }
+
+  /* ══ VALUES ══ */
+  #values { background:var(--white); }
+  .values-header { text-align:center; margin-bottom:64px; }
+  .values-header .section-label { justify-content:center; }
+  .center-rule { width:50px; height:3px; background:var(--gold); margin:16px auto; }
+  .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .value-card { padding:40px 32px; border:1px solid rgba(0,0,0,0.06); position:relative; overflow:hidden; transition:all 0.4s ease; background:var(--white); opacity:0; transform:translateY(24px) scale(0.97); }
+  .value-card.visible { opacity:1; transform:none; }
+  .value-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(184,150,46,0.04),transparent); opacity:0; transition:opacity 0.4s; }
+  .value-card:hover::before { opacity:1; }
+  .value-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.35s ease; }
+  .value-card:hover { box-shadow:0 12px 40px rgba(184,150,46,0.14); transform:translateY(-5px) scale(1.01); }
+  .value-card:hover::after { transform:scaleX(1); }
+  .value-icon { width:52px; height:52px; background:var(--off-white); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:20px; transition:background 0.3s,transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+  .value-card:hover .value-icon { background:var(--gold-pale); transform:rotate(5deg) scale(1.1); }
+  .value-card h3 { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:500; color:var(--dark); margin-bottom:12px; }
+  .value-card p { font-size:13.5px; color:var(--grey); line-height:1.8; font-weight:300; }
+
+  /* ══ PRESENCE ══ */
+  #presence { background:var(--dark); position:relative; overflow:hidden; }
+  .presence-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(184,150,46,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.04) 1px,transparent 1px); background-size:80px 80px; pointer-events:none; animation:gridDrift 20s linear infinite; }
+  .presence-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:2; }
+  .presence-body { font-size:15px; color:rgba(255,255,255,0.5); line-height:1.9; font-weight:300; margin-bottom:20px; }
+  .presence-items { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:36px; }
+  .presence-item { padding:20px 22px; border:1px solid rgba(184,150,46,0.15); background:rgba(255,255,255,0.02); transition:border-color 0.3s,background 0.3s,transform 0.3s; }
+  .presence-item:hover { border-color:rgba(184,150,46,0.35); background:rgba(184,150,46,0.04); transform:translateY(-2px); }
+  .presence-item h5 { font-family:'Jost',sans-serif; font-size:12px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+  .presence-item p { font-size:13px; color:rgba(255,255,255,0.4); font-weight:300; }
+  .presence-right { display:flex; align-items:center; justify-content:center; }
+  .presence-visual { position:relative; width:100%; max-width:460px; }
+  .presence-ring { border-radius:50%; border:1px solid rgba(184,150,46,0.15); display:flex; align-items:center; justify-content:center; }
+  .presence-ring-outer { width:360px; height:360px; margin:0 auto; animation:spinSlow 30s linear infinite; }
+  .presence-ring-inner { width:260px; height:260px; animation:spinSlow 20s linear infinite reverse; }
+  .presence-ring-core { width:160px; height:160px; background:rgba(184,150,46,0.06); border-color:rgba(184,150,46,0.3); flex-direction:column; gap:6px; animation:glowPulse 4s ease-in-out infinite; }
+  @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .presence-ring-core-text { font-size:14px; letter-spacing:1.5px; text-transform:uppercase; font-family:'Jost',sans-serif; font-weight:500; color:rgba(184,150,46,0.8); }
+  .presence-ring-core-label { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+
+  /* ══ CTA BAND ══ */
+  #cta-band { background:var(--gold); padding:80px 5%; position:relative; overflow:hidden; }
+  #cta-band::before { content:''; position:absolute; inset:0; background:linear-gradient(45deg,rgba(255,255,255,0.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,0.05) 75%); background-size:40px 40px; }
+  .cta-band-inner { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:48px; flex-wrap:wrap; position:relative; z-index:1; }
+  .cta-band-text h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,3.5vw,44px); font-weight:400; color:var(--white); line-height:1.2; }
+  .cta-band-text p { font-size:14px; color:rgba(255,255,255,0.75); margin-top:10px; font-weight:300; }
+  .cta-band-actions { display:flex; gap:16px; flex-wrap:wrap; flex-shrink:0; }
+  .btn-white { display:inline-flex; align-items:center; gap:8px; padding:15px 34px; background:var(--white); color:var(--gold); text-decoration:none; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:1px solid var(--white); transition:all 0.3s; position:relative; overflow:hidden; }
+  .btn-white::before { content:''; position:absolute; inset:0; background:var(--dark); transform:translateX(-101%); transition:transform 0.3s ease; }
+  .btn-white:hover::before { transform:translateX(0); }
+  .btn-white:hover { color:var(--white); }
+  .btn-white span { position:relative; z-index:1; }
+  .btn-outline-white { display:inline-flex; align-items:center; gap:8px; padding:15px 34px; background:transparent; color:var(--white); text-decoration:none; font-size:11px; font-weight:500; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,255,255,0.5); transition:all 0.3s; }
+  .btn-outline-white:hover { border-color:var(--white); background:rgba(255,255,255,0.1); }
+
+  /* ══ FOOTER ══ */
+  footer { background:var(--dark); padding:64px 5% 32px; }
+  .footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:60px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:32px; }
+  .footer-brand-desc { font-size:13.5px; color:rgba(255,255,255,0.38); line-height:1.8; font-weight:300; margin:20px 0 24px; max-width:240px; }
+  .social-links { display:flex; gap:10px; }
+  .social-link { width:36px; height:36px; border:1px solid rgba(255,255,255,0.12); display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:13px; color:rgba(255,255,255,0.4); transition:all 0.3s; }
+  .social-link:hover { border-color:var(--gold); color:var(--gold); background:rgba(184,150,46,0.08); transform:translateY(-3px); }
+  .footer-col h5 { font-family:'Jost',sans-serif; font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:20px; }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:10px; }
+  .footer-col ul li a { text-decoration:none; font-size:13.5px; color:rgba(255,255,255,0.38); font-weight:300; transition:color 0.3s,padding-left 0.3s; display:inline-block; }
+  .footer-col ul li a:hover { color:var(--gold-light); padding-left:6px; }
+  .footer-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-copy { font-size:12px; color:rgba(255,255,255,0.22); font-weight:300; }
+  .footer-legal { display:flex; gap:24px; }
+  .footer-legal a { font-size:12px; color:rgba(255,255,255,0.22); text-decoration:none; transition:color 0.3s; }
+  .footer-legal a:hover { color:var(--gold); }
+
+  /* ══ RESPONSIVE ══ */
+  @media (max-width:1024px) {
+    .who-grid { grid-template-columns:1fr; gap:48px; }
+    .philosophy-grid { grid-template-columns:1fr 1fr; }
+    .journey-layout { grid-template-columns:1fr; gap:48px; }
+    .values-grid { grid-template-columns:1fr 1fr; }
+    .presence-layout { grid-template-columns:1fr; gap:48px; }
+    .about-stat-strip-inner { grid-template-columns:1fr 1fr; }
+    .footer-top { grid-template-columns:1fr 1fr; gap:40px; }
+  }
+  @media (max-width:768px) {
+    .hamburger { display:flex; }
+    .nav-links { display:none; }
+    section { padding:72px 5%; }
+    .philosophy-grid { grid-template-columns:1fr; }
+    .values-grid { grid-template-columns:1fr; }
+    .about-stat-strip-inner { grid-template-columns:1fr 1fr; }
+    .footer-top { grid-template-columns:1fr; gap:36px; }
+    .cta-band-inner { flex-direction:column; }
+    .presence-ring-outer { width:280px; height:280px; }
+    .presence-ring-inner { width:200px; height:200px; }
+    .presence-ring-core { width:120px; height:120px; }
+    #section-dots { display:none; }
+    #custom-cursor { display:none; }
+  }
+  @media (max-width:480px) {
+    .presence-items { grid-template-columns:1fr; }
+    .about-stat-strip-inner { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-particle" style="--dur:3.2s;--delay:0s;--dx:20px;left:20%;bottom:30%;width:3px;height:3px;"></div>
+  <div class="loader-particle" style="--dur:2.8s;--delay:0.3s;--dx:-15px;left:40%;bottom:20%;"></div>
+  <div class="loader-particle" style="--dur:3.5s;--delay:0.7s;--dx:30px;left:60%;bottom:25%;width:3px;height:3px;"></div>
+  <div class="loader-particle" style="--dur:2.5s;--delay:1s;--dx:-25px;left:75%;bottom:15%;"></div>
+  <div class="loader-particle" style="--dur:4s;--delay:0.2s;--dx:10px;left:85%;bottom:35%;"></div>
+  <div class="loader-particle" style="--dur:3s;--delay:1.2s;--dx:-20px;left:30%;bottom:40%;"></div>
+  <div class="loader-logo">
+    <div class="loader-logo-mark"></div>
+    <div class="loader-name">CorpSight Advisors</div>
+    <div class="loader-sub">About Us</div>
+  </div>
+  <div class="loader-progress-row">
+    <div class="loader-progress-wrap"><div class="loader-progress-fill"></div></div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+  </div>
+</div>
+
+<!-- Fixed UI -->
+<div id="scroll-progress"></div>
+<div id="side-progress"><div id="side-progress-fill"></div></div>
+<div id="cursor-glow"></div>
+<div id="custom-cursor"></div>
+<canvas id="particle-canvas"></canvas>
+
+<!-- Section dots -->
+<nav id="section-dots">
+  <div class="s-dot" data-target="about-hero" data-label="Hero"></div>
+  <div class="s-dot" data-target="who" data-label="Who We Are"></div>
+  <div class="s-dot" data-target="philosophy" data-label="Philosophy"></div>
+  <div class="s-dot" data-target="journey" data-label="Journey"></div>
+  <div class="s-dot" data-target="values" data-label="Values"></div>
+  <div class="s-dot" data-target="presence" data-label="Presence"></div>
+  <div class="s-dot" data-target="cta-band" data-label="Contact"></div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="about.html" onclick="closeMobile()">About Us</a>
+  <a href="practice.html" onclick="closeMobile()">Practice Areas</a>
+  <a href="team.html" onclick="closeMobile()">Our Team</a>
+  <a href="resources.html" onclick="closeMobile()">Resources</a>
+  <a href="careers.html" onclick="closeMobile()">Careers</a>
+  <a href="contact.html" onclick="closeMobile()">Contact Us</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="logo/1.png" alt="CorpSight Logo" style="width:180px;height:180px;object-fit:contain;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="nav-active">About Us</a></li>
+    <li class="nav-dropdown">
+      <a href="practice.html">Practice Areas</a>
+      <div class="nav-dropdown-menu">
+        <a href="practice-setup.html" class="nav-dropdown-item">Setting up of Business and Compliance Management</a>
+        <a href="practice-licensing.html" class="nav-dropdown-item">Licensing &amp; Regulatory Approvals</a>
+        <a href="practice-transactional.html" class="nav-dropdown-item">Transactional Advisory and Due Diligence</a>
+        <a href="practice-fund.html" class="nav-dropdown-item">Fund Formation and Periodic Compliances</a>
+        <a href="practice-commercial.html" class="nav-dropdown-item">Corporate Commercial Advisory</a>
+        <a href="practice-labour.html" class="nav-dropdown-item">Labour and Employment</a>
+        <a href="practice-ip.html" class="nav-dropdown-item">Intellectual Property</a>
+        <a href="practice-privacy.html" class="nav-dropdown-item">Privacy and Data Protection</a>
+        <a href="practice-nbfc.html" class="nav-dropdown-item">NBFC and Fintech Advisory</a>
+      </div>
+    </li>
+    <li><a href="team.html">Our Team</a></li>
+    <li><a href="resources.html">Resources</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+    <li><a href="consult.html" class="nav-cta">Consult Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO BANNER -->
+<section id="about-hero">
+  <div class="about-hero-grid"></div>
+  <div class="about-hero-glow"></div>
+  <div class="about-hero-glow2"></div>
+  <div class="about-hero-line"></div>
+  <div class="about-hero-scan"></div>
+  <div class="about-hero-inner">
+    <div class="about-hero-eyebrow">
+      <div class="about-hero-eyebrow-line"></div>
+      <span>CorpSight Advisors LLP</span>
+    </div>
+    <h1 class="about-hero-title">About <em>Us</em></h1>
+    <p class="about-hero-desc">We are a premier corporate advisory and compliance firm — built on the belief that every business deserves expert counsel that is precise, principled, and purposeful.</p>
+  </div>
+  <div class="about-hero-breadcrumb">
+    <a href="index.html">Home</a>
+    <span>/</span>
+    <span class="current">About Us</span>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<div class="about-stat-strip">
+  <div class="about-stat-strip-inner">
+    <div class="about-stat-item">
+      <div class="about-stat-num"><span class="strip-count" data-target="15">0</span><sup>+</sup></div>
+      <div class="about-stat-label">Years of Excellence</div>
+    </div>
+    <div class="about-stat-item" style="transition-delay:0.12s">
+      <div class="about-stat-num"><span class="strip-count" data-target="500">0</span><sup>+</sup></div>
+      <div class="about-stat-label">Clients Served</div>
+    </div>
+    <div class="about-stat-item" style="transition-delay:0.24s">
+      <div class="about-stat-num"><span class="strip-count" data-target="98">0</span><sup>%</sup></div>
+      <div class="about-stat-label">Client Retention Rate</div>
+    </div>
+    <div class="about-stat-item" style="transition-delay:0.36s">
+      <div class="about-stat-num"><span class="strip-count" data-target="9">0</span></div>
+      <div class="about-stat-label">Practice Areas</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section id="who" class="section-wipe">
+  <div class="section-inner">
+    <div class="who-grid">
+      <div class="who-left reveal">
+        <div class="section-label"><div class="section-label-line"></div><span>Who We Are</span></div>
+        <h2 class="section-title">Trusted Advisors for <em>Every Stage</em> of Your Business</h2>
+        <div class="gold-rule"></div>
+        <p class="who-body">CorpSight Advisors LLP is a premier corporate advisory and consulting firm with deep expertise in legal compliance, regulatory affairs, and strategic business counsel. Founded on the twin pillars of integrity and precision, we serve as trusted partners to corporations, emerging startups, and SMEs across industries.</p>
+        <p class="who-body">Our multidisciplinary team brings together seasoned legal professionals, compliance experts, and business strategists who understand both the letter of the law and the spirit of enterprise. We don't just advise — we engage, we execute, and we stand beside you at every turn.</p>
+        <p class="who-body">With a decade and a half of practice under our belt, we have guided businesses through their most complex regulatory challenges, M&amp;A transactions, fund formations, and governance overhauls — always with the same calm clarity that defines our philosophy.</p>
+        <div class="who-signature">
+          <div style="width:48px;height:48px;background:var(--dark);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='rotate(5deg) scale(1.1)'" onmouseleave="this.style.transform=''">
+            <span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);font-weight:600;">CS</span>
+          </div>
+          <div class="who-sig-line">
+            <span class="who-sig-name">CorpSight Advisors LLP</span>
+            <span class="who-sig-title">Founded · Mumbai, India</span>
+          </div>
+        </div>
+      </div>
+      <div class="who-right reveal-scale reveal-delay-2">
+        <div class="who-image-box">
+          <div class="who-image-main">
+            <svg class="who-inner-svg" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="40" width="320" height="220" rx="4" stroke="#B8962E" stroke-width="2"/>
+              <path d="M40 80 H360" stroke="#B8962E" stroke-width="1"/>
+              <circle cx="65" cy="60" r="8" fill="#B8962E" opacity="0.4"/><circle cx="88" cy="60" r="8" fill="#B8962E" opacity="0.25"/><circle cx="111" cy="60" r="8" fill="#B8962E" opacity="0.15"/>
+              <rect x="60" y="100" width="120" height="8" rx="2" fill="#B8962E" opacity="0.3"/>
+              <rect x="60" y="116" width="200" height="6" rx="2" fill="#B8962E" opacity="0.15"/><rect x="60" y="130" width="180" height="6" rx="2" fill="#B8962E" opacity="0.15"/>
+              <rect x="60" y="155" width="80" height="60" rx="3" fill="#B8962E" opacity="0.08" stroke="#B8962E" stroke-width="1"/>
+              <rect x="160" y="155" width="80" height="60" rx="3" fill="#B8962E" opacity="0.08" stroke="#B8962E" stroke-width="1"/>
+              <rect x="260" y="155" width="80" height="60" rx="3" fill="#B8962E" opacity="0.08" stroke="#B8962E" stroke-width="1"/>
+              <path d="M80 200 L100 180 L120 190" stroke="#B8962E" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M180 200 L200 170 L220 195" stroke="#B8962E" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M275 200 L295 175 L315 185 L335 165" stroke="#B8962E" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div style="position:absolute;top:28px;left:28px;"><span style="font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:500;">Est. 2009</span></div>
+          </div>
+          <div class="who-image-deco">
+            <div class="who-image-deco-num">15<span style="font-size:24px">+</span></div>
+            <div class="who-image-deco-label">Years of<br>Excellence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="philosophy-bg"></div>
+  <div class="philosophy-glow"></div>
+  <div class="section-inner philosophy-inner">
+    <div class="reveal" style="text-align:center;">
+      <div class="section-label" style="justify-content:center;"><div class="section-label-line"></div><span>Our Philosophy</span><div class="section-label-line"></div></div>
+      <h2 class="section-title" style="color:var(--white);margin-top:12px;">The Principles That <em>Guide Us</em></h2>
+    </div>
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="philosophy-card-num">01</div>
+        <h3>Compliance as Foundation</h3>
+        <p>We believe that compliance is not a burden — it is the bedrock upon which sustainable businesses are built. Every advisory engagement begins with building a robust compliance architecture that withstands scrutiny and enables growth.</p>
+      </div>
+      <div class="philosophy-card" style="transition-delay:0.12s">
+        <div class="philosophy-card-num">02</div>
+        <h3>Clarity Above Complexity</h3>
+        <p>The law is complex; our counsel should not be. We translate intricate regulatory landscapes into clear, actionable guidance — empowering our clients to make confident decisions without ambiguity or confusion.</p>
+      </div>
+      <div class="philosophy-card" style="transition-delay:0.24s">
+        <div class="philosophy-card-num">03</div>
+        <h3>Partnership, Not Transactions</h3>
+        <p>We measure success not by engagements closed but by relationships sustained. Our approach is deeply consultative — we invest time to understand your business, your ambitions, and your constraints before we advise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey" class="section-wipe">
+  <div class="section-inner">
+    <div class="journey-layout">
+      <div class="journey-left reveal">
+        <div class="section-label"><div class="section-label-line"></div><span>Our Journey</span></div>
+        <h2 class="section-title">A Decade and a Half of <em>Growth</em></h2>
+        <div class="gold-rule"></div>
+        <p class="journey-desc">From a boutique startup advisory desk to a full-spectrum corporate advisory powerhouse — our journey has been defined by our clients' milestones as much as our own.</p>
+      </div>
+      <div class="journey-right">
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2009</div><h4>Foundation</h4><p>CorpSight Advisors LLP was established in Mumbai with a focused mandate to provide expert corporate compliance and advisory services to emerging startups and SMEs navigating India's complex regulatory landscape.</p></div>
+          <div class="timeline-item" style="transition-delay:0.1s"><div class="timeline-dot"></div><div class="timeline-year">2012</div><h4>Expanding Practice Areas</h4><p>Introduced dedicated practice desks for SEBI regulatory matters, FEMA compliance, and transactional advisory — responding to the growing complexity of cross-border investments and capital market regulations.</p></div>
+          <div class="timeline-item" style="transition-delay:0.2s"><div class="timeline-dot"></div><div class="timeline-year">2015</div><h4>Startup Ecosystem Focus</h4><p>Became a preferred advisory partner for seed-stage and Series A funded startups, developing proprietary frameworks for rapid business incorporation, ESOP structuring, and investor due diligence.</p></div>
+          <div class="timeline-item" style="transition-delay:0.3s"><div class="timeline-dot"></div><div class="timeline-year">2018</div><h4>Fund Formation Practice</h4><p>Launched our dedicated Fund Formation &amp; NBFC Advisory practice, enabling clients to establish AIF structures, comply with SEBI AIF Regulations, and navigate RBI's NBFC licensing and periodic compliance framework.</p></div>
+          <div class="timeline-item" style="transition-delay:0.4s"><div class="timeline-dot"></div><div class="timeline-year">2022</div><h4>Data Protection &amp; IP Practice</h4><p>Established specialised practice areas in Privacy &amp; Data Protection and Intellectual Property — keeping pace with the DPDP Act, IT Rules, and the rapidly evolving digital regulatory environment in India.</p></div>
+          <div class="timeline-item" style="transition-delay:0.5s"><div class="timeline-dot"></div><div class="timeline-year">Today</div><h4>500+ Clients &amp; Growing</h4><p>Today, CorpSight serves over 500 clients across India — from first-time founders to listed companies — offering a full spectrum of corporate legal, compliance, and strategic advisory services.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values" class="section-wipe">
+  <div class="section-inner">
+    <div class="values-header reveal">
+      <div class="section-label" style="justify-content:center;"><div class="section-label-line"></div><span>Core Values</span><div class="section-label-line"></div></div>
+      <div class="center-rule"></div>
+      <h2 class="section-title" style="font-size:clamp(32px,4vw,52px);">What We <em>Stand For</em></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card" style="transition-delay:0s"><div class="value-icon">⚖️</div><h3>Integrity</h3><p>Every piece of advice we give is grounded in complete honesty. We will never tell you what you want to hear at the cost of what you need to know. Our counsel is always candid, objective, and in your best interest.</p></div>
+      <div class="value-card" style="transition-delay:0.1s"><div class="value-icon">🎯</div><h3>Precision</h3><p>In matters of law and compliance, there is no room for imprecision. We approach every engagement with meticulous attention to detail — from statutory filings to complex transaction structures.</p></div>
+      <div class="value-card" style="transition-delay:0.2s"><div class="value-icon">🤝</div><h3>Partnership</h3><p>We don't just work for our clients — we work with them. Our team invests deeply in understanding each client's business model, sector, and long-term aspirations to deliver advice that is genuinely tailored.</p></div>
+      <div class="value-card" style="transition-delay:0.1s"><div class="value-icon">🔒</div><h3>Confidentiality</h3><p>Our clients trust us with their most sensitive business information. We treat every engagement with absolute discretion, maintaining the highest standards of professional confidentiality at all times.</p></div>
+      <div class="value-card" style="transition-delay:0.2s"><div class="value-icon">💡</div><h3>Innovation</h3><p>Regulatory landscapes evolve — our practice evolves with them. We continuously invest in staying ahead of legislative changes, new frameworks, and emerging compliance challenges across all practice areas.</p></div>
+      <div class="value-card" style="transition-delay:0.3s"><div class="value-icon">📈</div><h3>Growth Orientation</h3><p>Compliance should enable growth, not obstruct it. We structure our advisory to ensure that every compliance framework we build serves as a launchpad for your business ambitions — not a constraint.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESENCE -->
+<section id="presence">
+  <div class="presence-bg"></div>
+  <div class="section-inner">
+    <div class="presence-layout">
+      <div class="presence-left reveal">
+        <div class="section-label"><div class="section-label-line"></div><span>Our Reach</span></div>
+        <h2 class="section-title" style="color:var(--white);">India-Rooted, <em>Globally</em> Connected</h2>
+        <div style="width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:20px 0;"></div>
+        <p class="presence-body">Headquartered in Mumbai's financial heart, CorpSight Advisors LLP serves clients across India and supports cross-border transactions involving multiple jurisdictions — bridging India's regulatory framework with global business requirements.</p>
+        <p class="presence-body">Our practice routinely involves FEMA cross-border structuring, FDI advisory, GIFT City fund formations, and inbound investment compliance — connecting our Indian expertise to international business ambitions.</p>
+        <div class="presence-items">
+          <div class="presence-item"><h5>📍 Mumbai HQ</h5><p>World Trade Centre, Level 12</p></div>
+          <div class="presence-item"><h5>🇮🇳 Pan-India</h5><p>Clients across 18+ cities</p></div>
+          <div class="presence-item"><h5>🌐 Cross-Border</h5><p>FEMA, FDI, GIFT City advisory</p></div>
+          <div class="presence-item"><h5>🤝 Network</h5><p>Global law firm alliances</p></div>
+        </div>
+      </div>
+      <div class="presence-right reveal-scale reveal-delay-2">
+        <div class="presence-visual">
+          <div class="presence-ring presence-ring-outer" style="position:relative;">
+            <div class="presence-ring presence-ring-inner" style="position:absolute;">
+              <div class="presence-ring presence-ring-core" style="position:absolute;flex-direction:column;gap:4px;">
+                <div class="presence-ring-core-text">CorpSight</div>
+                <div style="width:30px;height:1px;background:var(--gold);margin:4px auto;opacity:0.4;"></div>
+                <div class="presence-ring-core-label">Advisors LLP</div>
+              </div>
+            </div>
+            <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:var(--gold);border-radius:50%;opacity:0.7;animation:dotPulse 2s ease-in-out infinite;"></div>
+            <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:6px;height:6px;background:var(--gold);border-radius:50%;opacity:0.4;animation:dotPulse 2.5s 0.5s ease-in-out infinite;"></div>
+            <div style="position:absolute;top:50%;left:10px;transform:translateY(-50%);width:6px;height:6px;background:var(--gold);border-radius:50%;opacity:0.5;animation:dotPulse 3s 1s ease-in-out infinite;"></div>
+            <div style="position:absolute;top:50%;right:10px;transform:translateY(-50%);width:8px;height:8px;background:var(--gold);border-radius:50%;opacity:0.6;animation:dotPulse 2.2s 0.2s ease-in-out infinite;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  @keyframes dotPulse { 0%,100%{transform:translateX(-50%) scale(1);opacity:0.6} 50%{transform:translateX(-50%) scale(1.6);opacity:1} }
+</style>
+
+<!-- CTA BAND -->
+<section id="cta-band">
+  <div class="cta-band-inner reveal">
+    <div class="cta-band-text">
+      <h2>Ready to Work with Us?</h2>
+      <p>Book a no-obligation consultation with our senior advisory team today.</p>
+    </div>
+    <div class="cta-band-actions">
+      <a href="index.html#booking" class="btn-white"><span>Book Consultation →</span></a>
+      <a href="contact.html" class="btn-outline-white">Get In Touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <div><img src="logo/1.png" alt="CorpSight Logo" style="width:180px;height:100px;object-fit:contain;"></div>
+      <p class="footer-brand-desc">Trusted corporate advisory, compliance, and legal consulting — empowering businesses to operate with clarity and confidence.</p>
+      <div class="social-links">
+        <a href="#" class="social-link" title="LinkedIn">in</a>
+        <a href="#" class="social-link" title="Twitter">𝕏</a>
+        <a href="#" class="social-link" title="Email">@</a>
+      </div>
+    </div>
+    <div class="footer-col reveal reveal-delay-1">
+      <h5>Practice Areas</h5>
+      <ul>
+        <li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li>
+        <li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li>
+        <li><a href="practice-transactional.html">Transactional Advisory</a></li>
+        <li><a href="practice-fund.html">Fund Formation</a></li>
+        <li><a href="practice-labour.html">Labour &amp; Employment</a></li>
+        <li><a href="practice-ip.html">IP &amp; Data Protection</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal reveal-delay-2">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#who">Who We Are</a></li>
+        <li><a href="about.html#journey">Our Journey</a></li>
+        <li><a href="about.html#values">Our Values</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="careers.html">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col reveal reveal-delay-3">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="#">Mumbai Office</a></li>
+        <li><a href="#">+91 22 4000 0000</a></li>
+        <li><a href="#">consult@corpsightadvisors.com</a></li>
+        <li><a href="index.html#booking">Book Consultation</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 CorpSight Advisors LLP. All rights reserved.</p>
+    <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div>
+  </div>
+</footer>
+
+<script>
+/* LOADER */
+(function(){
+  var pct=0, pctEl=document.getElementById('loaderPct'), loader=document.getElementById('loader');
+  var iv=setInterval(function(){ pct+=Math.random()*8+2; if(pct>=100){pct=100;clearInterval(iv);} if(pctEl)pctEl.textContent=Math.floor(pct)+'%'; },80);
+  function hideLoader(){ loader.classList.add('loaded'); document.body.style.overflow=''; setTimeout(function(){ document.getElementById('section-dots').classList.add('visible'); },800); }
+  document.body.style.overflow='hidden';
+  if(document.readyState==='complete') setTimeout(hideLoader,2800);
+  else { window.addEventListener('load',function(){setTimeout(hideLoader,2800);}); setTimeout(hideLoader,3200); }
+}());
+
+/* NAVBAR */
+var navbar=document.getElementById('navbar');
+window.addEventListener('scroll',function(){ navbar.classList.toggle('scrolled',window.scrollY>60); },{passive:true});
+document.getElementById('hamburger').addEventListener('click',function(){ document.getElementById('mobileNav').classList.add('open'); });
+document.getElementById('navClose').addEventListener('click',function(){ document.getElementById('mobileNav').classList.remove('open'); });
+function closeMobile(){ document.getElementById('mobileNav').classList.remove('open'); }
+
+/* SCROLL PROGRESS */
+var pb=document.getElementById('scroll-progress'), sf=document.getElementById('side-progress-fill');
+window.addEventListener('scroll',function(){ var p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100; pb.style.width=p+'%'; sf.style.height=p+'%'; },{passive:true});
+
+/* CUSTOM CURSOR */
+var curEl=document.getElementById('custom-cursor'), curGlow=document.getElementById('cursor-glow');
+document.addEventListener('mousemove',function(e){ curEl.style.left=e.clientX+'px'; curEl.style.top=e.clientY+'px'; curGlow.style.left=e.clientX+'px'; curGlow.style.top=e.clientY+'px'; });
+document.querySelectorAll('a,button,.value-card,.philosophy-card,.timeline-item,.presence-item,.who-image-box').forEach(function(el){ el.addEventListener('mouseenter',function(){curEl.classList.add('hovering');}); el.addEventListener('mouseleave',function(){curEl.classList.remove('hovering');}); });
+
+/* PARTICLES */
+(function(){
+  var canvas=document.getElementById('particle-canvas'), ctx=canvas.getContext('2d'), ps=[];
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  resize(); window.addEventListener('resize',resize);
+  document.addEventListener('mousemove',function(e){
+    if(Math.random()<0.3) ps.push({x:e.clientX+(Math.random()-.5)*8,y:e.clientY+(Math.random()-.5)*8,vx:(Math.random()-.5)*.5,vy:-Math.random()-0.2,life:1,decay:Math.random()*.02+.01,size:Math.random()*2+.4});
+  });
+  function anim(){ ctx.clearRect(0,0,canvas.width,canvas.height); ps=ps.filter(function(p){return p.life>0;}); ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba(184,150,46,'+(p.life*.45)+')';ctx.fill();}); requestAnimationFrame(anim); }
+  anim();
+}());
+
+/* HERO PARALLAX */
+var heroEl=document.getElementById('about-hero'), heroBg=document.querySelector('.about-hero-grid'), heroGlow=document.querySelector('.about-hero-glow');
+window.addEventListener('scroll',function(){
+  var sy=window.scrollY;
+  if(!heroEl||sy>window.innerHeight*1.5) return;
+  var t=sy/window.innerHeight;
+  if(heroBg) heroBg.style.transform='translateY('+(sy*.2)+'px)';
+  if(heroGlow) heroGlow.style.transform='translateY('+(sy*.35)+'px) scale('+(1+t*.1)+')';
+  heroEl.style.opacity=Math.max(0,1-t*.5);
+},{passive:true});
+
+/* SCROLL REVEAL */
+var revObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target);} }); },{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){revObs.observe(el);});
+
+/* SECTION WIPE */
+var wipeObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('visible');wipeObs.unobserve(e.target);} }); },{threshold:0.05});
+document.querySelectorAll('.section-wipe').forEach(function(el){wipeObs.observe(el);});
+
+/* STAT STRIP COUNTERS */
+function animCount(el,target,dur){
+  var start=null;
+  function step(ts){ if(!start)start=ts; var p=Math.min((ts-start)/dur,1); var ease=1-Math.pow(1-p,3); el.textContent=Math.floor(target*ease); if(p<1)requestAnimationFrame(step); else el.textContent=target; }
+  requestAnimationFrame(step);
+}
+var stripDone=false;
+var stripObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting&&!stripDone){
+      stripDone=true;
+      document.querySelectorAll('.about-stat-item').forEach(function(item){item.classList.add('visible');});
+      document.querySelectorAll('.strip-count').forEach(function(el){animCount(el,parseInt(el.dataset.target),1800);});
+    }
+  });
+},{threshold:0.3});
+var stripEl=document.querySelector('.about-stat-strip'); if(stripEl)stripObs.observe(stripEl);
+
+/* PHILOSOPHY CARDS */
+var philObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){var d=parseFloat(e.target.style.transitionDelay||'0'); setTimeout(function(){e.target.classList.add('visible');},d*1000); philObs.unobserve(e.target);} }); },{threshold:0.15});
+document.querySelectorAll('.philosophy-card').forEach(function(c){c.style.transition='opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1)'; philObs.observe(c);});
+
+/* VALUE CARDS */
+var valObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){var d=parseFloat(e.target.style.transitionDelay||'0'); setTimeout(function(){e.target.classList.add('visible');},d*1000); valObs.unobserve(e.target);} }); },{threshold:0.15});
+document.querySelectorAll('.value-card').forEach(function(c){c.style.transition='opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s'; valObs.observe(c);});
+
+/* TIMELINE ITEMS */
+var tlObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('visible');tlObs.unobserve(e.target);} }); },{threshold:0.2});
+document.querySelectorAll('.timeline-item').forEach(function(el){tlObs.observe(el);});
+
+/* SECTION DOTS */
+var dots=document.querySelectorAll('.s-dot');
+dots.forEach(function(d){ d.addEventListener('click',function(){ var t=document.getElementById(d.dataset.target); if(t)t.scrollIntoView({behavior:'smooth'}); }); });
+var secIds=['about-hero','who','philosophy','journey','values','presence','cta-band'];
+var sdObs=new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ var id=e.target.id; dots.forEach(function(d){d.classList.toggle('active',d.dataset.target===id);}); } }); },{threshold:0.4});
+secIds.forEach(function(id){ var el=document.getElementById(id); if(el)sdObs.observe(el); });
+
+/* 3D TILT: VALUE CARDS */
+document.querySelectorAll('.value-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){ var rect=card.getBoundingClientRect(); var rx=-((e.clientY-rect.top-rect.height/2)/(rect.height/2))*5; var ry=((e.clientX-rect.left-rect.width/2)/(rect.width/2))*5; card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-5px) scale(1.01)'; });
+  card.addEventListener('mouseleave',function(){ card.style.transform=''; });
+});
+
+/* 3D TILT: PHILOSOPHY CARDS */
+document.querySelectorAll('.philosophy-card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){ var rect=card.getBoundingClientRect(); var rx=-((e.clientY-rect.top-rect.height/2)/(rect.height/2))*4; var ry=((e.clientX-rect.left-rect.width/2)/(rect.width/2))*4; card.style.transform='perspective(900px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-4px)'; });
+  card.addEventListener('mouseleave',function(){ card.style.transform=''; });
+});
+
+/* MAGNETIC BUTTONS */
+document.querySelectorAll('.btn-white,.btn-outline-white,.nav-cta').forEach(function(btn){
+  btn.addEventListener('mousemove',function(e){ var rect=btn.getBoundingClientRect(); var dx=(e.clientX-rect.left-rect.width/2)*.25; var dy=(e.clientY-rect.top-rect.height/2)*.25; btn.style.transform='translate('+dx+'px,'+dy+'px)'; });
+  btn.addEventListener('mouseleave',function(){ btn.style.transition='transform 0.5s cubic-bezier(0.34,1.56,0.64,1)'; btn.style.transform=''; setTimeout(function(){btn.style.transition='';},500); });
+});
+
+/* ABOUT-RIGHT PARALLAX */
+var whoRight=document.querySelector('.who-right');
+window.addEventListener('scroll',function(){
+  if(!whoRight) return;
+  var rect=document.getElementById('who').getBoundingClientRect();
+  var pct=-rect.top/rect.height;
+  if(pct>-0.3&&pct<1.3) whoRight.style.transform='translateY('+(pct*-22)+'px)';
+},{passive:true});
+</script>
+</body>
+</html>

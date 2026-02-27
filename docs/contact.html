@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | CorpSight Advisors LLP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#B8962E;--gold-light:#D4AF5A;--gold-pale:#F0E6C8;--dark:#1A1A1A;--dark-mid:#2C2C2C;--dark-soft:#3E3E3E;--grey:#6B6B6B;--grey-light:#9A9A9A;--off-white:#F8F6F1;--white:#FFFFFF;--border:rgba(184,150,46,0.2);}
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{font-family:'Jost',sans-serif;color:var(--dark);background:var(--white);overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;}
+  section{padding:100px 5%;}
+  .section-inner{max-width:1200px;margin:0 auto;}
+  .section-label{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .section-label span{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+  .section-label-line{width:30px;height:1px;background:var(--gold);}
+  .section-title{font-size:clamp(32px,4vw,52px);font-weight:400;line-height:1.1;color:var(--dark);letter-spacing:-0.5px;}
+  .section-title em{font-style:italic;color:var(--gold);}
+  .gold-rule{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:20px 0;}
+
+  /* LOADER */
+  #loader{position:fixed;inset:0;z-index:99999;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transition:opacity 0.8s ease,visibility 0.8s ease;}
+  #loader.loaded{opacity:0;visibility:hidden;}
+  .loader-logo{display:flex;flex-direction:column;align-items:center;gap:16px;animation:loaderLogoIn 0.8s ease forwards;}
+  @keyframes loaderLogoIn{from{opacity:0;transform:translateY(20px) scale(0.9);}to{opacity:1;transform:translateY(0) scale(1);}}
+  .loader-logo-mark{width:72px;height:72px;border:2px solid rgba(184,150,46,0.3);display:flex;align-items:center;justify-content:center;position:relative;animation:loaderMarkSpin 0.6s 0.4s ease forwards;opacity:0;}
+  @keyframes loaderMarkSpin{from{opacity:0;transform:rotate(-15deg) scale(0.8);}to{opacity:1;transform:rotate(0deg) scale(1);}}
+  .loader-logo-mark::before{content:'';position:absolute;inset:-8px;border:1px solid rgba(184,150,46,0.15);animation:loaderRingPulse 2s ease-in-out infinite;}
+  @keyframes loaderRingPulse{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.08);opacity:1;}}
+  .loader-logo-mark::after{content:'CS';font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold);letter-spacing:2px;}
+  .loader-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--white);letter-spacing:4px;text-transform:uppercase;animation:loaderNameIn 0.6s 0.6s ease forwards;opacity:0;}
+  @keyframes loaderNameIn{from{opacity:0;letter-spacing:8px;}to{opacity:1;letter-spacing:4px;}}
+  .loader-sub{font-size:9px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;animation:loaderSubIn 0.6s 0.9s ease forwards;opacity:0;}
+  @keyframes loaderSubIn{from{opacity:0;}to{opacity:1;}}
+  .loader-progress-wrap{width:220px;height:1px;background:rgba(255,255,255,0.08);position:relative;overflow:hidden;animation:loaderBarIn 0.4s 1.1s ease forwards;opacity:0;}
+  @keyframes loaderBarIn{from{opacity:0;}to{opacity:1;}}
+  .loader-progress-fill{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;animation:loaderFill 1.8s 1.1s cubic-bezier(0.4,0,0.2,1) forwards,loaderShimmer 1s 1.1s linear infinite;width:0%;}
+  @keyframes loaderFill{0%{width:0%;}60%{width:85%;}100%{width:100%;}}
+  @keyframes loaderShimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+  .loader-pct{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);font-weight:300;animation:loaderPctIn 0.4s 1.1s ease forwards;opacity:0;min-width:40px;text-align:center;}
+  @keyframes loaderPctIn{from{opacity:0;}to{opacity:1;}}
+  .loader-progress-row{display:flex;align-items:center;gap:14px;}
+  .loader-particle{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--gold);opacity:0;animation:loaderParticleFloat var(--dur) var(--delay) linear infinite;}
+  @keyframes loaderParticleFloat{0%{opacity:0;transform:translateY(0) translateX(0);}10%{opacity:0.6;}90%{opacity:0.3;}100%{opacity:0;transform:translateY(-120px) translateX(var(--dx));}}
+
+  /* FIXED UI */
+  #scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;z-index:9999;transition:width 0.1s linear;box-shadow:0 0 12px rgba(184,150,46,0.8);animation:progressShimmer 2s linear infinite;}
+  @keyframes progressShimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+  #side-progress{position:fixed;left:0;top:0;bottom:0;width:2px;background:rgba(184,150,46,0.06);z-index:500;pointer-events:none;}
+  #side-progress-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:linear-gradient(to bottom,transparent,var(--gold) 30%,var(--gold));transition:height 0.12s ease;}
+  #cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;transition:left 0.15s ease,top 0.15s ease;display:none;}
+  body:hover #cursor-glow{display:block;}
+  #custom-cursor{width:12px;height:12px;border:1.5px solid rgba(184,150,46,0.6);border-radius:50%;position:fixed;z-index:99998;pointer-events:none;transform:translate(-50%,-50%);transition:transform 0.1s ease,width 0.3s ease,height 0.3s ease,border-color 0.3s ease,background 0.3s ease;mix-blend-mode:multiply;}
+  #custom-cursor.hovering{width:36px;height:36px;background:rgba(184,150,46,0.1);border-color:var(--gold);}
+  #particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.7;}
+  #section-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:10px;opacity:0;transition:opacity 0.5s;}
+  .s-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,150,46,0.25);cursor:pointer;transition:all 0.3s;border:1px solid transparent;position:relative;}
+  .s-dot::before{content:attr(data-label);position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);white-space:nowrap;opacity:0;transition:opacity 0.2s;pointer-events:none;font-family:'Jost',sans-serif;}
+  .s-dot:hover::before{opacity:1;}.s-dot.active{background:var(--gold);transform:scale(1.5);}
+  .s-dot:hover{background:var(--gold);border-color:var(--gold);}
+
+  /* NAVBAR */
+  nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all 0.3s ease;transform:translateY(-100%);animation:navSlideDown 0.6s 2.8s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+  @keyframes navSlideDown{from{transform:translateY(-100%);}to{transform:translateY(0);}}
+  nav#navbar.scrolled{height:60px;box-shadow:0 2px 24px rgba(0,0,0,0.08);}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+  .nav-links a{text-decoration:none;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--dark-soft);position:relative;transition:color 0.3s;}
+  .nav-links>li>a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s ease;}
+  .nav-links a:hover{color:var(--dark);}.nav-links>li>a:hover::after{width:100%;}
+  .nav-links>li.nav-dropdown>a::after{display:none;}
+  .nav-active{color:var(--gold)!important;}.nav-active::after{width:100%!important;}
+  .nav-cta{background:var(--dark)!important;color:var(--white)!important;padding:10px 20px;letter-spacing:1.5px!important;border:1px solid var(--dark);transition:background 0.3s!important;}
+  .nav-cta::after{display:none!important;}.nav-cta:hover{background:var(--gold)!important;border-color:var(--gold)!important;}
+  .nav-dropdown{position:relative;}.nav-dropdown>a{display:flex!important;align-items:center;gap:6px;}
+  .nav-dropdown>a::after{content:''!important;display:inline-block!important;width:0!important;height:0!important;border-left:4px solid transparent!important;border-right:4px solid transparent!important;border-top:4px solid currentColor!important;border-bottom:none!important;background:none!important;position:static!important;flex-shrink:0;transition:transform 0.25s ease!important;margin-top:1px;}
+  .nav-dropdown:hover>a::after{transform:rotate(180deg)!important;}
+  .nav-dropdown-menu{position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-50%) translateY(-8px);background:var(--white);min-width:265px;border:1px solid rgba(0,0,0,0.07);box-shadow:0 20px 60px rgba(0,0,0,0.13);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s;z-index:2000;}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+  .nav-dropdown-menu::before{content:'';position:absolute;top:-7px;left:50%;width:13px;height:13px;background:var(--white);border-left:1px solid rgba(0,0,0,0.07);border-top:1px solid rgba(0,0,0,0.07);transform:translateX(-50%) rotate(45deg);}
+  .nav-dropdown-item{display:block;padding:13px 24px;font-family:'Jost',sans-serif;font-size:12.5px;font-weight:400;color:#444;text-decoration:none;letter-spacing:0.3px;transition:background 0.18s,color 0.18s,padding-left 0.18s;border-bottom:1px solid rgba(0,0,0,0.045);white-space:nowrap;text-transform:none;}
+  .nav-dropdown-item:last-child{border-bottom:none;}.nav-dropdown-item:first-child{border-top:3px solid var(--gold);}
+  .nav-dropdown-item:hover{background:var(--off-white);color:var(--gold);padding-left:30px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+  .hamburger span{display:block;width:24px;height:1.5px;background:var(--dark);transition:all 0.3s;}
+  .mobile-nav{display:none;position:fixed;inset:0;z-index:999;background:var(--dark);flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+  .mobile-nav.open{display:flex;}
+  .mobile-nav a{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--white);text-decoration:none;letter-spacing:1px;transition:color 0.3s;}
+  .mobile-nav a:hover{color:var(--gold);}
+  .mobile-nav-close{position:absolute;top:24px;right:5%;background:none;border:none;font-size:24px;color:rgba(255,255,255,0.5);cursor:pointer;padding:8px;}
+
+  /* SCROLL ANIMATIONS */
+  .reveal{opacity:0;transform:translateY(36px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-48px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);}
+  .reveal-left.visible{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(48px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);}
+  .reveal-right.visible{opacity:1;transform:translateX(0);}
+  .reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}
+  .reveal-delay-3{transition-delay:0.3s;}.reveal-delay-4{transition-delay:0.4s;}
+  .section-wipe{position:relative;}
+  .section-wipe::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transform:scaleX(0);transition:transform 1s ease,opacity 0.5s;}
+  .section-wipe.visible::before{opacity:1;transform:scaleX(1);}
+
+  /* HERO */
+  #con-hero{min-height:52vh;padding-top:72px;display:flex;align-items:center;position:relative;background:var(--dark);overflow:hidden;}
+  .hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridDrift 20s linear infinite;}
+  @keyframes gridDrift{0%{background-position:0 0;}100%{background-position:80px 80px;}}
+  .hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(184,150,46,0.12) 0%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;}
+  @keyframes glowPulse{0%,100%{transform:scale(1) translateY(0);opacity:0.8;}50%{transform:scale(1.1) translateY(-20px);opacity:1;}}
+  .hero-glow2{position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(184,150,46,0.06) 0%,transparent 70%);animation:glowPulse2 8s ease-in-out infinite;}
+  @keyframes glowPulse2{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.15);opacity:0.8;}}
+  .hero-line{position:absolute;left:5%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.3) 30%,rgba(184,150,46,0.3) 70%,transparent);}
+  .hero-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.15),transparent);animation:heroScan 4s ease-in-out infinite;}
+  @keyframes heroScan{0%{top:20%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{top:80%;opacity:0;}}
+  .hero-diag-line{position:absolute;width:1px;background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.1),transparent);animation:diagFall var(--duration) var(--delay) ease-in-out infinite;}
+  @keyframes diagFall{0%{transform:translateY(-100%) rotate(var(--rot));opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{transform:translateY(100vh) rotate(var(--rot));opacity:0;}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+  .hero-inner{position:relative;z-index:2;padding:60px 5% 80px;max-width:1200px;margin:0 auto;width:100%;}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:28px;opacity:0;animation:fadeUp 0.9s 3.0s cubic-bezier(0.22,1,0.36,1) forwards;}
+  .hero-eyebrow span{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+  .hero-eyebrow-line{width:0;height:1px;background:var(--gold);animation:lineExpand 0.8s 3.3s ease forwards;}
+  @keyframes lineExpand{to{width:40px;}}
+  .hero-title{font-size:clamp(48px,6.5vw,92px);font-weight:300;color:var(--white);line-height:1.05;letter-spacing:-1.5px;margin-bottom:24px;opacity:0;animation:fadeUp 0.9s 3.2s cubic-bezier(0.22,1,0.36,1) forwards;}
+  .hero-title em{font-style:italic;color:var(--gold-light);}
+  .hero-desc{max-width:500px;font-size:15px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.8;opacity:0;animation:fadeUp 0.9s 3.4s cubic-bezier(0.22,1,0.36,1) forwards;}
+  .hero-breadcrumb{position:absolute;bottom:32px;left:5%;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.9s 3.6s cubic-bezier(0.22,1,0.36,1) forwards;}
+  .hero-breadcrumb a{font-size:11px;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
+  .hero-breadcrumb a:hover{color:var(--gold);}.hero-breadcrumb span{font-size:11px;color:rgba(255,255,255,0.2);}
+  .hero-breadcrumb .current{font-size:11px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;}
+
+  /* CONTACT MAIN */
+  #contact-main{background:var(--white);}
+  .contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;}
+  .contact-info-text{font-size:15px;color:var(--grey);line-height:1.8;font-weight:300;margin-bottom:40px;}
+  .contact-cards{display:flex;flex-direction:column;gap:0;}
+  .contact-card{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--border);transition:padding-left 0.3s;}
+  .contact-card:first-child{border-top:1px solid var(--border);}
+  .contact-card:hover{padding-left:8px;}
+  .contact-card-icon{width:44px;height:44px;flex-shrink:0;background:var(--off-white);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;transition:background 0.3s,border-color 0.3s;}
+  .contact-card:hover .contact-card-icon{background:var(--gold-pale);border-color:var(--gold);}
+  .contact-card-body label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:5px;}
+  .contact-card-body span{font-size:14px;color:var(--dark);line-height:1.6;}
+  .contact-card-body a{font-size:14px;color:var(--dark);text-decoration:none;transition:color 0.3s;display:block;}
+  .contact-card-body a:hover{color:var(--gold);}
+  .contact-form-wrap{background:var(--off-white);padding:48px 44px;border-top:3px solid var(--gold);}
+  .contact-form-wrap h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;color:var(--dark);margin-bottom:6px;}
+  .contact-form-wrap>p{font-size:13px;color:var(--grey);margin-bottom:32px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .form-group{margin-bottom:16px;}
+  .form-group label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dark-soft);font-weight:500;margin-bottom:8px;}
+  .form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 16px;background:var(--white);border:1px solid rgba(0,0,0,0.1);font-family:'Jost',sans-serif;font-size:14px;color:var(--dark);outline:none;transition:border-color 0.3s;appearance:none;}
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold);}
+  .form-group textarea{height:120px;resize:none;}
+  .form-submit{width:100%;padding:16px;background:var(--dark);color:var(--white);border:none;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;margin-top:8px;position:relative;overflow:hidden;}
+  .form-submit::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform 0.3s ease;}
+  .form-submit:hover::before{transform:translateX(0);}
+  .form-submit span{position:relative;z-index:1;}
+
+  /* MAP */
+  #map-section{background:var(--off-white);padding:0;}
+  .map-placeholder{width:100%;height:380px;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  .map-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.04) 1px,transparent 1px);background-size:40px 40px;animation:gridDrift 15s linear infinite;}
+  .map-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(184,150,46,0.06) 0%,transparent 70%);animation:glowPulse 5s ease-in-out infinite;}
+  .map-pin{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:2;animation:mapPinBounce 2s ease-in-out infinite;}
+  @keyframes mapPinBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  .map-pin-dot{width:16px;height:16px;background:var(--gold);border-radius:50%;box-shadow:0 0 0 6px rgba(184,150,46,0.2),0 0 0 12px rgba(184,150,46,0.1);}
+  .map-pin-label{background:var(--white);padding:10px 18px;font-size:12px;font-weight:500;letter-spacing:0.5px;color:var(--dark);white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.2);}
+
+  /* FAQ */
+  #faq{background:var(--white);}
+  .faq-layout{display:grid;grid-template-columns:380px 1fr;gap:80px;align-items:start;}
+  .faq-list{display:flex;flex-direction:column;}
+  .faq-item{border-bottom:1px solid var(--border);}
+  .faq-question{width:100%;padding:20px 0;background:none;border:none;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left;gap:20px;transition:padding-left 0.3s;}
+  .faq-question:hover{padding-left:6px;}
+  .faq-question h4{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--dark);line-height:1.3;transition:color 0.3s;}
+  .faq-item.open .faq-question h4{color:var(--gold);}
+  .faq-icon{width:28px;height:28px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:var(--gold);transition:all 0.3s;}
+  .faq-item.open .faq-icon{background:var(--gold);border-color:var(--gold);color:var(--white);transform:rotate(45deg);}
+  .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s ease;}
+  .faq-answer p{font-size:14px;color:var(--grey);line-height:1.8;font-weight:300;padding-bottom:20px;}
+  .faq-item.open .faq-answer{max-height:300px;}
+
+  /* STATS STRIP */
+  #stats-strip{background:var(--gold);padding:60px 5%;overflow:hidden;position:relative;}
+  #stats-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,rgba(255,255,255,0.05) 25%,transparent 25%,transparent 75%,rgba(255,255,255,0.05) 75%);background-size:40px 40px;}
+  .stats-strip-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:40px;position:relative;z-index:1;}
+  .strip-item{text-align:center;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+  .strip-item.visible{opacity:1;transform:translateY(0);}
+  .strip-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--white);line-height:1;}
+  .strip-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-top:8px;}
+  .strip-divider{width:30px;height:1px;background:rgba(255,255,255,0.4);margin:12px auto;}
+
+  /* FOOTER */
+  footer{background:var(--dark);padding:64px 5% 32px;}
+  .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:32px;}
+  .footer-brand-desc{font-size:13.5px;color:rgba(255,255,255,0.38);line-height:1.8;font-weight:300;margin:20px 0 24px;max-width:240px;}
+  .footer-logo-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--white);margin-bottom:4px;}
+  .footer-logo-sub{font-size:9px;color:var(--gold);letter-spacing:2.5px;text-transform:uppercase;}
+  .social-links{display:flex;gap:10px;}
+  .social-link{width:36px;height:36px;border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:13px;color:rgba(255,255,255,0.4);transition:all 0.3s;}
+  .social-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,150,46,0.08);transform:translateY(-3px);}
+  .footer-col h5{font-family:'Jost',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:20px;}
+  .footer-col ul{list-style:none;}.footer-col ul li{margin-bottom:10px;}
+  .footer-col ul li a{text-decoration:none;font-size:13.5px;color:rgba(255,255,255,0.38);font-weight:300;transition:color 0.3s,padding-left 0.3s;display:inline-block;}
+  .footer-col ul li a:hover{color:var(--gold-light);padding-left:6px;}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+  .footer-copy{font-size:12px;color:rgba(255,255,255,0.22);font-weight:300;}
+  .footer-legal{display:flex;gap:24px;}
+  .footer-legal a{font-size:12px;color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.3s;}
+  .footer-legal a:hover{color:var(--gold);}
+
+  @media(max-width:1024px){.contact-layout{grid-template-columns:1fr;gap:48px;}.faq-layout{grid-template-columns:1fr;gap:48px;}.footer-top{grid-template-columns:1fr 1fr;gap:40px;}.stats-strip-inner{grid-template-columns:1fr 1fr;}}
+  @media(max-width:768px){.hamburger{display:flex;}.nav-links{display:none;}section{padding:72px 5%;}.form-row{grid-template-columns:1fr;}.contact-form-wrap{padding:32px 24px;}.footer-top{grid-template-columns:1fr;gap:36px;}#section-dots{display:none;}#custom-cursor{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-particle" style="--dur:3.2s;--delay:0s;--dx:20px;left:20%;bottom:30%;width:3px;height:3px;"></div>
+  <div class="loader-particle" style="--dur:2.8s;--delay:0.3s;--dx:-15px;left:40%;bottom:20%;"></div>
+  <div class="loader-particle" style="--dur:3.5s;--delay:0.7s;--dx:30px;left:60%;bottom:25%;width:3px;height:3px;"></div>
+  <div class="loader-particle" style="--dur:2.5s;--delay:1s;--dx:-25px;left:75%;bottom:15%;"></div>
+  <div class="loader-particle" style="--dur:4s;--delay:0.2s;--dx:10px;left:85%;bottom:35%;"></div>
+  <div class="loader-particle" style="--dur:3s;--delay:1.2s;--dx:-20px;left:30%;bottom:40%;"></div>
+  <div class="loader-logo">
+    <div class="loader-logo-mark"></div>
+    <div class="loader-name">CorpSight Advisors</div>
+    <div class="loader-sub">Corporate Advisory &amp; Compliance</div>
+  </div>
+  <div class="loader-progress-row">
+    <div class="loader-progress-wrap"><div class="loader-progress-fill"></div></div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+  </div>
+</div>
+
+<div id="scroll-progress"></div>
+<div id="side-progress"><div id="side-progress-fill"></div></div>
+<div id="cursor-glow"></div>
+<div id="custom-cursor"></div>
+<canvas id="particle-canvas"></canvas>
+
+<nav id="section-dots">
+  <div class="s-dot" data-target="con-hero" data-label="Top"></div>
+  <div class="s-dot" data-target="contact-main" data-label="Contact"></div>
+  <div class="s-dot" data-target="stats-strip" data-label="Stats"></div>
+  <div class="s-dot" data-target="faq" data-label="FAQ"></div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">✕</button>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="about.html" onclick="closeMobile()">About Us</a>
+  <a href="practice.html" onclick="closeMobile()">Practice Areas</a>
+  <a href="team.html" onclick="closeMobile()">Our Team</a>
+  <a href="resources.html" onclick="closeMobile()">Resources</a>
+  <a href="careers.html" onclick="closeMobile()">Careers</a>
+  <a href="contact.html" onclick="closeMobile()">Contact Us</a>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><img src="logo/1.png" alt="CorpSight Logo" style="width:180px;height:180px;object-fit:contain;"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li>
+    <li class="nav-dropdown"><a href="practice.html">Practice Areas</a>
+      <div class="nav-dropdown-menu">
+        <a href="practice-setup.html" class="nav-dropdown-item">Setting up of Business and Compliance Management</a>
+        <a href="practice-licensing.html" class="nav-dropdown-item">Licensing &amp; Regulatory Approvals</a>
+        <a href="practice-transactional.html" class="nav-dropdown-item">Transactional Advisory and Due Diligence</a>
+        <a href="practice-fund.html" class="nav-dropdown-item">Fund Formation and Periodic Compliances</a>
+        <a href="practice-commercial.html" class="nav-dropdown-item">Corporate Commercial Advisory</a>
+        <a href="practice-labour.html" class="nav-dropdown-item">Labour and Employment</a>
+        <a href="practice-ip.html" class="nav-dropdown-item">Intellectual Property</a>
+        <a href="practice-privacy.html" class="nav-dropdown-item">Privacy and Data Protection</a>
+        <a href="practice-nbfc.html" class="nav-dropdown-item">NBFC and Fintech Advisory</a>
+      </div>
+    </li>
+    <li><a href="team.html">Our Team</a></li><li><a href="resources.html">Resources</a></li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="contact.html" class="nav-active">Contact Us</a></li>
+    <li><a href="consult.html" class="nav-cta">Consult Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="con-hero">
+  <div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="hero-glow2"></div><div class="hero-line"></div>
+  <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;">
+    <div class="hero-diag-line" style="--rot:15deg;--duration:8s;--delay:0s;height:300px;left:15%;"></div>
+    <div class="hero-diag-line" style="--rot:12deg;--duration:10s;--delay:2s;height:250px;left:45%;"></div>
+    <div class="hero-diag-line" style="--rot:18deg;--duration:9s;--delay:4s;height:200px;left:75%;"></div>
+  </div>
+  <div class="hero-scan"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>Get In Touch</span></div>
+    <h1 class="hero-title">Contact <em>Us</em></h1>
+    <p class="hero-desc">Have a question, need a consultation, or want to explore a long-term advisory relationship? We would love to hear from you.</p>
+  </div>
+  <div class="hero-breadcrumb"><a href="index.html">Home</a><span>/</span><span class="current">Contact Us</span></div>
+</section>
+
+<!-- CONTACT MAIN -->
+<section id="contact-main" class="section-wipe">
+  <div class="section-inner">
+    <div class="contact-layout">
+      <div class="reveal-left">
+        <div class="section-label"><div class="section-label-line"></div><span>Reach Us</span></div>
+        <h2 class="section-title">Let's Start a <em>Conversation</em></h2>
+        <div class="gold-rule"></div>
+        <p class="contact-info-text">Whether you need immediate legal counsel, a compliance health check, or a long-term strategic advisory partner — our team is ready to engage. Reach out through any of the channels below, or complete the enquiry form.</p>
+        <div class="contact-cards">
+          <div class="contact-card"><div class="contact-card-icon">📍</div><div class="contact-card-body"><label>Office Address</label><span>Level 12, World Trade Centre,<br>Cuffe Parade, Mumbai – 400 005</span></div></div>
+          <div class="contact-card"><div class="contact-card-icon">📞</div><div class="contact-card-body"><label>Telephone</label><a href="tel:+912240000000">+91 22 4000 0000</a></div></div>
+          <div class="contact-card"><div class="contact-card-icon">✉️</div><div class="contact-card-body"><label>Email</label><a href="mailto:consult@corpsightadvisors.com">consult@corpsightadvisors.com</a></div></div>
+          <div class="contact-card"><div class="contact-card-icon">🕐</div><div class="contact-card-body"><label>Office Hours</label><span>Monday – Saturday<br>9:30 AM – 6:30 PM IST</span></div></div>
+          <div class="contact-card"><div class="contact-card-icon">💼</div><div class="contact-card-body"><label>HR &amp; Careers</label><a href="mailto:careers@corpsightadvisors.com">careers@corpsightadvisors.com</a></div></div>
+        </div>
+      </div>
+      <div class="contact-form-wrap reveal-right">
+        <h3>Send an Enquiry</h3>
+        <p>We typically respond within one business day.</p>
+        <form onsubmit="handleContact(event)">
+          <div class="form-row">
+            <div class="form-group"><label>First Name *</label><input type="text" placeholder="First name" required></div>
+            <div class="form-group"><label>Last Name *</label><input type="text" placeholder="Last name" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email *</label><input type="email" placeholder="your@email.com" required></div>
+            <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX"></div>
+          </div>
+          <div class="form-group"><label>Company / Organisation</label><input type="text" placeholder="Your company name"></div>
+          <div class="form-group"><label>Practice Area of Interest</label>
+            <select>
+              <option value="">Select a practice area</option>
+              <option>Business Setup &amp; Compliance</option><option>Licensing &amp; Regulatory Approvals</option>
+              <option>Transactional Advisory &amp; Due Diligence</option><option>Fund Formation &amp; Periodic Compliances</option>
+              <option>Corporate Commercial Advisory</option><option>Labour &amp; Employment</option>
+              <option>Intellectual Property</option><option>Privacy &amp; Data Protection</option>
+              <option>NBFC &amp; Fintech Advisory</option><option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message *</label><textarea placeholder="Please describe your requirement or question..." required></textarea></div>
+          <button type="submit" class="form-submit" id="conBtn"><span>Send Enquiry →</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section id="stats-strip">
+  <div class="stats-strip-inner">
+    <div class="strip-item" style="transition-delay:0s"><div class="strip-num"><span class="strip-count" data-target="15">0</span>+</div><div class="strip-divider"></div><div class="strip-label">Years of Excellence</div></div>
+    <div class="strip-item" style="transition-delay:0.12s"><div class="strip-num"><span class="strip-count" data-target="500">0</span>+</div><div class="strip-divider"></div><div class="strip-label">Clients Served</div></div>
+    <div class="strip-item" style="transition-delay:0.24s"><div class="strip-num"><span class="strip-count" data-target="9">0</span></div><div class="strip-divider"></div><div class="strip-label">Practice Areas</div></div>
+    <div class="strip-item" style="transition-delay:0.36s"><div class="strip-num"><span class="strip-count" data-target="98">0</span>%</div><div class="strip-divider"></div><div class="strip-label">Client Retention</div></div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div id="map-section">
+  <div class="map-placeholder">
+    <div class="map-bg"></div>
+    <div class="map-glow"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.06;" viewBox="0 0 1200 400" fill="none"><path d="M0 200 Q150 150 300 200 T600 200 T900 200 T1200 200" stroke="#B8962E" stroke-width="1.5" fill="none"/><circle cx="600" cy="200" r="60" stroke="#B8962E" stroke-width="1" fill="none"/></svg>
+    <div class="map-pin">
+      <div class="map-pin-label">📍 CorpSight Advisors LLP, World Trade Centre, Mumbai</div>
+      <div style="margin-top:8px;font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-align:center;">22.2155° N, 72.9710° E</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section id="faq" class="section-wipe">
+  <div class="section-inner">
+    <div class="faq-layout">
+      <div class="reveal">
+        <div class="section-label"><div class="section-label-line"></div><span>FAQ</span></div>
+        <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+        <div class="gold-rule"></div>
+        <p style="font-size:14px;color:var(--grey);line-height:1.8;font-weight:300;">Can't find what you're looking for? Reach out directly — we're happy to help.</p>
+      </div>
+      <div class="faq-list reveal reveal-delay-2">
+        <div class="faq-item"><button class="faq-question" onclick="toggleFAQ(this)"><h4>How do I schedule a consultation with CorpSight?</h4><span class="faq-icon">+</span></button><div class="faq-answer"><p>You can book a 15-minute consultation directly through our online booking widget on the homepage, or by emailing consult@corpsightadvisors.com. Our team will confirm your appointment within one business day.</p></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFAQ(this)"><h4>What types of clients does CorpSight work with?</h4><span class="faq-icon">+</span></button><div class="faq-answer"><p>We work with a broad spectrum of clients — from first-time founders incorporating their first company to listed enterprises managing complex regulatory obligations. Our practice spans startups, SMEs, investment funds, NBFCs, and multinational corporations operating in India.</p></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFAQ(this)"><h4>Do you offer retainer-based advisory services?</h4><span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. Many of our clients engage us on a monthly retainer basis for ongoing compliance management, periodic filings, board advisory, and regulatory monitoring. We offer tailored retainer packages depending on the size and complexity of your business.</p></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFAQ(this)"><h4>How quickly can CorpSight respond to urgent matters?</h4><span class="faq-icon">+</span></button><div class="faq-answer"><p>For retainer clients, we maintain a dedicated response SLA of 4 business hours for urgent matters. For new enquiries, we aim to respond within one business day, and for regulatory emergencies, we can often mobilise a team within the same day.</p></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFAQ(this)"><h4>Does CorpSight handle cross-border and international matters?</h4><span class="faq-icon">+</span></button><div class="faq-answer"><p>Yes. Our practice regularly involves FEMA compliance, FDI structuring, ODI advisory, GIFT City fund formations, and inbound investment matters. We also work with international law firms through our global network to support cross-jurisdictional transactions.</p></div></div>
+        <div class="faq-item"><button class="faq-question" onclick="toggleFAQ(this)"><h4>Is an initial consultation free?</h4><span class="faq-icon">+</span></button><div class="faq-answer"><p>We offer a complimentary 15-minute introductory call to understand your needs and determine whether CorpSight is the right fit for your requirements. You can book this directly through our website's consultation booking tool.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <div class="footer-logo-name">CorpSight Advisors</div>
+      <div class="footer-logo-sub">LLP</div>
+      <p class="footer-brand-desc">Trusted corporate advisory, compliance, and legal consulting — empowering businesses to operate with clarity and confidence.</p>
+      <div class="social-links"><a href="#" class="social-link">in</a><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">@</a></div>
+    </div>
+    <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul><li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li><li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li><li><a href="practice-transactional.html">Transactional Advisory</a></li><li><a href="practice-fund.html">Fund Formation</a></li><li><a href="practice-labour.html">Labour &amp; Employment</a></li><li><a href="practice-ip.html">IP &amp; Data Protection</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="resources.html">Resources</a></li><li><a href="careers.html">Careers</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">Mumbai Office</a></li><li><a href="tel:+912240000000">+91 22 4000 0000</a></li><li><a href="mailto:consult@corpsightadvisors.com">consult@corpsightadvisors.com</a></li><li><a href="consult.html">Book Consultation</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p class="footer-copy">&copy; 2026 CorpSight Advisors LLP. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div></div>
+</footer>
+
+<script>
+/* LOADER */
+(function(){var pct=0,pctEl=document.getElementById('loaderPct'),loader=document.getElementById('loader');var iv=setInterval(function(){pct+=Math.random()*8+2;if(pct>=100){pct=100;clearInterval(iv);}if(pctEl)pctEl.textContent=Math.floor(pct)+'%';},80);function hide(){loader.classList.add('loaded');document.body.style.overflow='';setTimeout(function(){document.getElementById('section-dots').style.opacity='1';},800);}if(document.readyState==='complete'){setTimeout(hide,2800);}else{window.addEventListener('load',function(){setTimeout(hide,2800);});setTimeout(hide,3200);}document.body.style.overflow='hidden';}());
+
+/* NAVBAR */
+var navbar=document.getElementById('navbar');
+window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60);},{passive:true});
+document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileNav').classList.add('open');});
+document.getElementById('navClose').addEventListener('click',function(){document.getElementById('mobileNav').classList.remove('open');});
+function closeMobile(){document.getElementById('mobileNav').classList.remove('open');}
+
+/* SCROLL PROGRESS */
+var pb=document.getElementById('scroll-progress'),sf=document.getElementById('side-progress-fill');
+window.addEventListener('scroll',function(){var p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;pb.style.width=p+'%';sf.style.height=p+'%';},{passive:true});
+
+/* CURSOR */
+var cur=document.getElementById('custom-cursor'),glow=document.getElementById('cursor-glow');
+document.addEventListener('mousemove',function(e){cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
+document.querySelectorAll('a,button,.contact-card,.faq-question').forEach(function(el){el.addEventListener('mouseenter',function(){cur.classList.add('hovering');});el.addEventListener('mouseleave',function(){cur.classList.remove('hovering');});});
+
+/* PARTICLES */
+(function(){var c=document.getElementById('particle-canvas'),ctx=c.getContext('2d'),ps=[];function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}resize();window.addEventListener('resize',resize);document.addEventListener('mousemove',function(e){if(Math.random()<0.3)ps.push({x:e.clientX+(Math.random()-.5)*8,y:e.clientY+(Math.random()-.5)*8,vx:(Math.random()-.5)*.5,vy:-Math.random()*1-.2,life:1,decay:Math.random()*.02+.01,size:Math.random()*2+.4});});function anim(){ctx.clearRect(0,0,c.width,c.height);ps=ps.filter(function(p){return p.life>0;});ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba(184,150,46,'+(p.life*.45)+')';ctx.fill();});requestAnimationFrame(anim);}anim();}());
+
+/* SCROLL REVEAL */
+var ro=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');ro.unobserve(en.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){ro.observe(el);});
+
+/* SECTION WIPE */
+var wo=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');wo.unobserve(en.target);}});},{threshold:0.05});
+document.querySelectorAll('.section-wipe').forEach(function(el){wo.observe(el);});
+
+/* STATS STRIP */
+var sc=false;var so2=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting&&!sc){sc=true;document.querySelectorAll('.strip-count').forEach(function(el){var t=parseInt(el.dataset.target),s=null;function step(ts){if(!s)s=ts;var p=Math.min((ts-s)/1800,1),ease=1-Math.pow(1-p,3);el.textContent=Math.floor(t*ease);if(p<1)requestAnimationFrame(step);else el.textContent=t;}requestAnimationFrame(step);});document.querySelectorAll('.strip-item').forEach(function(el){el.classList.add('visible');});}});},{threshold:0.3});var strip=document.getElementById('stats-strip');if(strip)so2.observe(strip);
+
+/* SECTION DOTS */
+var sids=['con-hero','contact-main','stats-strip','faq'];var dots=document.querySelectorAll('.s-dot');
+dots.forEach(function(d){d.addEventListener('click',function(){var t=document.getElementById(d.dataset.target);if(t)t.scrollIntoView({behavior:'smooth'});});});
+var so=new IntersectionObserver(function(e){e.forEach(function(en){if(en.isIntersecting){var id=en.target.id;dots.forEach(function(d){d.classList.toggle('active',d.dataset.target===id);});}});},{threshold:0.4});
+sids.forEach(function(id){var el=document.getElementById(id);if(el)so.observe(el);});
+
+/* HERO PARALLAX */
+var heroEl=document.getElementById('con-hero'),heroGlow=document.querySelector('.hero-glow');
+window.addEventListener('scroll',function(){if(!heroEl||window.scrollY>window.innerHeight*1.5)return;var t=window.scrollY/window.innerHeight;if(heroGlow)heroGlow.style.transform='translateY('+(window.scrollY*.3)+'px) scale('+(1+t*.08)+')';heroEl.style.opacity=Math.max(0,1-t*.5);},{passive:true});
+
+/* MAGNETIC BUTTONS */
+document.querySelectorAll('.form-submit,.nav-cta').forEach(function(btn){btn.addEventListener('mousemove',function(e){var r=btn.getBoundingClientRect();btn.style.transform='translate('+(e.clientX-r.left-r.width/2)*.2+'px,'+(e.clientY-r.top-r.height/2)*.2+'px)';});btn.addEventListener('mouseleave',function(){btn.style.transition='transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';btn.style.transform='';setTimeout(function(){btn.style.transition='';},500);});});
+
+/* FAQ */
+function toggleFAQ(btn){var item=btn.closest('.faq-item');var isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});if(!isOpen)item.classList.add('open');}
+
+/* CONTACT FORM */
+function handleContact(e){e.preventDefault();var btn=document.getElementById('conBtn');var sp=btn.querySelector('span');sp.textContent='Enquiry Sent ✓';btn.style.background='#2C6E49';setTimeout(function(){sp.textContent='Send Enquiry →';btn.style.background='';e.target.reset();},4000);}
+</script>
+</body>
+</html>
