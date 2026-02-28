@@ -41,13 +41,6 @@
   @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   #side-progress{position:fixed;left:0;top:0;bottom:0;width:2px;background:rgba(184,150,46,0.06);z-index:500;pointer-events:none;}
   #side-progress-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:linear-gradient(to bottom,transparent,var(--gold) 30%,var(--gold));transition:height 0.12s ease;}
-  #section-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:10px;opacity:0;transition:opacity 0.5s;}
-  #section-dots.visible{opacity:1;}
-  .s-dot{width:6px;height:6px;border-radius:50%;background:rgba(184,150,46,0.25);cursor:pointer;transition:all 0.3s;position:relative;}
-  .s-dot::before{content:attr(data-label);position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);white-space:nowrap;opacity:0;transition:opacity 0.2s;pointer-events:none;font-family:'Jost',sans-serif;}
-  .s-dot:hover::before{opacity:1;}
-  .s-dot.active{background:var(--gold);transform:scale(1.5);}
-  .s-dot:hover{background:var(--gold);}
   #cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;display:none;}
   body:hover #cursor-glow{display:block;}
   #custom-cursor{width:12px;height:12px;border:1.5px solid rgba(184,150,46,0.6);border-radius:50%;position:fixed;z-index:99998;pointer-events:none;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s;}
@@ -577,12 +570,6 @@ document.querySelectorAll('.associate-card').forEach(function(c){c.style.transit
 var pillarObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var d=parseFloat(e.target.style.transitionDelay||'0');setTimeout(function(){e.target.classList.add('visible');},d*1000);pillarObs.unobserve(e.target);}});},{threshold:0.15});
 document.querySelectorAll('.culture-pillar').forEach(function(c){c.style.transition='opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1),border-color 0.3s,background 0.3s';pillarObs.observe(c);});
 
-/* ── SECTION DOTS ── */
-var dots=document.querySelectorAll('.s-dot');
-dots.forEach(function(d){d.addEventListener('click',function(){var t=document.getElementById(d.dataset.target);if(t)t.scrollIntoView({behavior:'smooth'});});});
-var secIds=['team-hero','leadership','associates','culture','join-cta'];
-var sdObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var id=e.target.id;dots.forEach(function(d){d.classList.toggle('active',d.dataset.target===id);});}});},{threshold:0.4});
-secIds.forEach(function(id){var el=document.getElementById(id);if(el)sdObs.observe(el);});
 
 /* ── 3D TILT: PARTNER CARDS ── */
 document.querySelectorAll('.partner-card').forEach(function(card){
