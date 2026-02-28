@@ -78,7 +78,7 @@
   .nav-dropdown{position:relative;}.nav-dropdown>a{display:flex!important;align-items:center;gap:6px;}
   .nav-dropdown>a::after{content:''!important;display:inline-block!important;width:0!important;height:0!important;border-left:4px solid transparent!important;border-right:4px solid transparent!important;border-top:4px solid currentColor!important;border-bottom:none!important;background:none!important;position:static!important;flex-shrink:0;transition:transform 0.25s ease!important;margin-top:1px;}
   .nav-dropdown:hover>a::after{transform:rotate(180deg)!important;}
-  .nav-dropdown-menu{position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-50%) translateY(-8px);background:var(--white);min-width:265px;border:1px solid rgba(0,0,0,0.07);box-shadow:0 20px 60px rgba(0,0,0,0.13);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s;z-index:2000;}
+  .nav-dropdown-menu{position:absolute;top:100% ;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--white);min-width:265px;border:1px solid rgba(0,0,0,0.07);box-shadow:0 20px 60px rgba(0,0,0,0.13);opacity:0;visibility:hidden;pointer-events:none;transition:opacity 0.22s ease,transform 0.22s ease,visibility 0.22s;z-index:2000;}
   .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
   .nav-dropdown-menu::before{content:'';position:absolute;top:-7px;left:50%;width:13px;height:13px;background:var(--white);border-left:1px solid rgba(0,0,0,0.07);border-top:1px solid rgba(0,0,0,0.07);transform:translateX(-50%) rotate(45deg);}
   .nav-dropdown-item{display:block;padding:13px 24px;font-family:'Jost',sans-serif;font-size:12.5px;font-weight:400;color:#444;text-decoration:none;letter-spacing:0.3px;transition:background 0.18s,color 0.18s,padding-left 0.18s;border-bottom:1px solid rgba(0,0,0,0.045);white-space:nowrap;text-transform:none;}
@@ -397,20 +397,21 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-brand reveal">
-      <div class="footer-logo-name">CorpSight Advisors</div>
-      <div class="footer-logo-sub">LLP</div>
+      <img src="logo/1.png" alt="CorpSight Logo" style="width:180px;height:100px;object-fit:contain;">
       <p class="footer-brand-desc">Trusted corporate advisory, compliance, and legal consulting — empowering businesses to operate with clarity and confidence.</p>
       <div class="social-links"><a href="#" class="social-link">in</a><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">@</a></div>
     </div>
     <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul><li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li><li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li><li><a href="practice-transactional.html">Transactional Advisory</a></li><li><a href="practice-fund.html">Fund Formation</a></li><li><a href="practice-labour.html">Labour &amp; Employment</a></li><li><a href="practice-ip.html">IP &amp; Data Protection</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="resources.html">Resources</a></li><li><a href="careers.html">Careers</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">Mumbai Office</a></li><li><a href="tel:+912240000000">+91 22 4000 0000</a></li><li><a href="mailto:consult@corpsightadvisors.com">consult@corpsightadvisors.com</a></li><li><a href="consult.html">Book Consultation</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="resources.html">Resources</a></li><li><a href="careers.html">Careers</a></li><li><a href="index.html#booking">Book Meeting</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">Mumbai Office</a></li><li><a href="#">+91 22 4000 0000</a></li><li><a href="#">consult@corpsightadvisors.com</a></li><li><a href="index.html#booking">Book Consultation</a></li></ul></div>
   </div>
-  <div class="footer-bottom"><p class="footer-copy">&copy; 2026 CorpSight Advisors LLP. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div></div>
+  <div class="footer-bottom"><p class="footer-copy">© 2025 CorpSight Advisors LLP. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div></div>
 </footer>
+
 
 <script>
 /* LOADER */
