@@ -780,79 +780,6 @@
   }
   .team-card-close:hover { color: var(--white); transform: rotate(90deg); }
 
-  /* ── RESOURCES ── */
-  #resources { background: var(--off-white); }
-  .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .resource-card {
-    background: var(--white); border: 1px solid rgba(0,0,0,0.06);
-    overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
-    will-change: transform;
-  }
-  .resource-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.12); }
-  .resource-image { width: 100%; height: 200px; overflow: hidden; position: relative; }
-  .resource-image::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.3));
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .resource-card:hover .resource-image::after { opacity: 1; }
-  .resource-img-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.5s ease; }
-  .resource-card:hover .resource-img-placeholder { transform: scale(1.05); }
-  .resource-body { padding: 24px; }
-  .resource-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500; color: var(--dark); line-height: 1.4; margin-bottom: 12px; }
-  .resource-tag { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-right: 8px; }
-  .resource-tag--events { color: var(--gold-light); }
-  .resource-tag--news { color: #5a8fa8; }
-  .resource-date { font-size: 12px; color: var(--grey-light); margin: 10px 0 14px; }
-  .resource-read-more {
-    display: inline-flex; align-items: center; font-size: 12px; font-weight: 500;
-    color: var(--dark); text-decoration: none; transition: color 0.3s, gap 0.3s; gap: 4px;
-  }
-  .resource-read-more:hover { color: var(--gold); gap: 10px; }
-
-  /* ── TESTIMONIALS ── */
-  #testimonials { background: var(--off-white); position: relative; overflow: hidden; }
-  .testi-deco { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-  .testi-circle { position: absolute; border-radius: 50%; border: 1px solid rgba(184,150,46,0.12); }
-  .testi-c1 { width: 420px; height: 420px; top: -120px; right: -100px; background: radial-gradient(circle, rgba(184,150,46,0.05) 0%, transparent 70%); animation: testiOrbit 15s linear infinite; }
-  .testi-c2 { width: 300px; height: 300px; bottom: -80px; left: -80px; background: radial-gradient(circle, rgba(184,150,46,0.05) 0%, transparent 70%); animation: testiOrbit 20s linear infinite reverse; }
-  .testi-c3 { width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation: testiPulse 4s ease-in-out infinite; }
-  @keyframes testiOrbit {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  @keyframes testiPulse {
-    0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.3; }
-    50% { transform: translate(-50%,-50%) scale(1.4); opacity: 0.7; }
-  }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding-top: 48px; position: relative; z-index: 2; }
-  .testi-card {
-    background: var(--off-white); border: 1px solid rgba(0,0,0,0.07);
-    padding: 40px 32px 28px; text-align: center; display: flex;
-    flex-direction: column; align-items: center;
-    transition: box-shadow 0.3s, transform 0.3s;
-    will-change: transform;
-  }
-  .testi-card:hover { box-shadow: 0 12px 40px rgba(184,150,46,0.15); }
-  .testi-avatar {
-    width: 80px; height: 80px; border-radius: 50%;
-    border: 2px solid rgba(184,150,46,0.3); background: var(--white);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08); display: flex; align-items: center;
-    justify-content: center; font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 500; color: var(--dark-soft);
-    margin-bottom: 20px; margin-top: -68px; flex-shrink: 0;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .testi-card:hover .testi-avatar {
-    transform: scale(1.08);
-    box-shadow: 0 8px 24px rgba(184,150,46,0.2);
-  }
-  .testi-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
-  .testi-role { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--gold); margin-bottom: 18px; }
-  .testi-text { font-size: 13.5px; color: var(--grey); line-height: 1.85; font-weight: 300; flex: 1; }
-  .testi-rule { width: 60px; height: 3px; background: var(--gold); margin: 24px auto 0; opacity: 0.45; transition: width 0.3s, opacity 0.3s; }
-  .testi-card:hover .testi-rule { width: 100px; opacity: 0.8; }
-
   /* ── PROCESS ── */
   #process { background: var(--off-white); }
   .process-layout { display: grid; grid-template-columns: 380px 1fr; gap: 80px; align-items: start; }
@@ -1098,8 +1025,6 @@
     .process-layout { grid-template-columns: 1fr; gap: 48px; }
     .team-grid { grid-template-columns: 1fr 1fr; }
     .team-card { height: 340px; }
-    .resources-grid { grid-template-columns: 1fr 1fr; }
-    .testimonials-grid { grid-template-columns: 1fr 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
     .stats-strip-inner { grid-template-columns: 1fr 1fr; }
     .booking-widget { grid-template-columns: 1fr !important; }
@@ -1125,7 +1050,6 @@
   }
   @media (max-width: 480px) {
     .practice-grid { grid-template-columns: 1fr; }
-    .resources-grid { grid-template-columns: 1fr; }
     .hero-actions { flex-direction: column; }
     .hero-actions .btn-primary, .hero-actions .btn-outline { justify-content: center; }
     .why-grid { grid-template-columns: 1fr; }
@@ -1176,8 +1100,6 @@
   <div class="s-dot" data-target="stats-strip" data-label="Stats"></div>
   <div class="s-dot" data-target="why" data-label="Why Us"></div>
   <div class="s-dot" data-target="team" data-label="Team"></div>
-  <div class="s-dot" data-target="resources" data-label="Resources"></div>
-  <div class="s-dot" data-target="testimonials" data-label="Testimonials"></div>
   <div class="s-dot" data-target="process" data-label="Process"></div>
   <div class="s-dot" data-target="booking" data-label="Booking"></div>
   <div class="s-dot" data-target="contact" data-label="Contact"></div>
@@ -1190,8 +1112,6 @@
   <a href="about.html" onclick="closeMobile()">About Us</a>
   <a href="practice.html" onclick="closeMobile()">Practice Areas</a>
   <a href="team.html" onclick="closeMobile()">Our Team</a>
-  <a href="resources.html" onclick="closeMobile()">Resources</a>
-  <a href="careers.html" onclick="closeMobile()">Careers</a>  
   <a href="contact.html" onclick="closeMobile()">Contact Us</a>
 </div>
 
@@ -1220,8 +1140,6 @@
       </div>
     </li>
     <li><a href="team.html">Our Team</a></li>
-    <li><a href="resources.html">Resources</a></li>
-    <li><a href="careers.html">Careers</a></li>
     <li><a href="contact.html">Contact Us</a></li>
     <li><a href="consult.html" class="nav-cta">Consult Now</a></li>
   </ul>
@@ -1443,53 +1361,16 @@
     <div class="team-grid">
       <div class="team-card reveal" onclick="flipCard(this)">
         <div class="team-card-inner">
-          <div class="team-card-front"><div class="team-photo-placeholder" style="background:#e8d5b0;"><svg viewBox="0 0 120 140" fill="none"><circle cx="60" cy="45" r="28" fill="#c4a35a" opacity="0.45"/><path d="M10 140 C10 105 30 90 60 90 C90 90 110 105 110 140Z" fill="#c4a35a" opacity="0.4"/></svg></div></div>
-          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Arjun Mehta</h3><div class="team-name-rule"></div><p class="team-role">Managing Partner, CorpSight Advisors LLP</p><p class="team-email">arjun@corpsightadvisors.com</p><p class="team-phone">+91 98100 00001</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#contact" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
+         <div class="team-card-front"><div class="team-photo-placeholder" style="background-image:url('team/satyajeet.jpg'); background-size:cover; background-position:center;"></div></div>
+          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Satyajeet Yadav</h3><div class="team-name-rule"></div><p class="team-role">Founder & Partner</p><p class="team-email">cssatyajeetyadav@gmail.com</p><p class="team-phone">+91 9354430686</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="team.html" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
         </div>
       </div>
       <div class="team-card reveal reveal-delay-1" onclick="flipCard(this)">
         <div class="team-card-inner">
-          <div class="team-card-front"><div class="team-photo-placeholder" style="background:#d4c4e0;"><svg viewBox="0 0 120 140" fill="none"><circle cx="60" cy="45" r="28" fill="#8e6eab" opacity="0.4"/><path d="M10 140 C10 105 30 90 60 90 C90 90 110 105 110 140Z" fill="#8e6eab" opacity="0.35"/></svg></div></div>
-          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Priya Sharma</h3><div class="team-name-rule"></div><p class="team-role">Senior Partner, Corporate &amp; Commercial</p><p class="team-email">priya@corpsightadvisors.com</p><p class="team-phone">+91 98100 00002</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#contact" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
+          <div class="team-card-front"><div class="team-photo-placeholder" style="background-image:url('team/shubham.jpg'); background-size:cover; background-position:center;"></div></div>
+          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Shubham Agarwal</h3><div class="team-name-rule"></div><p class="team-role">Founder & Partner</p><p class="team-email">cs.agarwalshubham@gmail.com</p><p class="team-phone">+91 8755916273</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="team.html" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
         </div>
       </div>
-      <div class="team-card reveal reveal-delay-2" onclick="flipCard(this)">
-        <div class="team-card-inner">
-          <div class="team-card-front"><div class="team-photo-placeholder" style="background:#c8d8e8;"><svg viewBox="0 0 120 140" fill="none"><circle cx="60" cy="45" r="28" fill="#5a85a8" opacity="0.4"/><path d="M10 140 C10 105 30 90 60 90 C90 90 110 105 110 140Z" fill="#5a85a8" opacity="0.35"/></svg></div></div>
-          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Rahul Nair</h3><div class="team-name-rule"></div><p class="team-role">Partner, Regulatory &amp; Compliance</p><p class="team-email">rahul@corpsightadvisors.com</p><p class="team-phone">+91 98100 00003</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#contact" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
-        </div>
-      </div>
-      <div class="team-card reveal reveal-delay-3" onclick="flipCard(this)">
-        <div class="team-card-inner">
-          <div class="team-card-front"><div class="team-photo-placeholder" style="background:#cde8d8;"><svg viewBox="0 0 120 140" fill="none"><circle cx="60" cy="45" r="28" fill="#5a9e78" opacity="0.4"/><path d="M10 140 C10 105 30 90 60 90 C90 90 110 105 110 140Z" fill="#5a9e78" opacity="0.35"/></svg></div></div>
-          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Sneha Desai</h3><div class="team-name-rule"></div><p class="team-role">Associate Partner, Labour &amp; Employment</p><p class="team-email">sneha@corpsightadvisors.com</p><p class="team-phone">+91 98100 00004</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="#contact" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- RESOURCES -->
-<section id="resources" class="section-wipe">
-  <div class="section-inner">
-    <div class="section-center-header reveal"><div class="center-rule"></div><h2 class="center-title">Resources</h2></div>
-    <div class="resources-grid">
-      <div class="resource-card reveal"><div class="resource-image"><div class="resource-img-placeholder" style="background:linear-gradient(135deg,#2c2c2c,#4a4a4a);"><svg viewBox="0 0 320 200" fill="none" style="width:100%;height:100%;"><rect width="320" height="200" fill="#2a2a2a"/><rect x="20" y="60" width="80" height="8" rx="2" fill="#B8962E" opacity="0.6"/><rect x="20" y="75" width="120" height="6" rx="2" fill="white" opacity="0.2"/><circle cx="250" cy="100" r="40" fill="#B8962E" opacity="0.1"/></svg></div></div><div class="resource-body"><h3>Navigating SEBI Compliance for Startups in 2025</h3><span class="resource-tag">Blog</span><p class="resource-date">January 14, 2025</p><a href="#" class="resource-read-more">Read More →</a></div></div>
-      <div class="resource-card reveal reveal-delay-1"><div class="resource-image"><div class="resource-img-placeholder" style="background:linear-gradient(135deg,#1e2d40,#2c4a6e);"><svg viewBox="0 0 320 200" fill="none" style="width:100%;height:100%;"><rect width="320" height="200" fill="#1e2d3e"/><circle cx="160" cy="100" r="55" fill="#B8962E" opacity="0.08"/></svg></div></div><div class="resource-body"><h3>Key Changes in the Companies Act: What Businesses Must Know</h3><span class="resource-tag">Blog</span> <span class="resource-tag resource-tag--events">Events</span><p class="resource-date">February 10, 2025</p><a href="#" class="resource-read-more">Read More →</a></div></div>
-      <div class="resource-card reveal reveal-delay-2"><div class="resource-image"><div class="resource-img-placeholder" style="background:linear-gradient(135deg,#1a1a1a,#3a3a3a);"><svg viewBox="0 0 320 200" fill="none" style="width:100%;height:100%;"><rect width="320" height="200" fill="#1a1a1a"/><rect x="40" y="40" width="240" height="120" rx="4" fill="white" opacity="0.04"/></svg></div></div><div class="resource-body"><h3>FEMA Regulations Update: Impact on Cross-Border Transactions</h3><span class="resource-tag resource-tag--news">News</span><p class="resource-date">February 20, 2025</p><a href="#" class="resource-read-more">Read More →</a></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="testi-deco"><div class="testi-circle testi-c1"></div><div class="testi-circle testi-c2"></div><div class="testi-circle testi-c3"></div></div>
-  <div class="section-inner">
-    <div class="section-center-header reveal" style="position:relative;z-index:2;"><div class="center-rule"></div><h2 class="center-title">Testimonials</h2></div>
-    <div class="testimonials-grid">
-      <div class="testi-card reveal"><div class="testi-avatar">VR</div><h4 class="testi-name">Vikash Rajpurohit</h4><p class="testi-role">Founder, Vastra App</p><p class="testi-text">Positive Response is one word that came to mind when thinking about the CorpSight team. Always ready to listen, "Don't worry, will get it done" attitude is there with everyone. We have good expertise in the Startup space — a combination of Affordability and Expertise.</p><div class="testi-rule"></div></div>
-      <div class="testi-card reveal reveal-delay-1"><div class="testi-avatar">SS</div><h4 class="testi-name">Sanket Shendure</h4><p class="testi-role">Founder &amp; CEO, Minko Technologies</p><p class="testi-text">Working with CorpSight has been an outstanding experience. Their regulatory expertise and practical approach to compliance gave us the confidence to scale our operations without worry.</p><div class="testi-rule"></div></div>
-      <div class="testi-card reveal reveal-delay-2"><div class="testi-avatar">SP</div><h4 class="testi-name">Shailesh Prithani</h4><p class="testi-role">CEO, Jumbaya</p><p class="testi-text">I first engaged CorpSight almost 5 years ago when they were assisting with Due Diligence on behalf of the lead investor of our seed round. They have been on top of the job, ensured all compliances were met proficiently and in a timely manner.</p><div class="testi-rule"></div></div>
     </div>
   </div>
 </section>
@@ -1610,9 +1491,9 @@
         <div class="gold-rule"></div>
         <p class="contact-info-text">Whether you need immediate legal counsel, a compliance health check, or a long-term strategic advisory partner, our team is ready to engage. Schedule a no-obligation consultation today.</p>
         <div class="contact-details">
-          <div class="contact-detail"><div class="contact-detail-icon">📍</div><div class="contact-detail-body"><label>Office</label><span>Level 12, World Trade Centre, Mumbai – 400 005</span></div></div>
-          <div class="contact-detail"><div class="contact-detail-icon">📞</div><div class="contact-detail-body"><label>Phone</label><span>+91 22 4000 0000</span></div></div>
-          <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div class="contact-detail-body"><label>Email</label><span>consult@corpsightadvisors.com</span></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">📍</div><div class="contact-detail-body"><label>Office</label><span>D-32, Second Floor, Main Vikas Marg, Laxmi Nagar, Delhi – 110092</span></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">📞</div><div class="contact-detail-body"><label>Phone</label><span>+918755916273, +919354430686 </span></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div class="contact-detail-body"><label>Email</label><span>compliance@corpsight.co.in</span></div></div>
           <div class="contact-detail"><div class="contact-detail-icon">🕐</div><div class="contact-detail-body"><label>Hours</label><span>Monday – Saturday, 9:30 AM – 6:30 PM</span></div></div>
         </div>
       </div>
@@ -1629,8 +1510,8 @@
       <div class="social-links"><a href="#" class="social-link">in</a><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">@</a></div>
     </div>
     <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul><li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li><li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li><li><a href="practice-transactional.html">Transactional Advisory</a></li><li><a href="practice-fund.html">Fund Formation</a></li><li><a href="practice-labour.html">Labour &amp; Employment</a></li><li><a href="practice-ip.html">IP &amp; Data Protection</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="resources.html">Resources</a></li><li><a href="careers.html">Careers</a></li><li><a href="index.html#booking">Book Meeting</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">Mumbai Office</a></li><li><a href="#">+91 22 4000 0000</a></li><li><a href="#">consult@corpsightadvisors.com</a></li><li><a href="index.html#booking">Book Consultation</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><li><a href="index.html#booking">Book Meeting</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">D-32, Second Floor, Main Vikas Marg, Laxmi Nagar, Delhi – 110092</a></li><li><a href="#">+918755916273, +919354430686</a></li><li><a href="#">compliance@corpsight.co.in</a></li><li><a href="index.html#booking">Book Consultation</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p class="footer-copy">© 2025 CorpSight Advisors LLP. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div></div>
 </footer>
@@ -1875,7 +1756,7 @@ if (qb) quoteObs.observe(qb);
 /* ══════════════════════════════════════
    SECTION DOTS NAV
 ══════════════════════════════════════ */
-var sectionIds = ['hero','about','services','stats-strip','why','team','resources','testimonials','process','booking','contact'];
+var sectionIds = ['hero','about','services','stats-strip','why','team','process','booking','contact'];
 var dots = document.querySelectorAll('.s-dot');
 dots.forEach(function(dot) {
   dot.addEventListener('click', function() {
@@ -2054,18 +1935,54 @@ function closeCard(e, btn) { e.stopPropagation(); btn.closest('.team-card').clas
     var step=document.getElementById(id); if(step) step.style.display='block';
   }
 
-  window.bConfirm = function() {
-    var name  = (document.getElementById('bName').value||'').trim();
-    var email = (document.getElementById('bEmail').value||'').trim();
-    if(!name){alert('Please enter your full name.');return;}
-    if(!email){alert('Please enter your email address.');return;}
-    if(!s.date||!s.time){alert('Please select a date and time.');return;}
-    var d=s.date;
-    var ds=DAYS[d.getDay()]+', '+MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
-    var slot=ds+' at '+s.time+' IST';
-    var emailEl=document.getElementById('bConfirmEmail'); if(emailEl) emailEl.textContent=email;
-    bShowStep('bStep4');
-  };
+window.bConfirm = function() {
+  var name  = (document.getElementById('bName').value || '').trim();
+  var email = (document.getElementById('bEmail').value || '').trim();
+  var phone = (document.getElementById('bPhone').value || '').trim();
+  var note  = (document.getElementById('bNote').value || '').trim();
+
+  if (!name)  { alert('Please enter your full name.'); return; }
+  if (!email) { alert('Please enter your email address.'); return; }
+  if (!s.date || !s.time) { alert('Please select a date and time.'); return; }
+
+  var d  = s.date;
+  var ds = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+
+  var confirmBtn = document.querySelector('#bStep3 button[onclick="bConfirm()"]');
+  if (confirmBtn) { confirmBtn.textContent = 'Sending...'; confirmBtn.disabled = true; }
+
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      access_key: 'dc0c984c-e1a7-47fb-94ce-42569672cdc5',  // ← Replace this
+      subject: 'New Consultation Booking — CorpSight Advisors LLP',
+      from_name: name,
+      reply_to: email,
+      name:         name,
+      email:        email,
+      phone:        phone || 'Not provided',
+      booking_date: ds,
+      booking_time: s.time + ' IST',
+      message:      note || 'No additional notes'
+    })
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.success) {
+      var emailEl = document.getElementById('bConfirmEmail');
+      if (emailEl) emailEl.textContent = email;
+      bShowStep('bStep4');
+    } else {
+      throw new Error(data.message);
+    }
+  })
+  .catch(function(err) {
+    console.error('Web3Forms error:', err);
+    if (confirmBtn) { confirmBtn.textContent = 'Confirm Booking →'; confirmBtn.disabled = false; }
+    alert('Could not send booking. Please email us directly at compliance@corpsight.co.in');
+  });
+};
 
   window.bReset = function() {
     s.date=null;s.time=null;
