@@ -37,7 +37,7 @@
   @keyframes particleFloat{0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:0.6}90%{opacity:0.3}100%{opacity:0;transform:translateY(-120px) translateX(var(--dx))}}
 
   /* ══ SCROLL UI ══ */
-  #scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;z-index:9999;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;box-shadow:0 0 12px rgba(184,150,46,0.8);animation:shimmer 2s linear infinite;transition:width 0.1s linear;}
+  #scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;z-index:9999;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;box-shadow:0 0 12px rgba(184,150,46,0.8);animation:shimmer 2s linear infinite;transition:width 0.1s linear;pointer-events:none;}
   @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   #side-progress{position:fixed;left:0;top:0;bottom:0;width:2px;background:rgba(184,150,46,0.06);z-index:500;pointer-events:none;}
   #side-progress-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:linear-gradient(to bottom,transparent,var(--gold) 30%,var(--gold));transition:height 0.12s ease;}
@@ -48,11 +48,11 @@
   .s-dot:hover::before{opacity:1;}
   .s-dot.active{background:var(--gold);transform:scale(1.5);}
   .s-dot:hover{background:var(--gold);}
-  #cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;display:none;}
+  #cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%);pointer-events:none !important;transform:translate(-50%,-50%);z-index:0;display:none;}
   body:hover #cursor-glow{display:block;}
-  #custom-cursor{width:12px;height:12px;border:1.5px solid rgba(184,150,46,0.6);border-radius:50%;position:fixed;z-index:99998;pointer-events:none;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s;}
+  #custom-cursor{width:12px;height:12px;border:1.5px solid rgba(184,150,46,0.6);border-radius:50%;position:fixed;z-index:99998;pointer-events:none !important;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s;}
   #custom-cursor.hovering{width:36px;height:36px;background:rgba(184,150,46,0.1);border-color:var(--gold);}
-  #particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.7;}
+  #particle-canvas{position:fixed;inset:0;pointer-events:none !important;z-index:1;opacity:0.7;}
 
   /* ══ NAVBAR ══ */
   nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all 0.3s ease;transform:translateY(-100%);animation:navIn 0.6s 2.8s cubic-bezier(0.34,1.56,0.64,1) forwards;}
@@ -93,7 +93,7 @@
   .reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}
   .reveal-delay-3{transition-delay:0.3s;}.reveal-delay-4{transition-delay:0.4s;}
   .section-wipe{position:relative;}
-  .section-wipe::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transform:scaleX(0);transition:transform 1s ease,opacity 0.5s;}
+  .section-wipe::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transform:scaleX(0);transition:transform 1s ease,opacity 0.5s;pointer-events:none;}
   .section-wipe.visible::before{opacity:1;transform:scaleX(1);}
 
   /* ══ BASE ══ */
@@ -108,14 +108,14 @@
 
   /* ══ HERO ══ */
   #hub-hero{min-height:56vh;padding-top:72px;display:flex;align-items:center;position:relative;background:var(--dark);overflow:hidden;}
-  .hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridDrift 20s linear infinite;}
+  .hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridDrift 20s linear infinite;pointer-events:none;}
   @keyframes gridDrift{0%{background-position:0 0}100%{background-position:80px 80px}}
-  .hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(184,150,46,0.12) 0%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;}
-  .hero-glow2{position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(184,150,46,0.07) 0%,transparent 70%);animation:glowPulse2 8s ease-in-out infinite;}
+  .hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(184,150,46,0.12) 0%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none;}
+  .hero-glow2{position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(184,150,46,0.07) 0%,transparent 70%);animation:glowPulse2 8s ease-in-out infinite;pointer-events:none;}
   @keyframes glowPulse{0%,100%{transform:scale(1) translateY(0);opacity:0.8}50%{transform:scale(1.1) translateY(-20px);opacity:1}}
   @keyframes glowPulse2{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.15);opacity:0.8}}
-  .hero-line{position:absolute;left:5%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.3) 30%,rgba(184,150,46,0.3) 70%,transparent);}
-  .hero-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.15),transparent);animation:scanLine 5s ease-in-out infinite;}
+  .hero-line{position:absolute;left:5%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.3) 30%,rgba(184,150,46,0.3) 70%,transparent);pointer-events:none;}
+  .hero-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.15),transparent);animation:scanLine 5s ease-in-out infinite;pointer-events:none;}
   @keyframes scanLine{0%{top:15%;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:85%;opacity:0}}
   .hero-inner{position:relative;z-index:2;padding:80px 5% 100px;max-width:1200px;margin:0 auto;width:100%;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -130,7 +130,7 @@
   .hero-stat-item{border-left:2px solid rgba(184,150,46,0.4);padding-left:16px;}
   .hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--gold);line-height:1;}
   .hero-stat-label{font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;letter-spacing:0.5px;}
-  .hero-breadcrumb{position:absolute;bottom:32px;left:5%;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.9s 3.8s cubic-bezier(0.22,1,0.36,1) forwards;}
+  .hero-breadcrumb{position:absolute;bottom:32px;left:5%;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.9s 3.8s cubic-bezier(0.22,1,0.36,1) forwards;z-index:2;}
   .hero-breadcrumb a{font-size:11px;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
   .hero-breadcrumb a:hover{color:var(--gold);}
   .hero-breadcrumb span{font-size:11px;color:rgba(255,255,255,0.2);}
@@ -151,11 +151,12 @@
   #hub-grid{background:var(--white);padding:100px 5%;}
   .hub-grid-inner{max-width:1200px;margin:0 auto;}
   .hub-grid-header{margin-bottom:56px;}
+  /* 10 cards — 3 cols with last row centred using auto margin trick */
   .practice-hub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
   .practice-hub-card{padding:44px 36px;border:1px solid rgba(0,0,0,0.06);text-decoration:none;display:flex;flex-direction:column;position:relative;overflow:hidden;transition:all 0.4s cubic-bezier(0.22,1,0.36,1);opacity:0;transform:translateY(28px) scale(0.97);}
   .practice-hub-card.visible{opacity:1;transform:none;}
-  .practice-hub-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease;}
-  .practice-hub-card::after{content:'';position:absolute;bottom:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 40px 40px;border-color:transparent transparent var(--gold-pale) transparent;transition:all 0.3s;opacity:0;}
+  .practice-hub-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease;pointer-events:none;}
+  .practice-hub-card::after{content:'';position:absolute;bottom:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 40px 40px;border-color:transparent transparent var(--gold-pale) transparent;transition:all 0.3s;opacity:0;pointer-events:none;}
   .practice-hub-card:hover{background:var(--off-white);box-shadow:0 8px 40px rgba(184,150,46,0.12);transform:translateY(-4px) scale(1.01);}
   .practice-hub-card:hover::before{transform:scaleX(1);}
   .practice-hub-card:hover::after{opacity:1;}
@@ -169,11 +170,11 @@
 
   /* ══ APPROACH ══ */
   #hub-approach{background:var(--dark);padding:100px 5%;position:relative;overflow:hidden;}
-  .approach-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.05) 1px,transparent 1px);background-size:80px 80px;}
+  .approach-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.05) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;}
   .approach-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2;}
   .approach-header{text-align:center;margin-bottom:64px;}
   .approach-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;}
-  .approach-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.3) 20%,rgba(184,150,46,0.3) 80%,transparent);}
+  .approach-steps::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.3) 20%,rgba(184,150,46,0.3) 80%,transparent);pointer-events:none;}
   .approach-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 16px;position:relative;z-index:1;}
   .approach-step-dot{width:56px;height:56px;border:2px solid rgba(184,150,46,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--gold);margin-bottom:20px;background:var(--dark);transition:all 0.4s cubic-bezier(0.22,1,0.36,1);}
   .approach-step:hover .approach-step-dot{background:var(--gold);color:var(--white);border-color:var(--gold);transform:scale(1.15);}
@@ -277,6 +278,7 @@
         <a href="practice-ip.html" class="nav-dropdown-item">Intellectual Property</a>
         <a href="practice-privacy.html" class="nav-dropdown-item">Privacy and Data Protection</a>
         <a href="practice-nbfc.html" class="nav-dropdown-item">NBFC and Fintech Advisory</a>
+        <a href="practice-restructuring.html" class="nav-dropdown-item">Corporate Restructuring &amp; Capital Markets</a>
       </div>
     </li>
     <li><a href="team.html">Our Team</a></li>
@@ -296,11 +298,11 @@
   <div class="hero-inner">
     <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>CorpSight Advisors LLP</span></div>
     <h1 class="hero-title">Our <em>Practice</em><br>Areas</h1>
-    <p class="hero-desc">Nine focused practice areas. One integrated advisory team. Deep expertise across every dimension of India's corporate, regulatory, and compliance landscape.</p>
+    <p class="hero-desc">Ten focused practice areas. One integrated advisory team. Deep expertise across every dimension of India's corporate, regulatory, and compliance landscape.</p>
     <div class="hero-stats">
-      <div class="hero-stat-item"><div class="hero-stat-num">9</div><div class="hero-stat-label">Practice Areas</div></div>
-      <div class="hero-stat-item"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Clients Served</div></div>
-      <div class="hero-stat-item"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Years of Practice</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num">10</div><div class="hero-stat-label">Practice Areas</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num">50+</div><div class="hero-stat-label">Clients Served</div></div>
+      <div class="hero-stat-item"><div class="hero-stat-num">4+</div><div class="hero-stat-label">Years of Practice</div></div>
       <div class="hero-stat-item"><div class="hero-stat-num">Pan-India</div><div class="hero-stat-label">Coverage</div></div>
     </div>
   </div>
@@ -314,7 +316,7 @@
       <div class="section-label"><div class="section-label-line"></div><span>Our Approach</span></div>
       <h2 class="section-title">Integrated <em>Expertise</em></h2>
       <div class="gold-rule"></div>
-      <p class="intro-body">CorpSight Advisors offers a multidisciplinary approach to corporate advisory — bringing together legal, regulatory, compliance, and strategic expertise under one roof. Our nine practice areas are deeply interconnected, allowing us to serve clients with comprehensive, joined-up counsel.</p>
+      <p class="intro-body">CorpSight Advisors offers a multidisciplinary approach to corporate advisory — bringing together legal, regulatory, compliance, and strategic expertise under one roof. Our ten practice areas are deeply interconnected, allowing us to serve clients with comprehensive, joined-up counsel.</p>
       <p class="intro-body">Whether you need a single specialist service or an integrated advisory partnership, our team is structured to deliver precisely what your business requires — with the depth of a large firm and the personal attention of a boutique.</p>
     </div>
     <div class="intro-right reveal reveal-delay-2">
@@ -326,7 +328,7 @@
       <div class="intro-pillar">
         <div class="intro-pillar-num">02</div>
         <h5>Breadth</h5>
-        <p>Nine practice areas covering your full legal and compliance lifecycle.</p>
+        <p>Ten practice areas covering your full legal and compliance lifecycle.</p>
       </div>
       <div class="intro-pillar">
         <div class="intro-pillar-num">03</div>
@@ -424,6 +426,15 @@
         <span class="phc-link">Explore &#8594;</span>
       </a>
 
+      <!-- NEW: Card 10 — Corporate Restructuring & Capital Markets -->
+      <a href="practice-restructuring.html" class="practice-hub-card" style="transition-delay:0.1s">
+        <div class="phc-emoji">📈</div>
+        <div class="phc-num">10</div>
+        <h3>Corporate Restructuring &amp; Capital Markets Advisory</h3>
+        <p>Mergers, demergers, and strategic reorganisations — plus end-to-end capital market guidance including IPO, FPO, SEBI compliance, and post-listing obligations.</p>
+        <span class="phc-link">Explore &#8594;</span>
+      </a>
+
     </div>
   </div>
 </section>
@@ -486,10 +497,18 @@
     <div class="footer-brand reveal">
       <img src="logo/1.png" alt="CorpSight Logo" style="width:180px;height:100px;object-fit:contain;">
       <p class="footer-brand-desc">Trusted corporate advisory, compliance, and legal consulting — empowering businesses to operate with clarity and confidence.</p>
-      <div class="social-links"><a href="#" class="social-link">in</a><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">@</a></div>
+      <div class="social-links"><a href="https://www.linkedin.com/company/corpsight-advisors-llp/" class="social-link" target="_blank" rel="noopener noreferrer">in</a><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">@</a></div>
     </div>
-    <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul><li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li><li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li><li><a href="practice-transactional.html">Transactional Advisory</a></li><li><a href="practice-fund.html">Fund Formation</a></li><li><a href="practice-labour.html">Labour &amp; Employment</a></li><li><a href="practice-ip.html">IP &amp; Data Protection</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><li><a href="index.html#booking">Book Meeting</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul>
+      <li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li>
+      <li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li>
+      <li><a href="practice-transactional.html">Transactional Advisory</a></li>
+      <li><a href="practice-fund.html">Fund Formation</a></li>
+      <li><a href="practice-labour.html">Labour &amp; Employment</a></li>
+      <li><a href="practice-ip.html">IP &amp; Data Protection</a></li>
+      <li><a href="practice-restructuring.html">Restructuring &amp; Capital Markets</a></li>
+    </ul></div>
+    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="index.html#booking">Book Meeting</a></li></ul></div>
     <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">D-32, Second Floor, Main Vikas Marg, Laxmi Nagar, Delhi – 110092</a></li><li><a href="#">+918755916273, +919354430686</a></li><li><a href="#">compliance@corpsight.co.in</a></li><li><a href="index.html#booking">Book Consultation</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p class="footer-copy">© 2025 CorpSight Advisors LLP. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div></div>
@@ -523,7 +542,7 @@ window.addEventListener('scroll',function(){var p=(window.scrollY/(document.docu
 /* ── CURSOR ── */
 var curEl=document.getElementById('custom-cursor'),curGlow=document.getElementById('cursor-glow');
 document.addEventListener('mousemove',function(e){curEl.style.left=e.clientX+'px';curEl.style.top=e.clientY+'px';curGlow.style.left=e.clientX+'px';curGlow.style.top=e.clientY+'px';});
-document.querySelectorAll('a,button,.practice-hub-card,.intro-pillar').forEach(function(el){el.addEventListener('mouseenter',function(){curEl.classList.add('hovering');});el.addEventListener('mouseleave',function(){curEl.classList.remove('hovering');});});
+document.querySelectorAll('.practice-hub-card,.intro-pillar').forEach(function(el){el.addEventListener('mouseenter',function(){curEl.classList.add('hovering');});el.addEventListener('mouseleave',function(){curEl.classList.remove('hovering');});});
 
 /* ── PARTICLES ── */
 (function(){

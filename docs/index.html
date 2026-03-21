@@ -278,8 +278,6 @@
   /* ══════════════════════════════════════
      CORE SCROLL ANIMATIONS
   ══════════════════════════════════════ */
-
-  /* Base reveal */
   .reveal {
     opacity: 0; transform: translateY(36px);
     transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
@@ -319,6 +317,7 @@
     z-index: 9999; transition: width 0.1s linear;
     box-shadow: 0 0 12px rgba(184,150,46,0.8);
     animation: progressShimmer 2s linear infinite;
+    pointer-events: none;
   }
   @keyframes progressShimmer {
     0%   { background-position: 200% center; }
@@ -365,7 +364,7 @@
   #cursor-glow {
     position: fixed; width: 350px; height: 350px; border-radius: 50%;
     background: radial-gradient(circle, rgba(184,150,46,0.045) 0%, transparent 70%);
-    pointer-events: none; transform: translate(-50%,-50%); z-index: 0;
+    pointer-events: none !important; transform: translate(-50%,-50%); z-index: 0;
     transition: left 0.15s ease, top 0.15s ease;
     display: none;
   }
@@ -376,7 +375,7 @@
     width: 12px; height: 12px;
     border: 1.5px solid rgba(184,150,46,0.6);
     border-radius: 50%;
-    position: fixed; z-index: 99998; pointer-events: none;
+    position: fixed; z-index: 99998; pointer-events: none !important;
     transform: translate(-50%, -50%);
     transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease,
                 border-color 0.3s ease, background 0.3s ease;
@@ -390,7 +389,7 @@
 
   /* Particle canvas */
   #particle-canvas {
-    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.7;
+    position: fixed; inset: 0; pointer-events: none !important; z-index: 1; opacity: 0.7;
   }
 
   /* ══════════════════════════════════════
@@ -402,7 +401,6 @@
     position: relative; background: var(--dark); overflow: hidden;
   }
 
-  /* Animated grid */
   .hero-bg-grid {
     position: absolute; inset: 0;
     background-image: linear-gradient(rgba(184,150,46,0.06) 1px, transparent 1px),
@@ -410,6 +408,7 @@
     background-size: 80px 80px;
     will-change: transform;
     animation: gridDrift 20s linear infinite;
+    pointer-events: none;
   }
   @keyframes gridDrift {
     0%   { background-position: 0 0; }
@@ -421,26 +420,25 @@
     width: 700px; height: 700px;
     background: radial-gradient(circle, rgba(184,150,46,0.14) 0%, transparent 70%);
     animation: glowPulse 6s ease-in-out infinite;
-    will-change: transform;
+    will-change: transform; pointer-events: none;
   }
   @keyframes glowPulse {
     0%, 100% { transform: scale(1) translateY(0); opacity: 0.8; }
     50% { transform: scale(1.1) translateY(-20px); opacity: 1; }
   }
 
-  /* Second ambient glow */
   .hero-bg-glow2 {
     position: absolute; bottom: -20%; left: -10%;
     width: 500px; height: 500px;
     background: radial-gradient(circle, rgba(184,150,46,0.07) 0%, transparent 70%);
     animation: glowPulse2 8s ease-in-out infinite;
+    pointer-events: none;
   }
   @keyframes glowPulse2 {
     0%, 100% { transform: scale(1); opacity: 0.5; }
     50% { transform: scale(1.15); opacity: 0.8; }
   }
 
-  /* Animated diagonal lines */
   .hero-diag-lines {
     position: absolute; inset: 0; overflow: hidden; pointer-events: none;
   }
@@ -458,14 +456,13 @@
   .hero-line-left {
     position: absolute; left: 5%; top: 0; bottom: 0; width: 1px;
     background: linear-gradient(to bottom, transparent, rgba(184,150,46,0.3) 30%, rgba(184,150,46,0.3) 70%, transparent);
-    will-change: transform;
+    will-change: transform; pointer-events: none;
   }
 
-  /* Horizontal scan line */
   .hero-scan {
     position: absolute; left: 0; right: 0; height: 1px;
     background: linear-gradient(90deg, transparent, rgba(184,150,46,0.15), transparent);
-    animation: heroScan 4s ease-in-out infinite;
+    animation: heroScan 4s ease-in-out infinite; pointer-events: none;
   }
   @keyframes heroScan {
     0%   { top: 20%; opacity: 0; }
@@ -542,7 +539,6 @@
   .btn-outline:hover::before { transform: translateX(0); }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
 
-  /* Floating hero stats */
   .hero-stats {
     position: absolute; bottom: 48px; left: 5%; display: flex; gap: 48px;
     opacity: 0; animation: fadeUp 0.9s 3.8s cubic-bezier(0.22,1,0.36,1) forwards;
@@ -566,7 +562,7 @@
   }
   .ticker-track {
     display: flex; gap: 0; white-space: nowrap;
-    animation: ticker-scroll 35s linear infinite;
+    animation: ticker-scroll 40s linear infinite;
   }
   #practice-ticker:hover .ticker-track { animation-play-state: paused; }
   .ticker-item {
@@ -616,12 +612,11 @@
     transition: transform 0.3s ease;
   }
   .about-image-wrap::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); }
-  /* Animated inner glow */
   .about-image-wrap::after {
     content: ''; position: absolute;
     top: -50%; right: -50%; width: 100%; height: 100%;
     background: radial-gradient(circle, rgba(184,150,46,0.08) 0%, transparent 70%);
-    animation: aboutGlow 5s ease-in-out infinite;
+    animation: aboutGlow 5s ease-in-out infinite; pointer-events: none;
   }
   @keyframes aboutGlow {
     0%, 100% { transform: scale(1); opacity: 0.5; }
@@ -653,18 +648,18 @@
   .practice-card::before {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(184,150,46,0.04), transparent);
-    opacity: 0; transition: opacity 0.4s;
+    opacity: 0; transition: opacity 0.4s; pointer-events: none;
   }
   .practice-card:hover::before { opacity: 1; }
   .practice-card::after {
     content: ''; position: absolute; bottom: 0; left: 0;
     width: 100%; height: 3px; background: var(--gold);
     transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    pointer-events: none;
   }
   .practice-card:hover { box-shadow: 0 12px 48px rgba(184,150,46,0.18); transform: translateY(-6px); }
   .practice-card:hover::after { transform: scaleX(1); }
 
-  /* Icon float animation on hover */
   .practice-icon {
     width: 88px; height: 88px; margin-bottom: 22px;
     display: flex; align-items: center; justify-content: center;
@@ -678,7 +673,6 @@
   }
   .practice-card:hover h3 { color: var(--gold); }
 
-  /* Directional reveal */
   .practice-card.from-left  { opacity: 0; transform: translateX(-30px) translateY(20px); }
   .practice-card.from-right { opacity: 0; transform: translateX(30px) translateY(20px); }
   .practice-card.from-left.visible,
@@ -764,19 +758,20 @@
     width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.5);
     display: flex; align-items: center; justify-content: center;
     color: var(--white); text-decoration: none; transition: all 0.3s;
+    position: relative; z-index: 3;
   }
   .team-linkedin:hover { background: rgba(255,255,255,0.15); transform: rotate(5deg); }
   .team-read-more {
     display: inline-flex; align-items: center; padding: 10px 20px;
     background: var(--dark); color: var(--white); text-decoration: none;
     font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
-    transition: background 0.3s;
+    transition: background 0.3s; position: relative; z-index: 3;
   }
   .team-read-more:hover { background: rgba(0,0,0,0.7); }
   .team-card-close {
     position: absolute; top: 12px; right: 14px; background: none; border: none;
     color: rgba(255,255,255,0.55); font-size: 18px; cursor: pointer; line-height: 1;
-    padding: 4px; transition: color 0.2s, transform 0.2s;
+    padding: 4px; transition: color 0.2s, transform 0.2s; z-index: 3;
   }
   .team-card-close:hover { color: var(--white); transform: rotate(90deg); }
 
@@ -822,22 +817,15 @@
   .process-step-body h4 { font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--dark); margin-bottom: 6px; }
   .process-step-body p { font-size: 13.5px; color: var(--grey); line-height: 1.7; font-weight: 300; }
 
-  /* ══════════════════════════════════════
-     SECTION TRANSITION GRADIENT WIPES
-  ══════════════════════════════════════ */
-  .section-wipe {
-    position: relative;
-  }
+  .section-wipe { position: relative; }
   .section-wipe::before {
     content: '';
     position: absolute; top: -2px; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
     opacity: 0; transform: scaleX(0);
-    transition: transform 1s ease, opacity 0.5s;
+    transition: transform 1s ease, opacity 0.5s; pointer-events: none;
   }
-  .section-wipe.visible::before {
-    opacity: 1; transform: scaleX(1);
-  }
+  .section-wipe.visible::before { opacity: 1; transform: scaleX(1); }
 
   /* ══════════════════════════════════════
      MID-PAGE ANIMATIONS: GOLD COUNTER STRIP
@@ -849,7 +837,7 @@
   #stats-strip::before {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%);
-    background-size: 40px 40px;
+    background-size: 40px 40px; pointer-events: none;
   }
   .stats-strip-inner {
     max-width: 1200px; margin: 0 auto;
@@ -899,8 +887,6 @@
     transition: opacity 1s ease, transform 1s ease;
   }
   .quote-banner-text.visible { opacity: 1; transform: translateY(0); }
-
-  /* Animated word highlight */
   .quote-banner-text .highlight {
     color: var(--gold-light); font-style: normal;
     position: relative; display: inline-block;
@@ -954,18 +940,6 @@
   .contact-detail:hover .contact-detail-icon { background: var(--gold-pale); border-color: var(--gold); }
   .contact-detail-body label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 4px; }
   .contact-detail-body span { font-size: 14px; color: var(--dark); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  .form-group { margin-bottom: 16px; }
-  .form-group label { display: block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--dark-soft); font-weight: 500; margin-bottom: 8px; }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%; padding: 13px 16px; background: var(--white);
-    border: 1px solid rgba(0,0,0,0.1); font-family: 'Jost', sans-serif;
-    font-size: 14px; color: var(--dark); outline: none; transition: border-color 0.3s; appearance: none;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
-  .form-group textarea { height: 110px; resize: none; }
-  .form-submit { width: 100%; padding: 16px; background: var(--dark); color: var(--white); border: none; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-top: 8px; }
-  .form-submit:hover { background: var(--gold); }
 
   /* ── FOOTER ── */
   footer { background: var(--dark); padding: 64px 5% 32px; }
@@ -983,8 +957,6 @@
     background: rgba(184,150,46,0.08);
     transform: translateY(-3px);
   }
-  .footer-logo-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-  .footer-logo-sub { font-size: 9px; color: var(--gold); letter-spacing: 2.5px; text-transform: uppercase; }
   .footer-col h5 { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 20px; }
   .footer-col ul { list-style: none; }
   .footer-col ul li { margin-bottom: 10px; }
@@ -999,9 +971,6 @@
   .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.22); text-decoration: none; transition: color 0.3s; }
   .footer-legal a:hover { color: var(--gold); }
 
-  /* ══════════════════════════════════════
-     SHIMMER TEXT EFFECT
-  ══════════════════════════════════════ */
   @keyframes gold-shimmer {
     0%   { background-position: -200% center; }
     100% { background-position: 200% center; }
@@ -1014,9 +983,6 @@
     animation: gold-shimmer 4s linear infinite;
   }
 
-  /* ══════════════════════════════════════
-     RESPONSIVE
-  ══════════════════════════════════════ */
   @media (max-width: 1024px) {
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
     .practice-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1035,15 +1001,12 @@
     .nav-links { display: none; }
     section { padding: 72px 5%; }
     .practice-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
-    .form-row { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; gap: 36px; }
     .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
     .hero-stats { gap: 28px; flex-wrap: wrap; bottom: 32px; }
     .about-pillars { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
     .team-card { height: 320px; }
-    .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
     .stats-strip-inner { grid-template-columns: 1fr 1fr; }
     #section-dots { display: none; }
     #custom-cursor { display: none; }
@@ -1059,24 +1022,19 @@
 </head>
 <body>
 
-<!-- ════════════════════════════════════
-     LOADING SCREEN
-════════════════════════════════════ -->
+<!-- LOADING SCREEN -->
 <div id="loader">
-  <!-- Ambient particles -->
   <div class="loader-particle" style="--dur:3.2s;--delay:0s;--dx:20px;left:20%;bottom:30%;width:3px;height:3px;"></div>
   <div class="loader-particle" style="--dur:2.8s;--delay:0.3s;--dx:-15px;left:40%;bottom:20%;"></div>
   <div class="loader-particle" style="--dur:3.5s;--delay:0.7s;--dx:30px;left:60%;bottom:25%;width:3px;height:3px;"></div>
   <div class="loader-particle" style="--dur:2.5s;--delay:1s;--dx:-25px;left:75%;bottom:15%;"></div>
   <div class="loader-particle" style="--dur:4s;--delay:0.2s;--dx:10px;left:85%;bottom:35%;width:2px;height:2px;"></div>
   <div class="loader-particle" style="--dur:3s;--delay:1.2s;--dx:-20px;left:30%;bottom:40%;width:2px;height:2px;"></div>
-
   <div class="loader-logo">
     <div class="loader-logo-mark"></div>
     <div class="loader-name">CorpSight Advisors</div>
     <div class="loader-sub">Corporate Advisory &amp; Compliance</div>
   </div>
-
   <div class="loader-progress-row">
     <div class="loader-progress-wrap">
       <div class="loader-progress-fill" id="loaderFill"></div>
@@ -1117,26 +1075,25 @@
 
 <!-- NAVBAR -->
 <nav id="navbar">
-<a href="#hero" class="nav-logo">
-
-<img src="logo/1.png" alt="CorpSight Logo" style="width:180px; height:180px; object-fit:contain;">
-
-</a>
+  <a href="#hero" class="nav-logo">
+    <img src="logo/1.png" alt="CorpSight Logo" style="width:180px; height:180px; object-fit:contain;">
+  </a>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="about.html">About Us</a></li>
     <li class="nav-dropdown">
       <a href="practice.html">Practice Areas</a>
       <div class="nav-dropdown-menu">
-        <a href="#services" class="nav-dropdown-item">Setting up of Business and Compliance Management</a>
-        <a href="#services" class="nav-dropdown-item">Licensing &amp; Regulatory Approvals</a>
-        <a href="#services" class="nav-dropdown-item">Transactional Advisory and Due Diligence</a>
-        <a href="#services" class="nav-dropdown-item">Fund Formation and Periodic Compliances</a>
-        <a href="#services" class="nav-dropdown-item">Corporate Commercial Advisory</a>
-        <a href="#services" class="nav-dropdown-item">Labour and Employment</a>
-        <a href="#services" class="nav-dropdown-item">Intellectual Property</a>
-        <a href="#services" class="nav-dropdown-item">Privacy and Data Protection</a>
-        <a href="#services" class="nav-dropdown-item">NBFC and Fintech Advisory</a>
+        <a href="practice-setup.html" class="nav-dropdown-item">Setting up of Business and Compliance Management</a>
+        <a href="practice-licensing.html" class="nav-dropdown-item">Licensing &amp; Regulatory Approvals</a>
+        <a href="practice-transactional.html" class="nav-dropdown-item">Transactional Advisory and Due Diligence</a>
+        <a href="practice-fund.html" class="nav-dropdown-item">Fund Formation and Periodic Compliances</a>
+        <a href="practice-commercial.html" class="nav-dropdown-item">Corporate Commercial Advisory</a>
+        <a href="practice-labour.html" class="nav-dropdown-item">Labour and Employment</a>
+        <a href="practice-ip.html" class="nav-dropdown-item">Intellectual Property</a>
+        <a href="practice-privacy.html" class="nav-dropdown-item">Privacy and Data Protection</a>
+        <a href="practice-nbfc.html" class="nav-dropdown-item">NBFC and Fintech Advisory</a>
+        <a href="practice-restructuring.html" class="nav-dropdown-item">Corporate Restructuring &amp; Capital Markets</a>
       </div>
     </li>
     <li><a href="team.html">Our Team</a></li>
@@ -1146,7 +1103,7 @@
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- ═══════════ HERO ═══════════ -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-bg-grid"></div>
   <div class="hero-bg-glow"></div>
@@ -1174,12 +1131,12 @@
 
   <div class="hero-stats">
     <div class="hero-stat">
-      <div class="hero-stat-num"><span class="count-num" data-target="15">0</span><span>+</span></div>
+      <div class="hero-stat-num"><span class="count-num" data-target="4">0</span><span>+</span></div>
       <div class="hero-stat-label">Years Experience</div>
     </div>
     <div class="hero-stat-divider"></div>
     <div class="hero-stat">
-      <div class="hero-stat-num"><span class="count-num" data-target="500">0</span><span>+</span></div>
+      <div class="hero-stat-num"><span class="count-num" data-target="50">0</span><span>+</span></div>
       <div class="hero-stat-label">Clients Served</div>
     </div>
     <div class="hero-stat-divider"></div>
@@ -1190,7 +1147,7 @@
   </div>
 </section>
 
-<!-- TICKER -->
+<!-- TICKER — updated with new practice area, scroll speed increased to 40s -->
 <div id="practice-ticker" aria-hidden="true">
   <div class="ticker-track">
     <div class="ticker-item"><span class="ticker-dot"></span>Business Setup &amp; Compliance</div>
@@ -1202,6 +1159,8 @@
     <div class="ticker-item"><span class="ticker-dot"></span>Intellectual Property</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Privacy &amp; Data Protection</div>
     <div class="ticker-item"><span class="ticker-dot"></span>NBFC &amp; Fintech Advisory</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Corporate Restructuring &amp; Capital Markets</div>
+    <!-- duplicate set for seamless loop -->
     <div class="ticker-item"><span class="ticker-dot"></span>Business Setup &amp; Compliance</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Licensing &amp; Regulatory Approvals</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Transactional Advisory</div>
@@ -1211,6 +1170,7 @@
     <div class="ticker-item"><span class="ticker-dot"></span>Intellectual Property</div>
     <div class="ticker-item"><span class="ticker-dot"></span>Privacy &amp; Data Protection</div>
     <div class="ticker-item"><span class="ticker-dot"></span>NBFC &amp; Fintech Advisory</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Corporate Restructuring &amp; Capital Markets</div>
   </div>
 </div>
 
@@ -1290,25 +1250,30 @@
         <div class="practice-icon"><svg viewBox="0 0 80 80" fill="none"><path d="M28 32 C20 32 16 40 16 50 C16 62 26 70 40 70 C54 70 64 62 64 50 C64 40 60 32 52 32 Z" fill="#F0E6C8" stroke="#B8962E" stroke-width="2"/><path d="M32 32 C32 26 28 22 32 18 L48 18 C52 22 48 26 48 32" fill="#F0E6C8" stroke="#B8962E" stroke-width="2"/><text x="40" y="56" text-anchor="middle" font-family="Georgia" font-size="20" fill="#B8962E" font-weight="bold">$</text></svg></div>
         <h3>NBFC and Fintech Advisory</h3>
       </div>
+      <!-- NEW: Corporate Restructuring & Capital Markets -->
+      <div class="practice-card from-right" style="transition-delay:0s">
+        <div class="practice-icon"><svg viewBox="0 0 80 80" fill="none"><rect x="10" y="44" width="12" height="22" rx="2" fill="#F0E6C8" stroke="#B8962E" stroke-width="1.8"/><rect x="26" y="34" width="12" height="32" rx="2" fill="#F0E6C8" stroke="#B8962E" stroke-width="1.8"/><rect x="42" y="24" width="12" height="42" rx="2" fill="#D4AF5A" stroke="#B8962E" stroke-width="1.8" opacity="0.85"/><rect x="58" y="14" width="12" height="52" rx="2" fill="#B8962E" stroke="#B8962E" stroke-width="1.8" opacity="0.6"/><path d="M14 40 L30 30 L46 20 L62 10" stroke="#B8962E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="62" cy="10" r="4" fill="#B8962E"/></svg></div>
+        <h3>Corporate Restructuring &amp; Capital Markets Advisory</h3>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════ MID-PAGE: STATS STRIP ════════════ -->
+<!-- STATS STRIP -->
 <section id="stats-strip">
   <div class="stats-strip-inner">
     <div class="stat-item" style="transition-delay:0s">
-      <div class="stat-num"><span class="strip-count" data-target="15">0</span>+</div>
+      <div class="stat-num"><span class="strip-count" data-target="4">0</span>+</div>
       <div class="stat-divider"></div>
       <div class="stat-label">Years of Excellence</div>
     </div>
     <div class="stat-item" style="transition-delay:0.12s">
-      <div class="stat-num"><span class="strip-count" data-target="500">0</span>+</div>
+      <div class="stat-num"><span class="strip-count" data-target="50">0</span>+</div>
       <div class="stat-divider"></div>
       <div class="stat-label">Clients Served</div>
     </div>
     <div class="stat-item" style="transition-delay:0.24s">
-      <div class="stat-num"><span class="strip-count" data-target="9">0</span></div>
+      <div class="stat-num"><span class="strip-count" data-target="10">0</span></div>
       <div class="stat-divider"></div>
       <div class="stat-label">Practice Areas</div>
     </div>
@@ -1361,14 +1326,14 @@
     <div class="team-grid">
       <div class="team-card reveal" onclick="flipCard(this)">
         <div class="team-card-inner">
-         <div class="team-card-front"><div class="team-photo-placeholder" style="background-image:url('team/satyajeet.jpg'); background-size:cover; background-position:center;"></div></div>
-          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Satyajeet Yadav</h3><div class="team-name-rule"></div><p class="team-role">Founder & Partner</p><p class="team-email">cssatyajeetyadav@gmail.com</p><p class="team-phone">+91 9354430686</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="team.html" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
+          <div class="team-card-front"><div class="team-photo-placeholder" style="background-image:url('team/satyajeet.jpg'); background-size:cover; background-position:center;"></div></div>
+          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Satyajeet Yadav</h3><div class="team-name-rule"></div><p class="team-role">Founder &amp; Partner</p><p class="team-email">cssatyajeetyadav@gmail.com</p><p class="team-phone">+91 9354430686</p><div class="team-actions"><a href="https://www.linkedin.com/in/cs-satyajeet-yadav-5b54a117a/" target="_blank" rel="noopener noreferrer" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="team.html" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
         </div>
       </div>
       <div class="team-card reveal reveal-delay-1" onclick="flipCard(this)">
         <div class="team-card-inner">
           <div class="team-card-front"><div class="team-photo-placeholder" style="background-image:url('team/shubham.jpg'); background-size:cover; background-position:center;"></div></div>
-          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Shubham Agarwal</h3><div class="team-name-rule"></div><p class="team-role">Founder & Partner</p><p class="team-email">cs.agarwalshubham@gmail.com</p><p class="team-phone">+91 8755916273</p><div class="team-actions"><a href="#" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="team.html" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
+          <div class="team-card-back"><div class="team-info"><button class="team-card-close" onclick="closeCard(event,this)">✕</button><h3>Shubham Agarwal</h3><div class="team-name-rule"></div><p class="team-role">Founder &amp; Partner</p><p class="team-email">cs.agarwalshubham@gmail.com</p><p class="team-phone">+91 8755916273</p><div class="team-actions"><a href="https://www.linkedin.com/in/cs-shubham-agarwal-8362111b6/" target="_blank" rel="noopener noreferrer" class="team-linkedin" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="team.html" class="team-read-more" onclick="event.stopPropagation()">Read More</a></div></div></div>
         </div>
       </div>
     </div>
@@ -1472,7 +1437,7 @@
         <div id="bStep4" style="display:none;text-align:center;padding:40px 0 20px;">
           <div style="width:64px;height:64px;border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:28px;color:var(--gold);animation:scaleIn 0.5s cubic-bezier(0.34,1.56,0.64,1);">&#10003;</div>
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--white);margin-bottom:12px;font-weight:400;">Booking Confirmed!</h3>
-          <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:290px;margin:0 auto 14px;font-weight:300;">A confirmation email has been prepared for <span id="bConfirmEmail" style="color:var(--gold-light);"></span>. We look forward to speaking with you.</p>
+          <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:290px;margin:0 auto 14px;font-weight:300;">A confirmation has been sent to <span id="bConfirmEmail" style="color:var(--gold-light);"></span>. We look forward to speaking with you.</p>
           <p id="bConfirmDetails" style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(255,255,255,0.8);"></p>
           <button onclick="bReset()" style="margin-top:28px;background:none;border:1px solid rgba(184,150,46,0.35);color:var(--gold);padding:11px 28px;font-family:'Jost',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;">Book Another &#8594;</button>
         </div>
@@ -1492,7 +1457,7 @@
         <p class="contact-info-text">Whether you need immediate legal counsel, a compliance health check, or a long-term strategic advisory partner, our team is ready to engage. Schedule a no-obligation consultation today.</p>
         <div class="contact-details">
           <div class="contact-detail"><div class="contact-detail-icon">📍</div><div class="contact-detail-body"><label>Office</label><span>D-32, Second Floor, Main Vikas Marg, Laxmi Nagar, Delhi – 110092</span></div></div>
-          <div class="contact-detail"><div class="contact-detail-icon">📞</div><div class="contact-detail-body"><label>Phone</label><span>+918755916273, +919354430686 </span></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon">📞</div><div class="contact-detail-body"><label>Phone</label><span>+918755916273, +919354430686</span></div></div>
           <div class="contact-detail"><div class="contact-detail-icon">✉️</div><div class="contact-detail-body"><label>Email</label><span>compliance@corpsight.co.in</span></div></div>
           <div class="contact-detail"><div class="contact-detail-icon">🕐</div><div class="contact-detail-body"><label>Hours</label><span>Monday – Saturday, 9:30 AM – 6:30 PM</span></div></div>
         </div>
@@ -1507,20 +1472,38 @@
     <div class="footer-brand reveal">
       <img src="logo/1.png" alt="CorpSight Logo" style="width:180px;height:100px;object-fit:contain;">
       <p class="footer-brand-desc">Trusted corporate advisory, compliance, and legal consulting — empowering businesses to operate with clarity and confidence.</p>
-      <div class="social-links"><a href="#" class="social-link">in</a><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">@</a></div>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/corpsight-advisors-llp/" target="_blank" rel="noopener noreferrer" class="social-link">in</a>
+        <a href="#" class="social-link">𝕏</a>
+        <a href="#" class="social-link">@</a>
+      </div>
     </div>
-    <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul><li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li><li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li><li><a href="practice-transactional.html">Transactional Advisory</a></li><li><a href="practice-fund.html">Fund Formation</a></li><li><a href="practice-labour.html">Labour &amp; Employment</a></li><li><a href="practice-ip.html">IP &amp; Data Protection</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><li><a href="index.html#booking">Book Meeting</a></li></ul></div>
-    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul><li><a href="#">D-32, Second Floor, Main Vikas Marg, Laxmi Nagar, Delhi – 110092</a></li><li><a href="#">+918755916273, +919354430686</a></li><li><a href="#">compliance@corpsight.co.in</a></li><li><a href="index.html#booking">Book Consultation</a></li></ul></div>
+    <div class="footer-col reveal reveal-delay-1"><h5>Practice Areas</h5><ul>
+      <li><a href="practice-setup.html">Business Setup &amp; Compliance</a></li>
+      <li><a href="practice-licensing.html">Licensing &amp; Regulatory</a></li>
+      <li><a href="practice-transactional.html">Transactional Advisory</a></li>
+      <li><a href="practice-fund.html">Fund Formation</a></li>
+      <li><a href="practice-labour.html">Labour &amp; Employment</a></li>
+      <li><a href="practice-ip.html">IP &amp; Data Protection</a></li>
+      <li><a href="practice-restructuring.html">Restructuring &amp; Capital Markets</a></li>
+    </ul></div>
+    <div class="footer-col reveal reveal-delay-2"><h5>Company</h5><ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="team.html">Our Team</a></li>
+      <li><a href="index.html#booking">Book Meeting</a></li>
+    </ul></div>
+    <div class="footer-col reveal reveal-delay-3"><h5>Contact</h5><ul>
+      <li><a href="#">D-32, Second Floor, Main Vikas Marg, Laxmi Nagar, Delhi – 110092</a></li>
+      <li><a href="#">+918755916273, +919354430686</a></li>
+      <li><a href="#">compliance@corpsight.co.in</a></li>
+      <li><a href="index.html#booking">Book Consultation</a></li>
+    </ul></div>
   </div>
   <div class="footer-bottom"><p class="footer-copy">© 2025 CorpSight Advisors LLP. All rights reserved.</p><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Disclaimer</a></div></div>
 </footer>
 
-
 <script>
-/* ══════════════════════════════════════
-   LOADING SCREEN
-══════════════════════════════════════ */
+/* LOADING SCREEN */
 (function() {
   var pct = 0;
   var pctEl  = document.getElementById('loaderPct');
@@ -1534,7 +1517,6 @@
   function hideLoader() {
     loader.classList.add('loaded');
     document.body.style.overflow = '';
-    // Trigger hero counter after loader
     setTimeout(startHeroCounters, 400);
     setTimeout(function() {
       var sdots = document.getElementById('section-dots');
@@ -1542,26 +1524,20 @@
     }, 800);
   }
 
-  // Wait for page load OR 3s max
   if (document.readyState === 'complete') {
     setTimeout(hideLoader, 2800);
   } else {
-    window.addEventListener('load', function() {
-      setTimeout(hideLoader, 2800);
-    });
+    window.addEventListener('load', function() { setTimeout(hideLoader, 2800); });
     setTimeout(hideLoader, 3200);
   }
   document.body.style.overflow = 'hidden';
 }());
 
-/* ══════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════ */
+/* NAVBAR */
 var navbar = document.getElementById('navbar');
 window.addEventListener('scroll', function() {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
-
 document.getElementById('hamburger').addEventListener('click', function() {
   document.getElementById('mobileNav').classList.add('open');
 });
@@ -1570,9 +1546,7 @@ document.getElementById('navClose').addEventListener('click', function() {
 });
 function closeMobile() { document.getElementById('mobileNav').classList.remove('open'); }
 
-/* ══════════════════════════════════════
-   SCROLL PROGRESS
-══════════════════════════════════════ */
+/* SCROLL PROGRESS */
 var progressBar = document.getElementById('scroll-progress');
 var sideFill    = document.getElementById('side-progress-fill');
 window.addEventListener('scroll', function() {
@@ -1581,27 +1555,21 @@ window.addEventListener('scroll', function() {
   sideFill.style.height   = pct + '%';
 }, { passive: true });
 
-/* ══════════════════════════════════════
-   CUSTOM CURSOR
-══════════════════════════════════════ */
+/* CUSTOM CURSOR */
 var cursorEl  = document.getElementById('custom-cursor');
 var cursorGlow = document.getElementById('cursor-glow');
-var cx = -999, cy = -999;
 document.addEventListener('mousemove', function(e) {
-  cx = e.clientX; cy = e.clientY;
-  cursorEl.style.left   = cx + 'px';
-  cursorEl.style.top    = cy + 'px';
-  cursorGlow.style.left = cx + 'px';
-  cursorGlow.style.top  = cy + 'px';
+  cursorEl.style.left   = e.clientX + 'px';
+  cursorEl.style.top    = e.clientY + 'px';
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top  = e.clientY + 'px';
 });
-document.querySelectorAll('a, button, .practice-card, .testi-card, .team-card, .resource-card, .about-pillar').forEach(function(el) {
+document.querySelectorAll('.practice-card, .about-pillar, .why-card, .team-card, .process-step').forEach(function(el) {
   el.addEventListener('mouseenter', function() { cursorEl.classList.add('hovering'); });
   el.addEventListener('mouseleave', function() { cursorEl.classList.remove('hovering'); });
 });
 
-/* ══════════════════════════════════════
-   PARTICLE SYSTEM
-══════════════════════════════════════ */
+/* PARTICLE SYSTEM */
 (function() {
   var canvas = document.getElementById('particle-canvas');
   var ctx = canvas.getContext('2d');
@@ -1628,9 +1596,7 @@ document.querySelectorAll('a, button, .practice-card, .testi-card, .team-card, .
   anim();
 }());
 
-/* ══════════════════════════════════════
-   HERO PARALLAX
-══════════════════════════════════════ */
+/* HERO PARALLAX */
 var heroEl    = document.getElementById('hero');
 var heroBg    = document.querySelector('.hero-bg-grid');
 var heroGlow  = document.querySelector('.hero-bg-glow');
@@ -1645,9 +1611,7 @@ window.addEventListener('scroll', function() {
   heroEl.style.opacity = Math.max(0, 1 - t*0.5);
 }, { passive: true });
 
-/* ══════════════════════════════════════
-   NUMBER COUNTER
-══════════════════════════════════════ */
+/* NUMBER COUNTER */
 function animateCount(el, target, duration) {
   var start = null;
   function step(ts) {
@@ -1660,14 +1624,11 @@ function animateCount(el, target, duration) {
   }
   requestAnimationFrame(step);
 }
-
 function startHeroCounters() {
   document.querySelectorAll('.count-num').forEach(function(el) {
     animateCount(el, parseInt(el.dataset.target), 2000);
   });
 }
-
-/* Stats strip counters */
 var stripCounted = false;
 var stripObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
@@ -1685,9 +1646,7 @@ var stripObs = new IntersectionObserver(function(entries) {
 var stripEl = document.getElementById('stats-strip');
 if (stripEl) stripObs.observe(stripEl);
 
-/* ══════════════════════════════════════
-   SCROLL REVEAL (all types)
-══════════════════════════════════════ */
+/* SCROLL REVEAL */
 var revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
@@ -1696,14 +1655,11 @@ var revealObserver = new IntersectionObserver(function(entries) {
     }
   });
 }, { threshold: 0.10, rootMargin: '0px 0px -50px 0px' });
-
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function(el) {
   revealObserver.observe(el);
 });
 
-/* ══════════════════════════════════════
-   PRACTICE CARDS DIRECTIONAL
-══════════════════════════════════════ */
+/* PRACTICE CARDS DIRECTIONAL */
 var pracObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
@@ -1716,9 +1672,7 @@ var pracObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.12 });
 document.querySelectorAll('.practice-card').forEach(function(c) { pracObserver.observe(c); });
 
-/* ══════════════════════════════════════
-   WHY GRID STAGGER
-══════════════════════════════════════ */
+/* WHY GRID STAGGER */
 var whyObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
@@ -1729,9 +1683,7 @@ var whyObserver = new IntersectionObserver(function(entries) {
 }, { threshold: 0.15 });
 document.querySelectorAll('.why-card').forEach(function(el) { whyObserver.observe(el); });
 
-/* ══════════════════════════════════════
-   SECTION WIPE LINES
-══════════════════════════════════════ */
+/* SECTION WIPE LINES */
 var wipeObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) { entry.target.classList.add('visible'); wipeObs.unobserve(entry.target); }
@@ -1739,23 +1691,16 @@ var wipeObs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.05 });
 document.querySelectorAll('.section-wipe').forEach(function(el) { wipeObs.observe(el); });
 
-/* ══════════════════════════════════════
-   QUOTE BANNER
-══════════════════════════════════════ */
+/* QUOTE BANNER */
 var quoteObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      quoteObs.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.add('visible'); quoteObs.unobserve(e.target); }
   });
 }, { threshold: 0.4 });
 var qb = document.querySelector('.quote-banner-text');
 if (qb) quoteObs.observe(qb);
 
-/* ══════════════════════════════════════
-   SECTION DOTS NAV
-══════════════════════════════════════ */
+/* SECTION DOTS NAV */
 var sectionIds = ['hero','about','services','stats-strip','why','team','process','booking','contact'];
 var dots = document.querySelectorAll('.s-dot');
 dots.forEach(function(dot) {
@@ -1768,9 +1713,7 @@ var secObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
       var id = entry.target.id;
-      dots.forEach(function(d) {
-        d.classList.toggle('active', d.dataset.target === id);
-      });
+      dots.forEach(function(d) { d.classList.toggle('active', d.dataset.target === id); });
     }
   });
 }, { threshold: 0.4 });
@@ -1779,9 +1722,7 @@ sectionIds.forEach(function(id) {
   if (el) secObs.observe(el);
 });
 
-/* ══════════════════════════════════════
-   PROCESS STEP ACTIVE
-══════════════════════════════════════ */
+/* PROCESS STEP ACTIVE */
 var processObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
@@ -1792,36 +1733,7 @@ var processObs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.7 });
 document.querySelectorAll('.process-step').forEach(function(s) { processObs.observe(s); });
 
-/* ══════════════════════════════════════
-   3D TILT: TESTIMONIALS
-══════════════════════════════════════ */
-document.querySelectorAll('.testi-card').forEach(function(card) {
-  card.addEventListener('mousemove', function(e) {
-    var rect = card.getBoundingClientRect();
-    var rotX = -((e.clientY - rect.top - rect.height/2) / (rect.height/2)) * 7;
-    var rotY =  ((e.clientX - rect.left - rect.width/2) / (rect.width/2)) * 7;
-    card.style.transform = 'perspective(700px) rotateX('+rotX+'deg) rotateY('+rotY+'deg) translateY(-4px)';
-    card.style.boxShadow = '0 20px 60px rgba(184,150,46,0.2)';
-  });
-  card.addEventListener('mouseleave', function() {
-    card.style.transform = ''; card.style.boxShadow = '';
-  });
-});
-
-/* 3D TILT: RESOURCE CARDS */
-document.querySelectorAll('.resource-card').forEach(function(card) {
-  card.addEventListener('mousemove', function(e) {
-    var rect = card.getBoundingClientRect();
-    var rotX = -((e.clientY - rect.top - rect.height/2) / (rect.height/2)) * 4;
-    var rotY =  ((e.clientX - rect.left - rect.width/2) / (rect.width/2)) * 4;
-    card.style.transform = 'perspective(900px) rotateX('+rotX+'deg) rotateY('+rotY+'deg) scale(1.01)';
-  });
-  card.addEventListener('mouseleave', function() { card.style.transform = ''; });
-});
-
-/* ══════════════════════════════════════
-   MAGNETIC BUTTONS
-══════════════════════════════════════ */
+/* MAGNETIC BUTTONS */
 document.querySelectorAll('.btn-primary, .btn-outline, .nav-cta, .why-cta').forEach(function(btn) {
   btn.addEventListener('mousemove', function(e) {
     var rect = btn.getBoundingClientRect();
@@ -1836,9 +1748,7 @@ document.querySelectorAll('.btn-primary, .btn-outline, .nav-cta, .why-cta').forE
   });
 });
 
-/* ══════════════════════════════════════
-   ABOUT RIGHT PARALLAX
-══════════════════════════════════════ */
+/* ABOUT RIGHT PARALLAX */
 var aboutSection = document.getElementById('about');
 var aboutRight   = document.querySelector('.about-right');
 window.addEventListener('scroll', function() {
@@ -1850,15 +1760,11 @@ window.addEventListener('scroll', function() {
   }
 }, { passive: true });
 
-/* ══════════════════════════════════════
-   TEAM FLIP
-══════════════════════════════════════ */
+/* TEAM FLIP */
 function flipCard(card) { card.classList.toggle('flipped'); }
 function closeCard(e, btn) { e.stopPropagation(); btn.closest('.team-card').classList.remove('flipped'); }
 
-/* ══════════════════════════════════════
-   BOOKING WIDGET
-══════════════════════════════════════ */
+/* BOOKING WIDGET */
 (function() {
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -1935,54 +1841,54 @@ function closeCard(e, btn) { e.stopPropagation(); btn.closest('.team-card').clas
     var step=document.getElementById(id); if(step) step.style.display='block';
   }
 
-window.bConfirm = function() {
-  var name  = (document.getElementById('bName').value || '').trim();
-  var email = (document.getElementById('bEmail').value || '').trim();
-  var phone = (document.getElementById('bPhone').value || '').trim();
-  var note  = (document.getElementById('bNote').value || '').trim();
+  window.bConfirm = function() {
+    var name  = (document.getElementById('bName').value || '').trim();
+    var email = (document.getElementById('bEmail').value || '').trim();
+    var phone = (document.getElementById('bPhone').value || '').trim();
+    var note  = (document.getElementById('bNote').value || '').trim();
 
-  if (!name)  { alert('Please enter your full name.'); return; }
-  if (!email) { alert('Please enter your email address.'); return; }
-  if (!s.date || !s.time) { alert('Please select a date and time.'); return; }
+    if (!name)  { alert('Please enter your full name.'); return; }
+    if (!email) { alert('Please enter your email address.'); return; }
+    if (!s.date || !s.time) { alert('Please select a date and time.'); return; }
 
-  var d  = s.date;
-  var ds = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    var d  = s.date;
+    var ds = DAYS[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 
-  var confirmBtn = document.querySelector('#bStep3 button[onclick="bConfirm()"]');
-  if (confirmBtn) { confirmBtn.textContent = 'Sending...'; confirmBtn.disabled = true; }
+    var confirmBtn = document.querySelector('#bStep3 button[onclick="bConfirm()"]');
+    if (confirmBtn) { confirmBtn.textContent = 'Sending...'; confirmBtn.disabled = true; }
 
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body: JSON.stringify({
-      access_key: 'dc0c984c-e1a7-47fb-94ce-42569672cdc5',  // ← Replace this
-      subject: 'New Consultation Booking — CorpSight Advisors LLP',
-      from_name: name,
-      reply_to: email,
-      name:         name,
-      email:        email,
-      phone:        phone || 'Not provided',
-      booking_date: ds,
-      booking_time: s.time + ' IST',
-      message:      note || 'No additional notes'
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key:   'dc0c984c-e1a7-47fb-94ce-42569672cdc5',
+        subject:      'New Consultation Booking — CorpSight Advisors LLP',
+        from_name:    name,
+        reply_to:     email,
+        name:         name,
+        email:        email,
+        phone:        phone || 'Not provided',
+        booking_date: ds,
+        booking_time: s.time + ' IST',
+        message:      note || 'No additional notes'
+      })
     })
-  })
-  .then(function(res) { return res.json(); })
-  .then(function(data) {
-    if (data.success) {
-      var emailEl = document.getElementById('bConfirmEmail');
-      if (emailEl) emailEl.textContent = email;
-      bShowStep('bStep4');
-    } else {
-      throw new Error(data.message);
-    }
-  })
-  .catch(function(err) {
-    console.error('Web3Forms error:', err);
-    if (confirmBtn) { confirmBtn.textContent = 'Confirm Booking →'; confirmBtn.disabled = false; }
-    alert('Could not send booking. Please email us directly at compliance@corpsight.co.in');
-  });
-};
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.success) {
+        var emailEl = document.getElementById('bConfirmEmail');
+        if (emailEl) emailEl.textContent = email;
+        bShowStep('bStep4');
+      } else {
+        throw new Error(data.message);
+      }
+    })
+    .catch(function(err) {
+      console.error('Web3Forms error:', err);
+      if (confirmBtn) { confirmBtn.textContent = 'Confirm Booking →'; confirmBtn.disabled = false; }
+      alert('Could not send booking. Please email us directly at compliance@corpsight.co.in');
+    });
+  };
 
   window.bReset = function() {
     s.date=null;s.time=null;

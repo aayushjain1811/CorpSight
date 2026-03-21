@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NBFC and Fintech Advisory | CorpSight Advisors LLP</title>
+<title>Corporate Restructuring & Capital Markets Advisory | CorpSight Advisors LLP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
   @keyframes particleFloat{0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:0.6}90%{opacity:0.3}100%{opacity:0;transform:translateY(-120px) translateX(var(--dx))}}
 
   /* ══ SCROLL UI ══ */
-  #scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;z-index:9999;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;box-shadow:0 0 12px rgba(184,150,46,0.8);animation:shimmer 2s linear infinite;transition:width 0.1s linear;}
+  #scroll-progress{position:fixed;top:0;left:0;height:2px;width:0%;z-index:9999;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));background-size:200% 100%;box-shadow:0 0 12px rgba(184,150,46,0.8);animation:shimmer 2s linear infinite;transition:width 0.1s linear;pointer-events:none;}
   @keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
   #side-progress{position:fixed;left:0;top:0;bottom:0;width:2px;background:rgba(184,150,46,0.06);z-index:500;pointer-events:none;}
   #side-progress-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:linear-gradient(to bottom,transparent,var(--gold) 30%,var(--gold));transition:height 0.12s ease;}
@@ -48,11 +48,11 @@
   .s-dot:hover::before{opacity:1;}
   .s-dot.active{background:var(--gold);transform:scale(1.5);}
   .s-dot:hover{background:var(--gold);}
-  #cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;display:none;}
+  #cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,46,0.045) 0%,transparent 70%);pointer-events:none !important;transform:translate(-50%,-50%);z-index:0;display:none;}
   body:hover #cursor-glow{display:block;}
-  #custom-cursor{width:12px;height:12px;border:1.5px solid rgba(184,150,46,0.6);border-radius:50%;position:fixed;z-index:99998;pointer-events:none;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s;}
+  #custom-cursor{width:12px;height:12px;border:1.5px solid rgba(184,150,46,0.6);border-radius:50%;position:fixed;z-index:99998;pointer-events:none !important;transform:translate(-50%,-50%);transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s;}
   #custom-cursor.hovering{width:36px;height:36px;background:rgba(184,150,46,0.1);border-color:var(--gold);}
-  #particle-canvas{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.7;}
+  #particle-canvas{position:fixed;inset:0;pointer-events:none !important;z-index:1;opacity:0.7;}
 
   /* ══ NAVBAR ══ */
   nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all 0.3s ease;transform:translateY(-100%);animation:navIn 0.6s 2.8s cubic-bezier(0.34,1.56,0.64,1) forwards;}
@@ -91,17 +91,17 @@
   .reveal-delay-1{transition-delay:0.1s;}.reveal-delay-2{transition-delay:0.2s;}
   .reveal-delay-3{transition-delay:0.3s;}.reveal-delay-4{transition-delay:0.4s;}
   .section-wipe{position:relative;}
-  .section-wipe::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transform:scaleX(0);transition:transform 1s ease,opacity 0.5s;}
+  .section-wipe::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transform:scaleX(0);transition:transform 1s ease,opacity 0.5s;pointer-events:none;}
   .section-wipe.visible::before{opacity:1;transform:scaleX(1);}
 
   /* ══ HERO ══ */
   #pa-hero{min-height:52vh;padding-top:72px;display:flex;align-items:center;position:relative;background:var(--dark);overflow:hidden;}
-  .hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridDrift 20s linear infinite;}
+  .hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.06) 1px,transparent 1px);background-size:80px 80px;animation:gridDrift 20s linear infinite;pointer-events:none;}
   @keyframes gridDrift{0%{background-position:0 0}100%{background-position:80px 80px}}
-  .hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(184,150,46,0.12) 0%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;}
+  .hero-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(184,150,46,0.12) 0%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none;}
   @keyframes glowPulse{0%,100%{transform:scale(1) translateY(0);opacity:0.8}50%{transform:scale(1.1) translateY(-20px);opacity:1}}
-  .hero-line{position:absolute;left:5%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.3) 30%,rgba(184,150,46,0.3) 70%,transparent);}
-  .hero-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.15),transparent);animation:scanLine 5s ease-in-out infinite;}
+  .hero-line{position:absolute;left:5%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(184,150,46,0.3) 30%,rgba(184,150,46,0.3) 70%,transparent);pointer-events:none;}
+  .hero-scan{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,150,46,0.15),transparent);animation:scanLine 5s ease-in-out infinite;pointer-events:none;}
   @keyframes scanLine{0%{top:15%;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:85%;opacity:0}}
   .hero-inner{position:relative;z-index:2;padding:60px 5% 80px;max-width:1200px;margin:0 auto;width:100%;}
   @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -112,7 +112,7 @@
   .hero-title{font-size:clamp(36px,5.5vw,80px);font-weight:300;color:var(--white);line-height:1.05;letter-spacing:-1.5px;margin-bottom:24px;opacity:0;animation:fadeUp 0.9s 3.2s cubic-bezier(0.22,1,0.36,1) forwards;}
   .hero-title em{font-style:italic;color:var(--gold-light);}
   .hero-desc{max-width:540px;font-size:15px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.8;opacity:0;animation:fadeUp 0.9s 3.4s cubic-bezier(0.22,1,0.36,1) forwards;}
-  .hero-breadcrumb{position:absolute;bottom:32px;left:5%;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.9s 3.6s cubic-bezier(0.22,1,0.36,1) forwards;}
+  .hero-breadcrumb{position:absolute;bottom:32px;left:5%;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.9s 3.6s cubic-bezier(0.22,1,0.36,1) forwards;z-index:2;}
   .hero-breadcrumb a{font-size:11px;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
   .hero-breadcrumb a:hover{color:var(--gold);}
   .hero-breadcrumb span{font-size:11px;color:rgba(255,255,255,0.2);}
@@ -159,7 +159,7 @@
 
   /* ══ WHY ══ */
   #pa-why{background:var(--dark);padding:100px 5%;position:relative;overflow:hidden;}
-  .why-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.05) 1px,transparent 1px);background-size:80px 80px;}
+  .why-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(184,150,46,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(184,150,46,0.05) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;}
   .why-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2;}
   .why-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
   .why-body{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.85;font-weight:300;margin-bottom:24px;}
@@ -167,7 +167,7 @@
   .sector-tag{padding:8px 16px;border:1px solid rgba(184,150,46,0.25);font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.5px;transition:all 0.3s;}
   .sector-tag:hover{border-color:var(--gold);color:var(--gold);}
   .why-right{background:rgba(184,150,46,0.06);border:1px solid rgba(184,150,46,0.18);padding:48px 40px;position:relative;}
-  .why-right::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),transparent);}
+  .why-right::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--gold),transparent);pointer-events:none;}
   .why-quote{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;font-style:italic;color:var(--white);line-height:1.6;margin-top:20px;}
 
   /* ══ OTHERS ══ */
@@ -234,7 +234,7 @@
   <div class="loader-logo">
     <div class="loader-logo-mark"></div>
     <div class="loader-name">CorpSight Advisors</div>
-    <div class="loader-sub">NBFC &amp; Fintech Advisory</div>
+    <div class="loader-sub">Restructuring &amp; Capital Markets</div>
   </div>
   <div class="loader-progress-row">
     <div class="loader-bar-wrap"><div class="loader-bar-fill"></div></div>
@@ -298,13 +298,13 @@
   <div class="hero-bg-grid"></div><div class="hero-glow"></div><div class="hero-line"></div><div class="hero-scan"></div>
   <div class="hero-inner">
     <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>Practice Areas</span></div>
-    <h1 class="hero-title">NBFC <em>&amp;</em><br>Fintech Advisory</h1>
-    <p class="hero-desc">Regulatory advisory, RBI compliance, and licensing support for NBFCs, fintechs, and financial services businesses.</p>
+    <h1 class="hero-title">Corporate Restructuring &amp;<br><em>Capital Markets</em> Advisory</h1>
+    <p class="hero-desc">Strategic execution of complex corporate restructurings, mergers, demergers, and full-lifecycle capital market transactions including IPOs and public offerings.</p>
   </div>
   <div class="hero-breadcrumb">
     <a href="index.html">Home</a><span>/</span>
     <a href="practice.html">Practice Areas</a><span>/</span>
-    <span class="current">NBFC &amp; Fintech</span>
+    <span class="current">Restructuring &amp; Capital Markets</span>
   </div>
 </section>
 
@@ -313,20 +313,20 @@
   <div class="overview-inner">
     <div class="reveal">
       <div class="section-label"><div class="section-label-line"></div><span>Practice Overview</span></div>
-      <h2 class="section-title">NBFC <em>Advisory</em></h2>
+      <h2 class="section-title">Restructuring &amp; <em>Capital Markets</em></h2>
       <div class="gold-rule"></div>
-      <p class="overview-body">India's financial services sector is undergoing rapid transformation — driven by fintech innovation, regulatory evolution, and the explosion of digital financial products. NBFCs, payment aggregators, account aggregators, and lending platforms operate in an increasingly complex and rapidly changing regulatory environment.</p>
-      <p class="overview-body">CorpSight's NBFC and Fintech Advisory practice provides specialised regulatory and compliance support to financial services businesses — from NBFC incorporation and RBI licensing through ongoing compliance management and regulatory change advisory.</p>
+      <p class="overview-body">Corporate restructuring and capital markets transactions are among the most consequential decisions a business can undertake. Whether reorganising to unlock value, streamlining operations through a demerger, or accessing public capital through an IPO, the stakes — legal, regulatory, and commercial — demand expert advisory at every stage.</p>
+      <p class="overview-body">CorpSight Advisors specialises in structuring and executing complex corporate restructuring transactions, including mergers, demergers, and strategic reorganisations. We also guide companies through their capital market journeys — from IPO and FPO readiness to ongoing post-listing compliance — ensuring regulatory alignment, investor preparedness, and efficient execution throughout.</p>
       <a href="consult.html" class="overview-cta"><span>Book a Consultation &#8594;</span></a>
     </div>
     <div class="overview-right reveal reveal-delay-2">
       <div class="overview-box">
         <div class="overview-box-bg"></div>
         <div class="overview-stat">
-          <div class="o-stat"><div class="o-stat-num">80+</div><div class="o-stat-label">NBFCs advised</div></div>
-          <div class="o-stat"><div class="o-stat-num">All types</div><div class="o-stat-label">ICC, MFI, P2P, HFC</div></div>
-          <div class="o-stat"><div class="o-stat-num">RBI</div><div class="o-stat-label">Deep expertise</div></div>
-          <div class="o-stat"><div class="o-stat-num">Fintech</div><div class="o-stat-label">Regulatory mapping</div></div>
+          <div class="o-stat"><div class="o-stat-num">50+</div><div class="o-stat-label">Restructuring transactions advised</div></div>
+          <div class="o-stat"><div class="o-stat-num">End-to-End</div><div class="o-stat-label">IPO &amp; capital market support</div></div>
+          <div class="o-stat"><div class="o-stat-num">NCLT &amp;<br>SEBI</div><div class="o-stat-label">Regulatory authority expertise</div></div>
+          <div class="o-stat"><div class="o-stat-num">Multi-sector</div><div class="o-stat-label">Transaction experience</div></div>
         </div>
       </div>
     </div>
@@ -342,15 +342,47 @@
       <div class="gold-rule"></div>
     </div>
     <div class="services-grid">
-      <div class="service-item" style="transition-delay:0s"><div class="service-num">01</div><h3>NBFC Incorporation &amp; RBI Registration</h3><p>Advisory on NBFC structure and category selection (NBFC-ICC, NBFC-MFI, NBFC-P2P, etc.), incorporation, and RBI Certificate of Registration applications.</p></div>
-      <div class="service-item" style="transition-delay:0.1s"><div class="service-num">02</div><h3>RBI Regulatory Compliance</h3><p>Ongoing compliance with RBI Master Directions — Fair Practices Code, KYC/AML norms, prudential norms, board governance, and reporting requirements.</p></div>
-      <div class="service-item" style="transition-delay:0.05s"><div class="service-num">03</div><h3>Fintech Regulatory Advisory</h3><p>Regulatory mapping and compliance advisory for payment aggregators, account aggregators, digital lending platforms, and BNPL products.</p></div>
-      <div class="service-item" style="transition-delay:0.15s"><div class="service-num">04</div><h3>Payment Aggregator / Gateway Licensing</h3><p>Support for RBI payment aggregator authorisation applications, compliance gap analysis, and ongoing PA regulatory obligations.</p></div>
-      <div class="service-item" style="transition-delay:0.1s"><div class="service-num">05</div><h3>Digital Lending Compliance</h3><p>Advisory on RBI Digital Lending Guidelines — lending service provider arrangements, outsourcing norms, First Loss Default Guarantees, and co-lending.</p></div>
-      <div class="service-item" style="transition-delay:0.2s"><div class="service-num">06</div><h3>SEBI Investment Adviser / Research Analyst Registration</h3><p>Advisory and application support for SEBI IA and RA registration, compliance frameworks, and ongoing periodic obligations.</p></div>
-      <div class="service-item" style="transition-delay:0.15s"><div class="service-num">07</div><h3>FEMA &amp; Cross-Border Fintech Advisory</h3><p>FDI compliance for fintech businesses, FEMA implications for cross-border payments, and advisory on fintech partnerships with foreign entities.</p></div>
-      <div class="service-item" style="transition-delay:0.25s"><div class="service-num">08</div><h3>Regulatory Change Monitoring</h3><p>Proactive monitoring of RBI, SEBI, and IRDAI regulatory developments and their operational impact on your fintech or NBFC business.</p></div>
-    </div></div>
+      <div class="service-item" style="transition-delay:0s">
+        <div class="service-num">01</div>
+        <h3>Mergers &amp; Amalgamations</h3>
+        <p>End-to-end advisory on merger and amalgamation transactions under the Companies Act 2013 — from scheme drafting and board approvals to NCLT filing, stock exchange notifications, and effective date compliance.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.1s">
+        <div class="service-num">02</div>
+        <h3>Demergers &amp; Spin-Offs</h3>
+        <p>Structuring and executing demerger schemes to carve out business verticals, unlock shareholder value, or facilitate strategic separations, including tax-neutral structuring and regulatory approvals.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.05s">
+        <div class="service-num">03</div>
+        <h3>Corporate Reorganisations &amp; Internal Restructuring</h3>
+        <p>Advisory on holding company restructuring, group simplification, cross-border reorganisations, capital reductions, and share buy-back programmes under applicable statutes.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.15s">
+        <div class="service-num">04</div>
+        <h3>IPO Readiness &amp; Pre-IPO Advisory</h3>
+        <p>Comprehensive pre-IPO structuring — corporate governance improvements, Promoter Group reorganisation, DRHP readiness assessment, and coordination with investment banks, legal counsel, and auditors.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.1s">
+        <div class="service-num">05</div>
+        <h3>SEBI Compliance &amp; Capital Market Regulations</h3>
+        <p>Advisory on SEBI (LODR) Regulations, SEBI (ICDR) Regulations, takeover code obligations, insider trading policies, and ongoing listed entity compliance obligations.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.2s">
+        <div class="service-num">06</div>
+        <h3>FPO, Rights Issues &amp; Preferential Allotments</h3>
+        <p>Regulatory and documentation support for follow-on public offerings, rights issues, and preferential allotments — including SEBI filing, shareholder approvals, and stock exchange coordination.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.15s">
+        <div class="service-num">07</div>
+        <h3>Investor Readiness &amp; Governance Advisory</h3>
+        <p>Preparing companies for institutional scrutiny — board restructuring, independent director appointments, RPT policies, audit committee charters, and investor relations frameworks.</p>
+      </div>
+      <div class="service-item" style="transition-delay:0.25s">
+        <div class="service-num">08</div>
+        <h3>Post-Listing Compliance Management</h3>
+        <p>Ongoing listed entity compliance retainer services — quarterly and annual filings, board meeting secretarial support, continuous disclosure obligations, and SEBI correspondence management.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -363,18 +395,25 @@
         <div class="section-label"><div class="section-label-line"></div><span>Why CorpSight</span></div>
         <h2 class="section-title" style="color:var(--white);">The CorpSight <em>Difference</em></h2>
         <div style="width:60px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:20px 0;"></div>
-        <p class="why-body">Our NBFC and Fintech team understands both the letter of financial services regulation and the practical realities of running a fast-moving financial technology business in India.</p>
-        <p class="why-body">Our team's approach is grounded in deep regulatory knowledge, commercial pragmatism, and a genuine commitment to your business outcomes. We do not just advise — we partner.</p>
-        <div class="why-sectors"><span class="sector-tag">NBFCs &amp; Microfinance</span><span class="sector-tag">Digital Lending Platforms</span><span class="sector-tag">Payment Aggregators</span><span class="sector-tag">Account Aggregators</span><span class="sector-tag">WealthTech &amp; InvestTech</span><span class="sector-tag">InsurTech</span></div>
+        <p class="why-body">Restructuring and capital markets transactions require a rare combination of technical legal precision, commercial acumen, and regulatory fluency. Our team brings all three — and ensures that transactions are structured not just to close, but to create lasting strategic value.</p>
+        <p class="why-body">From the earliest feasibility assessment to post-transaction compliance, CorpSight acts as a single coordinated advisory partner, reducing friction between legal, regulatory, and commercial workstreams and keeping your transaction on track.</p>
+        <div class="why-sectors">
+          <span class="sector-tag">Manufacturing &amp; Industrials</span>
+          <span class="sector-tag">Technology &amp; Startups</span>
+          <span class="sector-tag">Financial Services</span>
+          <span class="sector-tag">Real Estate</span>
+          <span class="sector-tag">Healthcare &amp; Pharma</span>
+          <span class="sector-tag">Infrastructure</span>
+        </div>
       </div>
       <div class="why-right reveal reveal-delay-2">
         <div class="section-label"><div class="section-label-line"></div><span>Client Promise</span></div>
-        <p class="why-quote">"We measure our success not by the complexity of our advice, but by the clarity it brings to your business decisions and the confidence it gives you to act."</p>
+        <p class="why-quote">"In transactions of this complexity, the quality of your advisors determines not just the outcome — but your ability to sleep soundly through the process."</p>
         <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px;">
-          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Response within 1 business day</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Senior counsel on every engagement</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Fixed-fee and retainer options available</span></div>
-          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Complete confidentiality guaranteed</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Senior partner-led on every engagement</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Integrated legal, regulatory &amp; secretarial support</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Coordination with bankers, auditors &amp; counsel</span></div>
+          <div style="display:flex;align-items:center;gap:12px;"><span style="color:var(--gold);font-size:16px;">&#10003;</span><span style="font-size:13px;color:rgba(255,255,255,0.5);">Transparent, milestone-based fee structures</span></div>
         </div>
       </div>
     </div>
@@ -390,12 +429,12 @@
     </div>
     <div class="others-grid">
       <a href="practice-setup.html" class="other-card" style="transition-delay:0s"><div class="other-card-emoji">🏛️</div><h4>Business Setup &amp; Compliance</h4><p>Incorporation, structuring, ROC filings, and compliance management.</p><span class="other-card-arrow">&#8594;</span></a>
-      <a href="practice-licensing.html" class="other-card" style="transition-delay:0.08s"><div class="other-card-emoji">📋</div><h4>Licensing &amp; Regulatory</h4><p>Sector licences, regulatory approvals, and renewal management.</p><span class="other-card-arrow">&#8594;</span></a>
-      <a href="practice-transactional.html" class="other-card" style="transition-delay:0.16s"><div class="other-card-emoji">🤝</div><h4>Transactional Advisory</h4><p>M&amp;A due diligence, deal structuring, and investment documentation.</p><span class="other-card-arrow">&#8594;</span></a>
-      <a href="practice-fund.html" class="other-card" style="transition-delay:0.04s"><div class="other-card-emoji">💼</div><h4>Fund Formation</h4><p>AIF registration, SEBI compliance, and fund lifecycle management.</p><span class="other-card-arrow">&#8594;</span></a>
-      <a href="practice-commercial.html" class="other-card" style="transition-delay:0.12s"><div class="other-card-emoji">📄</div><h4>Corporate Commercial</h4><p>Contract drafting, JVs, and ongoing commercial advisory.</p><span class="other-card-arrow">&#8594;</span></a>
-      <a href="practice-labour.html" class="other-card" style="transition-delay:0.2s"><div class="other-card-emoji">👥</div><h4>Labour &amp; Employment</h4><p>Employment contracts, POSH, and workforce compliance.</p><span class="other-card-arrow">&#8594;</span></a>
-    </div></div>
+      <a href="practice-transactional.html" class="other-card" style="transition-delay:0.08s"><div class="other-card-emoji">🤝</div><h4>Transactional Advisory</h4><p>M&amp;A due diligence, deal structuring, and investment documentation.</p><span class="other-card-arrow">&#8594;</span></a>
+      <a href="practice-fund.html" class="other-card" style="transition-delay:0.16s"><div class="other-card-emoji">💼</div><h4>Fund Formation</h4><p>AIF registration, SEBI compliance, and fund lifecycle management.</p><span class="other-card-arrow">&#8594;</span></a>
+      <a href="practice-licensing.html" class="other-card" style="transition-delay:0.04s"><div class="other-card-emoji">📋</div><h4>Licensing &amp; Regulatory</h4><p>Sector-specific licences, regulatory approvals, and renewal management.</p><span class="other-card-arrow">&#8594;</span></a>
+      <a href="practice-nbfc.html" class="other-card" style="transition-delay:0.12s"><div class="other-card-emoji">🏦</div><h4>NBFC &amp; Fintech Advisory</h4><p>NBFC registration, RBI compliance, and fintech regulatory advisory.</p><span class="other-card-arrow">&#8594;</span></a>
+      <a href="practice-commercial.html" class="other-card" style="transition-delay:0.2s"><div class="other-card-emoji">📄</div><h4>Corporate Commercial</h4><p>Contract drafting, JVs, and ongoing commercial advisory.</p><span class="other-card-arrow">&#8594;</span></a>
+    </div>
   </div>
 </section>
 
@@ -404,7 +443,7 @@
   <div class="cta-inner reveal">
     <div class="cta-text">
       <h2>Ready to Get Started?</h2>
-      <p>Book a complimentary 15-minute introductory call with our NBFC &amp; Fintech team.</p>
+      <p>Book a complimentary 15-minute introductory call with our Restructuring &amp; Capital Markets team.</p>
     </div>
     <div style="display:flex;gap:16px;flex-wrap:wrap;flex-shrink:0;">
       <a href="consult.html" class="btn-white"><span>Book Consultation &#8594;</span></a>
@@ -431,28 +470,40 @@
 <script>
 /* ── LOADER ── */
 (function(){var pct=0,pctEl=document.getElementById('loaderPct'),loader=document.getElementById('loader');var iv=setInterval(function(){pct+=Math.random()*8+2;if(pct>=100){pct=100;clearInterval(iv);}if(pctEl)pctEl.textContent=Math.floor(pct)+'%';},80);function hide(){loader.classList.add('loaded');document.body.style.overflow='';setTimeout(function(){document.getElementById('section-dots').classList.add('visible');},800);}document.body.style.overflow='hidden';if(document.readyState==='complete')setTimeout(hide,2800);else{window.addEventListener('load',function(){setTimeout(hide,2800);});setTimeout(hide,3200);}})();
+
 /* ── NAVBAR ── */
 var navbar=document.getElementById('navbar');window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60);},{passive:true});document.getElementById('hamburger').addEventListener('click',function(){document.getElementById('mobileNav').classList.add('open');});document.getElementById('navClose').addEventListener('click',function(){document.getElementById('mobileNav').classList.remove('open');});function closeMobile(){document.getElementById('mobileNav').classList.remove('open');}
+
 /* ── SCROLL PROGRESS ── */
 var pb=document.getElementById('scroll-progress'),sf=document.getElementById('side-progress-fill');window.addEventListener('scroll',function(){var p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;pb.style.width=p+'%';sf.style.height=p+'%';},{passive:true});
+
 /* ── CURSOR ── */
-var curEl=document.getElementById('custom-cursor'),curGlow=document.getElementById('cursor-glow');document.addEventListener('mousemove',function(e){curEl.style.left=e.clientX+'px';curEl.style.top=e.clientY+'px';curGlow.style.left=e.clientX+'px';curGlow.style.top=e.clientY+'px';});document.querySelectorAll('a,button,.service-item,.other-card,.sector-tag').forEach(function(el){el.addEventListener('mouseenter',function(){curEl.classList.add('hovering');});el.addEventListener('mouseleave',function(){curEl.classList.remove('hovering');});});
+var curEl=document.getElementById('custom-cursor'),curGlow=document.getElementById('cursor-glow');document.addEventListener('mousemove',function(e){curEl.style.left=e.clientX+'px';curEl.style.top=e.clientY+'px';curGlow.style.left=e.clientX+'px';curGlow.style.top=e.clientY+'px';});document.querySelectorAll('.service-item,.other-card,.sector-tag').forEach(function(el){el.addEventListener('mouseenter',function(){curEl.classList.add('hovering');});el.addEventListener('mouseleave',function(){curEl.classList.remove('hovering');});});
+
 /* ── PARTICLES ── */
 (function(){var canvas=document.getElementById('particle-canvas'),ctx=canvas.getContext('2d'),ps=[];function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);document.addEventListener('mousemove',function(e){if(Math.random()<0.3)ps.push({x:e.clientX+(Math.random()-.5)*8,y:e.clientY+(Math.random()-.5)*8,vx:(Math.random()-.5)*.5,vy:-Math.random()-0.2,life:1,decay:Math.random()*.02+.01,size:Math.random()*2+.4});});function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);ps=ps.filter(function(p){return p.life>0;});ps.forEach(function(p){p.x+=p.vx;p.y+=p.vy;p.life-=p.decay;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle='rgba(184,150,46,'+(p.life*.45)+')';ctx.fill();});requestAnimationFrame(anim);}anim();})();
+
 /* ── HERO PARALLAX ── */
 var heroEl=document.getElementById('pa-hero'),heroBg=document.querySelector('.hero-bg-grid'),heroGlow=document.querySelector('.hero-glow');window.addEventListener('scroll',function(){var sy=window.scrollY;if(!heroEl||sy>window.innerHeight*1.5)return;var t=sy/window.innerHeight;if(heroBg)heroBg.style.transform='translateY('+(sy*.2)+'px)';if(heroGlow)heroGlow.style.transform='translateY('+(sy*.35)+'px) scale('+(1+t*.1)+')';heroEl.style.opacity=Math.max(0,1-t*.5);},{passive:true});
+
 /* ── SCROLL REVEAL ── */
 var revObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal').forEach(function(el){revObs.observe(el);});
+
 /* ── SECTION WIPE ── */
 var wipeObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');wipeObs.unobserve(e.target);}});},{threshold:0.05});document.querySelectorAll('.section-wipe').forEach(function(el){wipeObs.observe(el);});
+
 /* ── SERVICE CARDS STAGGER ── */
 var svcObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var d=parseFloat(e.target.style.transitionDelay||'0');setTimeout(function(){e.target.classList.add('visible');},d*1000);svcObs.unobserve(e.target);}});},{threshold:0.1});document.querySelectorAll('.service-item').forEach(function(c){c.style.transition='opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s,background 0.3s';svcObs.observe(c);});
+
 /* ── OTHER CARDS STAGGER ── */
 var othObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var d=parseFloat(e.target.style.transitionDelay||'0');setTimeout(function(){e.target.classList.add('visible');},d*1000);othObs.unobserve(e.target);}});},{threshold:0.1});document.querySelectorAll('.other-card').forEach(function(c){c.style.transition='opacity 0.6s cubic-bezier(0.22,1,0.36,1),transform 0.6s cubic-bezier(0.22,1,0.36,1),box-shadow 0.4s,background 0.3s';othObs.observe(c);});
+
 /* ── SECTION DOTS ── */
 var dots=document.querySelectorAll('.s-dot');dots.forEach(function(d){d.addEventListener('click',function(){var t=document.getElementById(d.dataset.target);if(t)t.scrollIntoView({behavior:'smooth'});});});var secIds=['pa-hero','pa-overview','pa-services','pa-why','pa-others'];var sdObs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var id=e.target.id;dots.forEach(function(d){d.classList.toggle('active',d.dataset.target===id);});}});},{threshold:0.4});secIds.forEach(function(id){var el=document.getElementById(id);if(el)sdObs.observe(el);});
+
 /* ── MAGNETIC BUTTONS ── */
 document.querySelectorAll('.btn-white,.btn-outline-white,.overview-cta,.nav-cta').forEach(function(btn){btn.addEventListener('mousemove',function(e){var rect=btn.getBoundingClientRect();var dx=(e.clientX-rect.left-rect.width/2)*.25;var dy=(e.clientY-rect.top-rect.height/2)*.25;btn.style.transform='translate('+dx+'px,'+dy+'px)';});btn.addEventListener('mouseleave',function(){btn.style.transition='transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';btn.style.transform='';setTimeout(function(){btn.style.transition='';},500);});});
+
 /* ── 3D TILT: SERVICE ITEMS ── */
 document.querySelectorAll('.service-item').forEach(function(card){card.addEventListener('mousemove',function(e){var rect=card.getBoundingClientRect();var rx=-((e.clientY-rect.top-rect.height/2)/(rect.height/2))*3;var ry=((e.clientX-rect.left-rect.width/2)/(rect.width/2))*3;card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-3px)';});card.addEventListener('mouseleave',function(){card.style.transform='';});});
 </script>
