@@ -373,12 +373,6 @@
     transition: height 0.12s ease;
   }
 
-  /* Section dots nav */
-  #section-dots {
-    position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
-    z-index: 900; display: flex; flex-direction: column; gap: 10px;
-    opacity: 0; transition: opacity 0.5s;
-  }
 
   .s-dot {
     width: 6px; height: 6px; border-radius: 50%;
@@ -761,7 +755,7 @@
   .center-rule { width: 50px; height: 3px; background: var(--gold); margin: 0 auto 20px; }
   .center-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 500; color: var(--dark); }
   .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .team-card { position: relative; height: 380px; cursor: pointer; }
+  .team-card { position: relative; height: 420px; cursor: pointer; }
   .team-card-inner {
     position: absolute; inset: 0;
     transition: transform 0.6s cubic-bezier(0.4,0.2,0.2,1);
@@ -773,10 +767,13 @@
     -webkit-backface-visibility: hidden; overflow: hidden;
   }
   .team-card-front { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-  .team-photo-placeholder {
-    width: 100%; height: 100%; display: flex; align-items: flex-end;
-    justify-content: center; overflow: hidden; position: relative;
-  }
+.team-photo-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: flex-end;
+  justify-content: center; overflow: hidden; position: relative;
+  background-size: cover !important;
+  background-position: top center !important;
+  background-repeat: no-repeat !important;
+}
   .team-photo-placeholder svg { display: block; width: 75%; max-width: 200px; margin-bottom: -2px; position: relative; z-index: 1; }
   .team-card-front::after {
     content: 'View Profile'; position: absolute; bottom: 0; left: 0; right: 0;
@@ -1029,7 +1026,7 @@
     .why-grid { grid-template-columns: repeat(2, 1fr); }
     .process-layout { grid-template-columns: 1fr; gap: 48px; }
     .team-grid { grid-template-columns: 1fr 1fr; }
-    .team-card { height: 340px; }
+    .team-card { height: 400px; }
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
     .stats-strip-inner { grid-template-columns: 1fr 1fr; }
     .booking-widget { grid-template-columns: 1fr !important; }
@@ -1047,7 +1044,7 @@
     .team-grid { grid-template-columns: 1fr; }
     .team-card { height: 320px; }
     .stats-strip-inner { grid-template-columns: 1fr 1fr; }
-    #section-dots { display: none; }
+   
     #custom-cursor { display: none; }
   }
   @media (max-width: 480px) {
@@ -1088,19 +1085,6 @@
 <div id="cursor-glow"></div>
 <div id="custom-cursor"></div>
 <canvas id="particle-canvas"></canvas>
-
-<!-- Section dot nav -->
-<nav id="section-dots">
-  <div class="s-dot" data-target="hero" data-label="Home"></div>
-  <div class="s-dot" data-target="about" data-label="About"></div>
-  <div class="s-dot" data-target="services" data-label="Services"></div>
-  <div class="s-dot" data-target="stats-strip" data-label="Stats"></div>
-  <div class="s-dot" data-target="why" data-label="Why Us"></div>
-  <div class="s-dot" data-target="team" data-label="Team"></div>
-  <div class="s-dot" data-target="process" data-label="Process"></div>
-  <div class="s-dot" data-target="booking" data-label="Booking"></div>
-  <div class="s-dot" data-target="contact" data-label="Contact"></div>
-</nav>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
